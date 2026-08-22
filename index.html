@@ -1,229 +1,3250 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Aimaam Galaxy Portfolio</title>
+
 <style>
-:root{--bg:#02030d;--bg2:#08051c;--panel:rgba(12,17,45,.86);--cyan:#00f6ff;--blue:#398cff;--purple:#9147ff;--pink:#ff3cac;--yellow:#ffe45c;--text:#fff;--soft:#d7ddff;--muted:#8f9bc4;--border:rgba(0,246,255,.28);--max:1180px}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{min-height:100vh;overflow-x:hidden;color:var(--text);font-family:"Noto Sans Thai","Segoe UI",Arial,sans-serif;background:radial-gradient(circle at 20% 10%,rgba(0,246,255,.13),transparent 25%),radial-gradient(circle at 80% 20%,rgba(145,71,255,.18),transparent 30%),linear-gradient(135deg,#01020a,#08051c,#03051a)}
-body:before{content:"";position:fixed;inset:0;z-index:-20;background-image:radial-gradient(#fff 1px,transparent 1.5px),radial-gradient(var(--cyan) 1px,transparent 1.5px),radial-gradient(#a56bff 1px,transparent 1.7px);background-size:90px 90px,160px 160px,230px 230px;opacity:.42;animation:space 55s linear infinite}
-@keyframes space{to{background-position:500px 700px,-300px 400px,600px -300px}}
-body:after{content:"";position:fixed;width:700px;height:700px;left:50%;top:20%;transform:translate(-50%,-50%);z-index:-15;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(0,246,255,.12),rgba(145,71,255,.08),transparent 70%);filter:blur(50px);animation:nebula 12s ease-in-out infinite alternate}
-@keyframes nebula{to{transform:translate(-42%,-35%) scale(1.25) rotate(20deg)}}
-a{color:inherit}
-button{font:inherit}
-.container{width:min(calc(100% - 32px),var(--max));margin:auto}
-#mouseGlow{position:fixed;width:280px;height:280px;border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,246,255,.14),transparent 68%);mix-blend-mode:screen}
-.stars{position:fixed;inset:0;pointer-events:none;z-index:1}.star{position:absolute;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 0 8px #fff)}
-.s1{left:5%;top:16%;font-size:26px}.s2{right:6%;top:27%;font-size:34px;animation-delay:1s}.s3{left:8%;top:55%;font-size:22px;animation-delay:2s}.s4{right:9%;top:72%;font-size:30px;animation-delay:.6s}.s5{left:18%;top:86%;font-size:20px;animation-delay:1.7s}
-@keyframes float{50%{transform:translateY(-22px) rotate(10deg)}}
-.ufo{position:fixed;right:-120px;top:18%;font-size:60px;z-index:3;pointer-events:none;animation:ufo 16s linear infinite}
-@keyframes ufo{0%{transform:translateX(0)}50%{transform:translateX(-60vw) translateY(80px) rotate(6deg)}100%{transform:translateX(-125vw) translateY(-40px)}}
-#loader{position:fixed;inset:0;z-index:10000;background:#01020a;display:grid;place-items:center;transition:.7s}.loaderBox{text-align:center}.loaderPlanet{width:90px;height:90px;border-radius:50%;margin:auto;background:radial-gradient(circle at 30% 25%,#fff,#55eaff 25%,#6540ef 65%,#09021d);box-shadow:0 0 35px #00f6ff,0 0 80px #9147ff;animation:spinPlanet 2s linear infinite}@keyframes spinPlanet{to{transform:rotate(360deg)}}.loaderTitle{font-size:clamp(1.6rem,5vw,3rem);font-weight:900;margin:22px 0 8px}.loaderText{color:var(--cyan)}.loaderBar{width:260px;height:6px;background:#15182d;border-radius:9px;overflow:hidden;margin:18px auto}.loaderBar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));animation:load 2.1s forwards}@keyframes load{to{width:100%}}
-header{position:sticky;top:0;z-index:500;background:rgba(2,3,13,.78);border-bottom:1px solid var(--border);backdrop-filter:blur(20px)}nav{min-height:72px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:950;font-size:1.35rem;text-decoration:none;text-shadow:0 0 15px var(--cyan)}.logo b{color:var(--cyan)}.nav{display:flex;gap:5px;list-style:none}.nav button,.mobileBtn{border:0;background:transparent;color:var(--soft);cursor:pointer;padding:10px 13px;border-radius:12px;font-weight:800}.nav button:hover,.nav button.active{color:var(--cyan);background:rgba(0,246,255,.09);box-shadow:0 0 20px rgba(0,246,255,.12)}
-.mobileBtn{display:none;font-size:1.5rem}
-.mobileMenu{display:none;padding:8px 0 14px}.mobileMenu button{display:block;width:100%;text-align:left;background:rgba(255,255,255,.04);border:1px solid var(--border);color:white;padding:12px;border-radius:12px;margin-top:6px}
-main{position:relative;z-index:5}.page{display:none;min-height:calc(100vh - 72px);padding:80px 0 100px;animation:pageIn .5s ease}.page.active{display:block}@keyframes pageIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.hero{min-height:calc(100vh - 72px);display:grid;grid-template-columns:1.05fr .95fr;gap:55px;align-items:center}.eyebrow{display:inline-block;padding:8px 16px;border:1px solid var(--cyan);border-radius:999px;color:var(--cyan);background:rgba(0,246,255,.07);box-shadow:0 0 25px rgba(0,246,255,.2);font-weight:900}.hero h1{font-size:clamp(3rem,7vw,6.5rem);line-height:1.03;margin:20px 0}.gradient{background:linear-gradient(90deg,var(--cyan),var(--blue),var(--purple),var(--pink),var(--yellow),var(--cyan));background-size:300% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:grad 6s linear infinite}@keyframes grad{to{background-position:300% center}}.hero p,.lead{color:var(--soft);font-size:1.12rem;max-width:720px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{border:1px solid var(--cyan);border-radius:14px;padding:12px 20px;text-decoration:none;font-weight:900;cursor:pointer;color:white;background:linear-gradient(135deg,var(--purple),var(--blue));box-shadow:0 0 25px rgba(0,246,255,.2);transition:.25s}.btn:hover{transform:translateY(-4px);box-shadow:0 0 35px rgba(0,246,255,.4)}.btn.alt{background:rgba(0,0,0,.25);color:var(--cyan)}
-.planetBox{min-height:470px;display:grid;place-items:center;position:relative}.planet{width:min(360px,70vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 30% 23%,#fff,#61eaff 12%,#278eff 35%,#6338e8 60%,#17072f 82%,#020108);box-shadow:0 0 35px #00f6ff,0 0 90px rgba(145,71,255,.55),0 0 150px rgba(255,60,172,.22),inset -45px -35px 70px #000;animation:planet 6s ease-in-out infinite}.planet:before{content:"";position:absolute;width:145%;height:35%;left:-22%;top:34%;border:3px solid rgba(255,255,255,.55);border-radius:50%;transform:rotate(-17deg);box-shadow:0 0 25px var(--cyan)}.planet:after{content:"";position:absolute;inset:-45px;border:1px dashed rgba(0,246,255,.45);border-radius:50%;animation:orbit 16s linear infinite}@keyframes planet{50%{transform:translateY(-20px) rotate(3deg)}}@keyframes orbit{to{transform:rotate(360deg)}}
-.title{text-align:center;margin-bottom:48px}.title h2{font-size:clamp(2.4rem,5vw,4.2rem);line-height:1.1;margin-bottom:12px}.title p{color:var(--soft)}
-.grid{display:grid;gap:22px}.two{grid-template-columns:repeat(2,1fr)}.three{grid-template-columns:repeat(3,1fr)}.four{grid-template-columns:repeat(4,1fr)}
-.card{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(18,25,62,.9),rgba(7,9,28,.92));border:1px solid var(--border);border-radius:24px;padding:28px;box-shadow:0 18px 45px rgba(0,0,0,.28);transition:.3s}.card:hover{transform:translateY(-8px) scale(1.015);border-color:var(--cyan);box-shadow:0 0 30px rgba(0,246,255,.18),0 20px 50px rgba(0,0,0,.4)}.card h3{color:var(--cyan);margin-bottom:10px;font-size:1.35rem}.card p{color:var(--soft)}.icon{font-size:2.5rem;margin-bottom:12px}.tag{display:inline-block;color:var(--yellow);border:1px solid rgba(255,228,92,.4);padding:4px 10px;border-radius:999px;margin:3px;font-size:.9rem}
-.profile{display:grid;grid-template-columns:340px 1fr;gap:35px;align-items:center}.profilePic{width:280px;height:340px;object-fit:cover;border-radius:35px;border:2px solid var(--cyan);box-shadow:0 0 30px rgba(0,246,255,.3),0 0 80px rgba(145,71,255,.2);margin:auto}.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}.fact{padding:15px;border-radius:15px;background:rgba(255,255,255,.04);border:1px solid var(--border)}.fact b{color:var(--yellow);display:block}
-.edu .card{min-height:240px}.year{font-size:2rem;font-weight:950;color:var(--purple);text-shadow:0 0 15px var(--purple)}
-.contact .card a{text-decoration:none;color:white}.contact .card a:hover{color:var(--cyan)}
-.friends{font-size:1.15rem;line-height:2.2}
-.achievement{min-height:250px}.achievement strong{font-size:1.35rem;color:var(--yellow);display:block;margin-bottom:10px}.achievement .big{font-size:3rem}
-.character{height:130px;width:130px;margin:0 auto 14px;background-image:url("3936.jpg");background-size:300% 400%;background-repeat:no-repeat;filter:drop-shadow(0 0 10px rgba(0,246,255,.35));animation:charFloat 3.5s ease-in-out infinite;transform-origin:center bottom}.c1{background-position:0 0}.c2{background-position:50% 0}.c3{background-position:100% 0}.c4{background-position:0 50%}.c5{background-position:50% 50%}.c6{background-position:100% 50%}.c7{background-position:0 100%}.c8{background-position:50% 100%}.c9{background-position:100% 100%}.c10{background-position:0 100%;filter:hue-rotate(15deg)}@keyframes charFloat{50%{transform:translateY(-9px) rotate(2deg)}}
-.sectionChar{position:absolute;right:3%;top:18%;width:110px;height:130px}.pageWrap{position:relative}
-footer{text-align:center;color:var(--muted);padding:35px;border-top:1px solid var(--border)}footer b{color:var(--cyan)}
-@media(max-width:900px){.hero,.profile{grid-template-columns:1fr;text-align:center}.hero p{margin:auto}.two,.three,.four{grid-template-columns:repeat(2,1fr)}.nav{display:none}.mobileBtn{display:block}.mobileMenu.open{display:block}.facts{max-width:650px;margin:20px auto}.sectionChar{display:none}}
-@media(max-width:600px){.container{width:min(calc(100% - 24px),var(--max))}.page{padding:55px 0 80px}.two,.three,.four{grid-template-columns:1fr}.hero{min-height:auto;padding-top:35px}.planetBox{min-height:350px}.planet{width:230px}.profilePic{width:220px;height:270px}.facts{grid-template-columns:1fr}.title{margin-bottom:30px}.ufo{font-size:42px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}}
+
+/* =========================================================
+   🌌 GALAXY VARIABLES
+========================================================= */
+
+:root{
+    --bg:#01020b;
+    --bg2:#08051c;
+
+    --cyan:#00f6ff;
+    --blue:#398cff;
+    --purple:#9147ff;
+    --pink:#ff3cac;
+    --yellow:#ffe45c;
+    --green:#55ffb0;
+
+    --white:#ffffff;
+    --soft:#d9e0ff;
+    --muted:#8995bd;
+
+    --panel:rgba(9,14,40,.82);
+    --border:rgba(0,246,255,.3);
+
+    --max:1200px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+
+    color:white;
+
+    font-family:
+        "Noto Sans Thai",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(0,246,255,.16),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(145,71,255,.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 80%,
+            rgba(255,60,172,.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #01020b,
+            #08051c,
+            #020318
+        );
+}
+
+
+/* =========================================================
+   ⭐ STAR FIELD
+========================================================= */
+
+body::before{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    z-index:-50;
+
+    background-image:
+        radial-gradient(#fff 1px,transparent 1.5px),
+        radial-gradient(var(--cyan) 1px,transparent 1.5px),
+        radial-gradient(#a56bff 1px,transparent 1.7px);
+
+    background-size:
+        90px 90px,
+        160px 160px,
+        230px 230px;
+
+    opacity:.45;
+
+    animation:
+        starField 55s linear infinite;
+}
+
+@keyframes starField{
+
+    to{
+        background-position:
+            500px 700px,
+            -300px 400px,
+            600px -300px;
+    }
+}
+
+
+/* =========================================================
+   🌌 NEBULA
+========================================================= */
+
+body::after{
+    content:"";
+
+    position:fixed;
+
+    width:800px;
+    height:800px;
+
+    left:50%;
+    top:20%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    z-index:-40;
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,246,255,.13),
+            rgba(145,71,255,.1),
+            rgba(255,60,172,.06),
+            transparent 70%
+        );
+
+    filter:blur(55px);
+
+    animation:
+        nebulaMove 14s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaMove{
+
+    to{
+        transform:
+            translate(-42%,-35%)
+            scale(1.25)
+            rotate(20deg);
+    }
+}
+
+
+/* =========================================================
+   🖱️ MOUSE GLOW
+========================================================= */
+
+#mouseGlow{
+    position:fixed;
+
+    width:320px;
+    height:320px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:9998;
+
+    transform:
+        translate(-50%,-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,246,255,.16),
+            rgba(145,71,255,.08),
+            transparent 68%
+        );
+
+    mix-blend-mode:screen;
+
+    transition:
+        width .2s,
+        height .2s;
+}
+
+
+/* =========================================================
+   ✨ POINTER PARTICLE
+========================================================= */
+
+.pointerParticle{
+    position:fixed;
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:9997;
+
+    background:var(--cyan);
+
+    box-shadow:
+        0 0 8px var(--cyan),
+        0 0 18px var(--purple);
+
+    animation:
+        particleOut .8s forwards;
+}
+
+@keyframes particleOut{
+
+    0%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    100%{
+        opacity:0;
+        transform:
+            translate(
+                var(--dx),
+                var(--dy)
+            )
+            scale(0);
+    }
+}
+
+
+/* =========================================================
+   💥 CLICK RIPPLE
+========================================================= */
+
+.ripple{
+    position:fixed;
+
+    width:20px;
+    height:20px;
+
+    border:2px solid var(--cyan);
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:10000;
+
+    transform:
+        translate(-50%,-50%);
+
+    box-shadow:
+        0 0 15px var(--cyan),
+        0 0 30px var(--purple);
+
+    animation:
+        ripple .8s ease-out forwards;
+}
+
+@keyframes ripple{
+
+    from{
+        width:20px;
+        height:20px;
+        opacity:1;
+    }
+
+    to{
+        width:180px;
+        height:180px;
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
+   ⭐ FLOATING STARS
+========================================================= */
+
+.stars{
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:2;
+}
+
+.star{
+    position:absolute;
+
+    animation:
+        starFloat 4s ease-in-out infinite;
+}
+
+.s1{
+    left:4%;
+    top:15%;
+    font-size:26px;
+}
+
+.s2{
+    right:5%;
+    top:26%;
+    font-size:35px;
+    animation-delay:1s;
+}
+
+.s3{
+    left:8%;
+    top:52%;
+    font-size:23px;
+    animation-delay:2s;
+}
+
+.s4{
+    right:9%;
+    top:72%;
+    font-size:30px;
+    animation-delay:.6s;
+}
+
+.s5{
+    left:18%;
+    top:86%;
+    font-size:21px;
+    animation-delay:1.7s;
+}
+
+@keyframes starFloat{
+
+    0%,100%{
+        transform:
+            translateY(0)
+            rotate(0);
+        opacity:.45;
+    }
+
+    50%{
+        transform:
+            translateY(-25px)
+            rotate(12deg);
+        opacity:1;
+
+        filter:
+            drop-shadow(0 0 8px white)
+            drop-shadow(0 0 18px var(--cyan));
+    }
+}
+
+
+/* =========================================================
+   🪐 FLOATING PLANETS
+========================================================= */
+
+.spacePlanet{
+    position:fixed;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:1;
+
+    animation:
+        planetFloat 8s ease-in-out infinite;
+}
+
+.planetBlue{
+    width:75px;
+    height:75px;
+
+    top:20%;
+    left:-20px;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #fff,
+            #56eaff 15%,
+            #267aff 45%,
+            #16206e 75%,
+            #050512
+        );
+
+    box-shadow:
+        0 0 20px var(--cyan),
+        0 0 50px rgba(0,246,255,.4);
+}
+
+.planetPurple{
+    width:55px;
+    height:55px;
+
+    right:7%;
+    top:43%;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #ffd9ff,
+            #b967ff 30%,
+            #6425c9 65%,
+            #15062d
+        );
+
+    box-shadow:
+        0 0 25px var(--purple);
+}
+
+.planetYellow{
+    width:42px;
+    height:42px;
+
+    left:11%;
+    bottom:18%;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #fff,
+            #ffe45c 30%,
+            #ff9d00 70%,
+            #501600
+        );
+
+    box-shadow:
+        0 0 20px var(--yellow);
+}
+
+@keyframes planetFloat{
+
+    0%,100%{
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+
+    50%{
+        transform:
+            translateY(-35px)
+            rotate(180deg);
+    }
+}
+
+
+/* =========================================================
+   🌍 SATURN
+========================================================= */
+
+.saturn{
+    position:fixed;
+
+    right:2%;
+    bottom:8%;
+
+    width:100px;
+    height:100px;
+
+    border-radius:50%;
+
+    z-index:1;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #fff5c4,
+            #e4b55b 25%,
+            #a96b32 60%,
+            #29130c
+        );
+
+    box-shadow:
+        0 0 25px rgba(255,200,100,.5);
+
+    animation:
+        saturnFloat 7s ease-in-out infinite;
+}
+
+.saturn::before{
+    content:"";
+
+    position:absolute;
+
+    width:165px;
+    height:45px;
+
+    left:-33px;
+    top:28px;
+
+    border:
+        6px solid rgba(255,220,130,.55);
+
+    border-radius:50%;
+
+    transform:
+        rotate(-15deg);
+
+    box-shadow:
+        0 0 15px rgba(255,220,130,.4);
+}
+
+@keyframes saturnFloat{
+
+    50%{
+        transform:
+            translateY(-25px)
+            rotate(8deg);
+    }
+}
+
+
+/* =========================================================
+   👽 ALIEN
+========================================================= */
+
+.alien{
+    position:fixed;
+
+    left:-100px;
+    top:62%;
+
+    font-size:65px;
+
+    z-index:4;
+
+    pointer-events:none;
+
+    animation:
+        alienFly 19s linear infinite;
+}
+
+@keyframes alienFly{
+
+    0%{
+        transform:
+            translateX(0)
+            rotate(-8deg);
+    }
+
+    50%{
+        transform:
+            translateX(55vw)
+            translateY(-100px)
+            rotate(8deg);
+    }
+
+    100%{
+        transform:
+            translateX(115vw)
+            translateY(50px)
+            rotate(-5deg);
+    }
+}
+
+
+/* =========================================================
+   🛸 UFO
+========================================================= */
+
+.ufo{
+    position:fixed;
+
+    right:-120px;
+    top:18%;
+
+    font-size:60px;
+
+    z-index:4;
+
+    pointer-events:none;
+
+    animation:
+        ufoFly 17s linear infinite;
+}
+
+@keyframes ufoFly{
+
+    0%{
+        transform:
+            translateX(0);
+    }
+
+    50%{
+        transform:
+            translateX(-60vw)
+            translateY(90px)
+            rotate(7deg);
+    }
+
+    100%{
+        transform:
+            translateX(-125vw)
+            translateY(-40px);
+    }
+}
+
+
+/* =========================================================
+   ☄️ SHOOTING STAR
+========================================================= */
+
+.shootingStar{
+    position:fixed;
+
+    width:150px;
+    height:3px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            white,
+            var(--cyan)
+        );
+
+    box-shadow:
+        0 0 10px white,
+        0 0 25px var(--cyan);
+
+    z-index:3;
+
+    pointer-events:none;
+
+    transform:
+        rotate(-35deg);
+
+    animation:
+        shooting 1.3s linear forwards;
+}
+
+@keyframes shooting{
+
+    0%{
+        opacity:0;
+
+        transform:
+            translate(0,0)
+            rotate(-35deg);
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+            translate(-500px,400px)
+            rotate(-35deg);
+    }
+}
+
+
+/* =========================================================
+   🚀 LOADER
+========================================================= */
+
+#loader{
+    position:fixed;
+
+    inset:0;
+
+    z-index:10000;
+
+    display:grid;
+    place-items:center;
+
+    background:
+        radial-gradient(
+            circle,
+            #11174b,
+            #01020a 65%
+        );
+
+    transition:
+        opacity .8s ease;
+}
+
+.loaderBox{
+    text-align:center;
+}
+
+.loaderPlanet{
+    width:95px;
+    height:95px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            white,
+            #55eaff 20%,
+            #6540ef 65%,
+            #09021d
+        );
+
+    box-shadow:
+        0 0 35px var(--cyan),
+        0 0 80px var(--purple);
+
+    animation:
+        loaderSpin 2s linear infinite;
+}
+
+@keyframes loaderSpin{
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.loaderTitle{
+    font-size:clamp(1.8rem,6vw,3.5rem);
+
+    font-weight:950;
+
+    margin-top:20px;
+}
+
+.loaderText{
+    color:var(--cyan);
+
+    margin-top:8px;
+}
+
+.loaderBar{
+    width:270px;
+    height:6px;
+
+    margin:20px auto;
+
+    overflow:hidden;
+
+    border-radius:10px;
+
+    background:#15182d;
+}
+
+.loaderBar i{
+    display:block;
+
+    width:0;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--purple),
+            var(--pink)
+        );
+
+    animation:
+        load 2s forwards;
+}
+
+@keyframes load{
+
+    to{
+        width:100%;
+    }
+}
+
+
+/* =========================================================
+   🧭 NAVBAR
+========================================================= */
+
+header{
+    position:sticky;
+
+    top:0;
+
+    z-index:500;
+
+    background:
+        rgba(2,3,13,.75);
+
+    border-bottom:
+        1px solid var(--border);
+
+    backdrop-filter:
+        blur(20px);
+}
+
+nav{
+    min-height:72px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+}
+
+.container{
+    width:
+        min(
+            calc(100% - 32px),
+            var(--max)
+        );
+
+    margin:auto;
+}
+
+.logo{
+    border:0;
+
+    background:none;
+
+    color:white;
+
+    font-weight:950;
+
+    font-size:1.3rem;
+
+    cursor:pointer;
+
+    text-shadow:
+        0 0 15px var(--cyan);
+}
+
+.logo b{
+    color:var(--cyan);
+}
+
+.nav{
+    display:flex;
+
+    gap:4px;
+
+    list-style:none;
+}
+
+.nav button,
+.mobileBtn{
+    border:0;
+
+    background:transparent;
+
+    color:var(--soft);
+
+    cursor:pointer;
+
+    padding:10px 12px;
+
+    border-radius:12px;
+
+    font-weight:850;
+
+    transition:.25s;
+}
+
+.nav button:hover,
+.nav button.active{
+    color:var(--cyan);
+
+    background:
+        rgba(0,246,255,.08);
+
+    box-shadow:
+        0 0 20px rgba(0,246,255,.15);
+}
+
+.mobileBtn{
+    display:none;
+
+    font-size:1.6rem;
+}
+
+.mobileMenu{
+    display:none;
+
+    padding:
+        8px 0
+        14px;
+}
+
+.mobileMenu.open{
+    display:block;
+}
+
+.mobileMenu button{
+    width:100%;
+
+    text-align:left;
+
+    border:
+        1px solid var(--border);
+
+    background:
+        rgba(255,255,255,.04);
+
+    color:white;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    margin-top:6px;
+}
+
+
+/* =========================================================
+   📄 PAGES
+========================================================= */
+
+main{
+    position:relative;
+
+    z-index:5;
+}
+
+.page{
+    display:none;
+
+    min-height:
+        calc(100vh - 72px);
+
+    padding:
+        80px 0
+        100px;
+
+    animation:
+        pageIn .5s ease;
+}
+
+.page.active{
+    display:block;
+}
+
+@keyframes pageIn{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+
+/* =========================================================
+   🚀 HERO
+========================================================= */
+
+.hero{
+    min-height:
+        calc(100vh - 72px);
+
+    display:grid;
+
+    grid-template-columns:
+        1.05fr .95fr;
+
+    gap:55px;
+
+    align-items:center;
+}
+
+.eyebrow{
+    display:inline-block;
+
+    padding:
+        8px 16px;
+
+    border:
+        1px solid var(--cyan);
+
+    border-radius:999px;
+
+    color:var(--cyan);
+
+    background:
+        rgba(0,246,255,.07);
+
+    box-shadow:
+        0 0 25px rgba(0,246,255,.2);
+
+    font-weight:900;
+}
+
+.hero h1{
+    font-size:
+        clamp(
+            3rem,
+            7vw,
+            6.5rem
+        );
+
+    line-height:1.03;
+
+    margin:
+        20px 0;
+}
+
+.gradient{
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--blue),
+            var(--purple),
+            var(--pink),
+            var(--yellow),
+            var(--cyan)
+        );
+
+    background-size:300% auto;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    animation:
+        gradientMove 6s linear infinite;
+}
+
+@keyframes gradientMove{
+
+    to{
+        background-position:
+            300% center;
+    }
+}
+
+.hero p,
+.lead{
+    color:var(--soft);
+
+    font-size:1.12rem;
+
+    max-width:720px;
+}
+
+.actions{
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-top:28px;
+}
+
+.btn{
+    border:
+        1px solid var(--cyan);
+
+    border-radius:14px;
+
+    padding:
+        12px 20px;
+
+    text-decoration:none;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--blue)
+        );
+
+    box-shadow:
+        0 0 25px rgba(0,246,255,.2);
+
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:
+        translateY(-5px)
+        scale(1.03);
+
+    box-shadow:
+        0 0 40px rgba(0,246,255,.45);
+}
+
+.btn.alt{
+    background:
+        rgba(0,0,0,.25);
+
+    color:var(--cyan);
+}
+
+
+/* =========================================================
+   🪐 HERO PLANET
+========================================================= */
+
+.planetBox{
+    min-height:470px;
+
+    display:grid;
+
+    place-items:center;
+
+    position:relative;
+}
+
+.heroPlanet{
+    width:min(360px,70vw);
+
+    aspect-ratio:1;
+
+    border-radius:50%;
+
+    position:relative;
+
+    background:
+        radial-gradient(
+            circle at 30% 23%,
+            #fff,
+            #61eaff 12%,
+            #278eff 35%,
+            #6338e8 60%,
+            #17072f 82%,
+            #020108
+        );
+
+    box-shadow:
+        0 0 35px var(--cyan),
+        0 0 90px rgba(145,71,255,.55),
+        0 0 150px rgba(255,60,172,.22),
+        inset -45px -35px 70px #000;
+
+    animation:
+        heroPlanet 6s ease-in-out infinite;
+}
+
+.heroPlanet::before{
+    content:"";
+
+    position:absolute;
+
+    width:145%;
+    height:35%;
+
+    left:-22%;
+    top:34%;
+
+    border:
+        3px solid rgba(255,255,255,.55);
+
+    border-radius:50%;
+
+    transform:
+        rotate(-17deg);
+
+    box-shadow:
+        0 0 25px var(--cyan);
+}
+
+.heroPlanet::after{
+    content:"";
+
+    position:absolute;
+
+    inset:-45px;
+
+    border:
+        1px dashed rgba(0,246,255,.45);
+
+    border-radius:50%;
+
+    animation:
+        orbit 16s linear infinite;
+}
+
+@keyframes heroPlanet{
+
+    50%{
+        transform:
+            translateY(-20px)
+            rotate(4deg);
+    }
+}
+
+@keyframes orbit{
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   🏷️ SECTION TITLE
+========================================================= */
+
+.title{
+    text-align:center;
+
+    margin-bottom:48px;
+}
+
+.title h2{
+    font-size:
+        clamp(
+            2.3rem,
+            5vw,
+            4.2rem
+        );
+
+    line-height:1.1;
+
+    margin-bottom:12px;
+}
+
+.title p{
+    color:var(--soft);
+}
+
+
+/* =========================================================
+   🃏 CARDS
+========================================================= */
+
+.grid{
+    display:grid;
+
+    gap:22px;
+}
+
+.two{
+    grid-template-columns:
+        repeat(2,1fr);
+}
+
+.three{
+    grid-template-columns:
+        repeat(3,1fr);
+}
+
+.four{
+    grid-template-columns:
+        repeat(4,1fr);
+}
+
+.card{
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18,25,62,.92),
+            rgba(7,9,28,.94)
+        );
+
+    border:
+        1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:28px;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.3);
+
+    transition:
+        transform .18s ease,
+        border .25s,
+        box-shadow .25s;
+
+    transform-style:preserve-3d;
+}
+
+.card::before{
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    right:-80px;
+    top:-80px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,246,255,.18),
+            transparent 70%
+        );
+
+    pointer-events:none;
+}
+
+.card:hover{
+    border-color:var(--cyan);
+
+    box-shadow:
+        0 0 35px rgba(0,246,255,.22),
+        0 25px 60px rgba(0,0,0,.5);
+}
+
+.card h3{
+    color:var(--cyan);
+
+    margin-bottom:10px;
+
+    font-size:1.35rem;
+}
+
+.card p{
+    color:var(--soft);
+}
+
+.icon{
+    font-size:2.5rem;
+
+    margin-bottom:12px;
+}
+
+
+/* =========================================================
+   👤 PROFILE
+========================================================= */
+
+.profile{
+    display:grid;
+
+    grid-template-columns:
+        340px 1fr;
+
+    gap:35px;
+
+    align-items:center;
+}
+
+.profilePic{
+    width:280px;
+    height:340px;
+
+    object-fit:cover;
+
+    display:block;
+
+    margin:auto;
+
+    border:
+        2px solid var(--cyan);
+
+    border-radius:35px;
+
+    box-shadow:
+        0 0 30px rgba(0,246,255,.35),
+        0 0 80px rgba(145,71,255,.25);
+
+    transition:.35s;
+}
+
+.profilePic:hover{
+    transform:
+        scale(1.04)
+        rotate(-1deg);
+
+    box-shadow:
+        0 0 45px var(--cyan),
+        0 0 100px var(--purple);
+}
+
+.facts{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+
+    margin-top:22px;
+}
+
+.fact{
+    padding:15px;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid var(--border);
+}
+
+.fact b{
+    color:var(--yellow);
+
+    display:block;
+
+    margin-bottom:4px;
+}
+
+
+/* =========================================================
+   🎓 EDUCATION
+========================================================= */
+
+.edu .card{
+    min-height:270px;
+}
+
+.year{
+    font-size:2rem;
+
+    font-weight:950;
+
+    color:var(--purple);
+
+    text-shadow:
+        0 0 15px var(--purple);
+}
+
+
+/* =========================================================
+   🎨 HOBBY
+========================================================= */
+
+.hobbyCard{
+    min-height:300px;
+}
+
+.hobbyCard:hover .icon{
+    animation:
+        iconBounce .6s ease;
+}
+
+@keyframes iconBounce{
+
+    50%{
+        transform:
+            scale(1.4)
+            rotate(12deg);
+    }
+}
+
+
+/* =========================================================
+   📡 CONTACT
+========================================================= */
+
+.contact .card{
+    min-height:280px;
+}
+
+.contactText{
+    word-break:break-word;
+
+    color:var(--soft);
+}
+
+
+/* =========================================================
+   ⭐ FRIENDS
+========================================================= */
+
+.friends{
+    font-size:1.12rem;
+
+    line-height:2.2;
+}
+
+.tag{
+    display:inline-block;
+
+    color:var(--yellow);
+
+    border:
+        1px solid rgba(255,228,92,.4);
+
+    padding:
+        4px 10px;
+
+    border-radius:999px;
+
+    margin:3px;
+
+    font-size:.9rem;
+}
+
+
+/* =========================================================
+   🏆 WORKS
+========================================================= */
+
+.achievement{
+    min-height:280px;
+}
+
+.achievement strong{
+    display:block;
+
+    font-size:1.35rem;
+
+    color:var(--yellow);
+
+    margin-bottom:10px;
+}
+
+.big{
+    font-size:3rem;
+}
+
+
+/* =========================================================
+   🎭 CHARACTER DECORATION
+========================================================= */
+
+.character{
+    font-size:4rem;
+
+    text-align:center;
+
+    margin-bottom:12px;
+
+    filter:
+        drop-shadow(0 0 12px rgba(0,246,255,.35));
+
+    animation:
+        characterFloat 3.5s ease-in-out infinite;
+}
+
+@keyframes characterFloat{
+
+    50%{
+        transform:
+            translateY(-10px)
+            rotate(3deg);
+    }
+}
+
+
+/* =========================================================
+   🚀 FOOTER
+========================================================= */
+
+footer{
+    text-align:center;
+
+    color:var(--muted);
+
+    padding:35px;
+
+    border-top:
+        1px solid var(--border);
+}
+
+footer b{
+    color:var(--cyan);
+}
+
+
+/* =========================================================
+   📱 RESPONSIVE
+========================================================= */
+
+@media(max-width:950px){
+
+    .hero,
+    .profile{
+        grid-template-columns:1fr;
+
+        text-align:center;
+    }
+
+    .hero p{
+        margin:auto;
+    }
+
+    .two,
+    .three,
+    .four{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .nav{
+        display:none;
+    }
+
+    .mobileBtn{
+        display:block;
+    }
+
+    .profilePic{
+        margin:auto;
+    }
+
+    .spacePlanet,
+    .saturn{
+        opacity:.55;
+    }
+}
+
+@media(max-width:600px){
+
+    .container{
+        width:
+            min(
+                calc(100% - 24px),
+                var(--max)
+            );
+    }
+
+    .page{
+        padding:
+            55px 0
+            80px;
+    }
+
+    .two,
+    .three,
+    .four{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        min-height:auto;
+
+        padding-top:35px;
+    }
+
+    .planetBox{
+        min-height:350px;
+    }
+
+    .heroPlanet{
+        width:230px;
+    }
+
+    .profilePic{
+        width:220px;
+        height:285px;
+    }
+
+    .facts{
+        grid-template-columns:1fr;
+    }
+
+    .ufo{
+        font-size:42px;
+    }
+
+    .alien{
+        font-size:42px;
+    }
+
+    .saturn{
+        width:65px;
+        height:65px;
+    }
+
+    .saturn::before{
+        width:110px;
+        height:32px;
+
+        left:-22px;
+        top:17px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation:none!important;
+        scroll-behavior:auto!important;
+    }
+}
+
 </style>
 </head>
+
+
 <body>
 
+
+<!-- =====================================================
+     🚀 LOADING SCREEN
+===================================================== -->
+
 <div id="loader">
-  <div class="loaderBox">
-    <div class="loaderPlanet"></div>
-    <div class="loaderTitle">AIMAAM <span class="gradient">GALAXY</span></div>
-    <div class="loaderText">กำลังเปิดประตูสู่จักรวาล...</div>
-    <div class="loaderBar"><i></i></div>
-  </div>
+
+    <div class="loaderBox">
+
+        <div class="loaderPlanet"></div>
+
+        <div class="loaderTitle">
+            AIMAAM
+            <span class="gradient">
+                GALAXY
+            </span>
+        </div>
+
+        <div class="loaderText">
+            🚀 กำลังเปิดประตูสู่จักรวาล...
+        </div>
+
+        <div class="loaderBar">
+            <i></i>
+        </div>
+
+    </div>
+
 </div>
+
+
+<!-- =====================================================
+     🖱️ MOUSE EFFECT
+===================================================== -->
 
 <div id="mouseGlow"></div>
+
+
+<!-- =====================================================
+     ⭐ STARS
+===================================================== -->
+
 <div class="stars">
-  <div class="star s1">⭐</div><div class="star s2">🌟</div><div class="star s3">✦</div>
-  <div class="star s4">💫</div><div class="star s5">✨</div>
+
+    <div class="star s1">⭐</div>
+    <div class="star s2">🌟</div>
+    <div class="star s3">✦</div>
+    <div class="star s4">💫</div>
+    <div class="star s5">✨</div>
+
 </div>
+
+
+<!-- =====================================================
+     🪐 FLOATING PLANETS
+===================================================== -->
+
+<div class="spacePlanet planetBlue"></div>
+
+<div class="spacePlanet planetPurple"></div>
+
+<div class="spacePlanet planetYellow"></div>
+
+<div class="saturn"></div>
+
+
+<!-- =====================================================
+     👽 SPACE CREATURES
+===================================================== -->
+
 <div class="ufo">🛸</div>
 
+<div class="alien">👽</div>
+
+
+<!-- =====================================================
+     🧭 NAVIGATION
+===================================================== -->
+
 <header>
+
 <nav class="container">
-  <button class="logo navGo" data-page="home">🚀 Aimaam <b>Galaxy</b></button>
-  <ul class="nav">
-    <li><button class="navGo active" data-page="home">HOME</button></li>
-    <li><button class="navGo" data-page="profile">PROFILE</button></li>
-    <li><button class="navGo" data-page="education">EDUCATION</button></li>
-    <li><button class="navGo" data-page="hobby">HOBBY</button></li>
-    <li><button class="navGo" data-page="contact">CONTACT</button></li>
-    <li><button class="navGo" data-page="friends">SUBJECT & FRIENDS</button></li>
-    <li><button class="navGo" data-page="works">WORKS</button></li>
-  </ul>
-  <button class="mobileBtn" id="menuBtn">☰</button>
+
+    <button
+        class="logo navGo"
+        data-page="home">
+
+        🚀 Aimaam
+        <b>Galaxy</b>
+
+    </button>
+
+
+    <ul class="nav">
+
+        <li>
+            <button
+                class="navGo active"
+                data-page="home">
+                HOME
+            </button>
+        </li>
+
+        <li>
+            <button
+                class="navGo"
+                data-page="profile">
+                PROFILE
+            </button>
+        </li>
+
+        <li>
+            <button
+                class="navGo"
+                data-page="education">
+                EDUCATION
+            </button>
+        </li>
+
+        <li>
+            <button
+                class="navGo"
+                data-page="hobby">
+                HOBBY
+            </button>
+        </li>
+
+        <li>
+            <button
+                class="navGo"
+                data-page="contact">
+                CONTACT
+            </button>
+        </li>
+
+        <li>
+            <button
+                class="navGo"
+                data-page="friends">
+                FRIENDS
+            </button>
+        </li>
+
+        <li>
+            <button
+                class="navGo"
+                data-page="works">
+                WORKS
+            </button>
+        </li>
+
+    </ul>
+
+
+    <button
+        class="mobileBtn"
+        id="menuBtn">
+
+        ☰
+
+    </button>
+
 </nav>
-<div class="mobileMenu container" id="mobileMenu">
-  <button class="navGo" data-page="home">🏠 HOME</button>
-  <button class="navGo" data-page="profile">👤 PROFILE / ABOUT ME</button>
-  <button class="navGo" data-page="education">🎓 EDUCATION</button>
-  <button class="navGo" data-page="hobby">🎨 HOBBY</button>
-  <button class="navGo" data-page="contact">📡 CONTACT</button>
-  <button class="navGo" data-page="friends">⭐ SUBJECT & FRIENDS</button>
-  <button class="navGo" data-page="works">🏆 WORKS</button>
+
+
+<div
+    class="mobileMenu container"
+    id="mobileMenu">
+
+    <button class="navGo" data-page="home">
+        🏠 HOME
+    </button>
+
+    <button class="navGo" data-page="profile">
+        👤 PROFILE / ABOUT ME
+    </button>
+
+    <button class="navGo" data-page="education">
+        🎓 EDUCATION
+    </button>
+
+    <button class="navGo" data-page="hobby">
+        🎨 HOBBY
+    </button>
+
+    <button class="navGo" data-page="contact">
+        📡 CONTACT
+    </button>
+
+    <button class="navGo" data-page="friends">
+        ⭐ SUBJECT & FRIENDS
+    </button>
+
+    <button class="navGo" data-page="works">
+        🏆 WORKS
+    </button>
+
 </div>
+
 </header>
+
+
+<!-- =====================================================
+     📄 MAIN
+===================================================== -->
 
 <main>
 
-<section class="page active" id="home">
+
+<!-- =====================================================
+     🏠 HOME
+===================================================== -->
+
+<section
+    class="page active"
+    id="home">
+
 <div class="container hero">
-  <div>
-    <div class="eyebrow">✨ WELCOME TO AIMAAM'S UNIVERSE</div>
-    <h1>สวัสดีค่ะ<br>ฉันคือ <span class="gradient">อิ่มเอม</span> 🚀</h1>
-    <p>Portfolio ส่วนตัวในธีมจักรวาลไซไฟ/เกม พร้อมดาวเคราะห์หมุน ยานอวกาศ เอฟเฟกต์เมาส์ และหน้าแต่ละหัวข้อที่กดเข้าได้จริง</p>
-    <div class="actions">
-      <button class="btn navGo" data-page="profile">🌌 เริ่มสำรวจ</button>
-      <button class="btn alt navGo" data-page="works">🏆 ดูผลงาน</button>
+
+    <div>
+
+        <div class="eyebrow">
+            ✨ WELCOME TO AIMAAM'S UNIVERSE
+        </div>
+
+        <h1>
+
+            สวัสดีค่ะ<br>
+
+            ฉันคือ
+
+            <span class="gradient">
+                อิ่มเอม
+            </span>
+
+            🚀
+
+        </h1>
+
+        <p>
+
+            ยินดีต้อนรับเข้าสู่
+            <b>Aimaam Galaxy</b>
+
+            จักรวาล Portfolio
+            ส่วนตัวที่เต็มไปด้วย
+            ดาวเคราะห์ ยานอวกาศ
+            เอเลี่ยน และความฝันของฉัน
+
+        </p>
+
+
+        <div class="actions">
+
+            <button
+                class="btn navGo"
+                data-page="profile">
+
+                🌌 สำรวจจักรวาล
+
+            </button>
+
+            <button
+                class="btn alt navGo"
+                data-page="works">
+
+                🏆 ดูผลงาน
+
+            </button>
+
+        </div>
+
     </div>
-  </div>
-  <div class="planetBox"><div class="planet"></div></div>
-</div>
-</section>
 
-<section class="page" id="profile">
-<div class="container pageWrap">
-  <div class="title"><h2>👤 <span class="gradient">Profile / About Me</span></h2><p>ข้อมูลนักเดินทางแห่งจักรวาล Aimaam</p></div>
-  <div class="profile">
-    <div><img class="profilePic" src="3796.jpg" alt="รูปโปรไฟล์ของอิ่มเอม"></div>
-    <div class="card">
-      <div class="character c1"></div>
-      <h3>🌟 ข้อมูลส่วนตัว</h3>
-      <div class="facts">
-        <div class="fact"><b>ชื่อจริง</b>นางสาว ฐาณดา ล้อลำเลียง</div>
-        <div class="fact"><b>ชื่อเล่น</b>อิ่มเอม</div>
-        <div class="fact"><b>วันเกิด</b>3 มิถุนายน พ.ศ. 2554 / ค.ศ. 2011</div>
-        <div class="fact"><b>สีที่ชอบ</b>💛 สีเหลือง</div>
-        <div class="fact"><b>อาหาร/เครื่องดื่มที่ชอบ</b>🍜 ก๋วยเตี๋ยว · 🥤 น้ำโกโก้ · 🍫 ช็อกโกแลต</div>
-        <div class="fact"><b>สัตว์ที่ชอบ</b>🐶 สุนัข · 🐱 แมว</div>
-      </div>
+
+    <div class="planetBox">
+
+        <div class="heroPlanet"></div>
+
     </div>
-  </div>
+
 </div>
+
 </section>
 
-<section class="page" id="education">
+
+
+<!-- =====================================================
+     👤 PROFILE
+===================================================== -->
+
+<section
+    class="page"
+    id="profile">
+
 <div class="container">
-  <div class="title"><h2>🎓 <span class="gradient">Education</span></h2><p>เส้นทางการเรียนรู้ของฉัน</p></div>
-  <div class="grid four edu">
-    <article class="card"><div class="character c2"></div><div class="year">01</div><h3>ระดับชั้นอนุบาล</h3><p>เรียนที่ <b>โรงเรียนวิทยาวัฒน์</b></p></article>
-    <article class="card"><div class="character c3"></div><div class="year">02</div><h3>ระดับชั้นประถมศึกษา</h3><p>เรียนที่ <b>โรงเรียนศรีจอมทอง</b></p></article>
-    <article class="card"><div class="character c4"></div><div class="year">03</div><h3>ปัจจุบัน</h3><p>กำลังเรียนชั้น <b>มัธยมศึกษาปีที่ 3</b><br>โรงเรียนจอมทอง</p></article>
-    <article class="card"><div class="character c5"></div><div class="year">04</div><h3>อนาคต</h3><p>จะเรียนต่อชั้นมัธยมศึกษา ที่ <b>โรงเรียนยุพราชวิทยาลัย</b></p></article>
-  </div>
+
+    <div class="title">
+
+        <h2>
+
+            👤
+
+            <span class="gradient">
+                Profile / About Me
+            </span>
+
+        </h2>
+
+        <p>
+            ข้อมูลนักเดินทางแห่งจักรวาล Aimaam
+        </p>
+
+    </div>
+
+
+    <div class="profile">
+
+
+        <div>
+
+            <!-- ⭐ รูปที่คุณส่งมา -->
+
+            <img
+                class="profilePic"
+                src="1000012017.jpg"
+                alt="รูปโปรไฟล์ของอิ่มเอม">
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="character">
+                👩🏻‍🚀
+            </div>
+
+            <h3>
+                🌟 ข้อมูลส่วนตัว
+            </h3>
+
+
+            <div class="facts">
+
+
+                <div class="fact">
+
+                    <b>
+                        ชื่อจริง
+                    </b>
+
+                    นางสาว ฐาณดา ล้อลำเลียง
+
+                </div>
+
+
+                <div class="fact">
+
+                    <b>
+                        ชื่อเล่น
+                    </b>
+
+                    อิ่มเอม
+
+                </div>
+
+
+                <div class="fact">
+
+                    <b>
+                        วันเกิด
+                    </b>
+
+                    3 มิถุนายน
+                    พ.ศ. 2554 /
+                    ค.ศ. 2011
+
+                </div>
+
+
+                <div class="fact">
+
+                    <b>
+                        สีที่ชอบ
+                    </b>
+
+                    💛 สีเหลือง
+
+                </div>
+
+
+                <div class="fact">
+
+                    <b>
+                        อาหารที่ชอบ
+                    </b>
+
+                    🍜 ก๋วยเตี๋ยว
+
+                </div>
+
+
+                <div class="fact">
+
+                    <b>
+                        เครื่องดื่ม
+                    </b>
+
+                    🥤 น้ำโกโก้
+
+                </div>
+
+
+                <div class="fact">
+
+                    <b>
+                        ขนมที่ชอบ
+                    </b>
+
+                    🍫 ช็อกโกแลต
+
+                </div>
+
+
+                <div class="fact">
+
+                    <b>
+                        สัตว์ที่ชอบ
+                    </b>
+
+                    🐶 สุนัข · 🐱 แมว
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
+
 </section>
 
-<section class="page" id="hobby">
+
+
+<!-- =====================================================
+     🎓 EDUCATION
+===================================================== -->
+
+<section
+    class="page"
+    id="education">
+
 <div class="container">
-  <div class="title"><h2>🎨 <span class="gradient">Hobby</span></h2><p>สิ่งที่ชอบทำในเวลาว่าง</p></div>
-  <div class="grid three">
-    <article class="card"><div class="character c6"></div><div class="icon">🎨</div><h3>วาดรูป</h3><p>สร้างโลกและตัวละครด้วยจินตนาการของตัวเอง</p></article>
-    <article class="card"><div class="character c7"></div><div class="icon">🎧</div><h3>ร้องเพลง / ฟังเพลง</h3><p>เพลิดเพลินกับเสียงเพลงและเพลงที่ชอบ</p></article>
-    <article class="card"><div class="character c8"></div><div class="icon">🌠</div><h3>ดูอนิเม / ซีรีย์</h3><p>สนุกกับเรื่องราว ตัวละคร และโลกแฟนตาซี</p></article>
-  </div>
+
+    <div class="title">
+
+        <h2>
+
+            🎓
+
+            <span class="gradient">
+                Education
+            </span>
+
+        </h2>
+
+        <p>
+            เส้นทางการเดินทางผ่านจักรวาลการศึกษา
+        </p>
+
+    </div>
+
+
+    <div class="grid four edu">
+
+
+        <article class="card">
+
+            <div class="character">
+                👶🏻
+            </div>
+
+            <div class="year">
+                01
+            </div>
+
+            <h3>
+                ระดับชั้นอนุบาล
+            </h3>
+
+            <p>
+                เรียนที่
+                <b>
+                    โรงเรียนวิทยาวัฒน์
+                </b>
+            </p>
+
+        </article>
+
+
+        <article class="card">
+
+            <div class="character">
+                🧒🏻
+            </div>
+
+            <div class="year">
+                02
+            </div>
+
+            <h3>
+                ระดับชั้นประถมศึกษา
+            </h3>
+
+            <p>
+                เรียนที่
+                <b>
+                    โรงเรียนศรีจอมทอง
+                </b>
+            </p>
+
+        </article>
+
+
+        <article class="card">
+
+            <div class="character">
+                🧑🏻‍🚀
+            </div>
+
+            <div class="year">
+                03
+            </div>
+
+            <h3>
+                ปัจจุบัน
+            </h3>
+
+            <p>
+
+                กำลังเรียนชั้น
+
+                <b>
+                    มัธยมศึกษาปีที่ 3
+                </b>
+
+                <br>
+
+                โรงเรียนจอมทอง
+
+            </p>
+
+        </article>
+
+
+        <article class="card">
+
+            <div class="character">
+                🚀
+            </div>
+
+            <div class="year">
+                04
+            </div>
+
+            <h3>
+                อนาคต
+            </h3>
+
+            <p>
+
+                จะเรียนต่อชั้นมัธยมศึกษา
+
+                ที่
+
+                <b>
+                    โรงเรียนยุพราชวิทยาลัย
+                </b>
+
+            </p>
+
+        </article>
+
+
+    </div>
+
 </div>
+
 </section>
 
-<section class="page" id="contact">
+
+
+<!-- =====================================================
+     🎨 HOBBY
+===================================================== -->
+
+<section
+    class="page"
+    id="hobby">
+
 <div class="container">
-  <div class="title"><h2>📡 <span class="gradient">Contact</span></h2><p>ส่งสัญญาณติดต่อมาหาฉันได้</p></div>
-  <div class="grid four contact">
-    <article class="card"><div class="character c9"></div><div class="icon">📘</div><h3>Facebook</h3><p>Thanada lorlamliang</p></article>
-    <article class="card"><div class="character c10"></div><div class="icon">📸</div><h3>Instagram</h3><p>aimaam22</p></article>
-    <article class="card"><div class="character c3"></div><div class="icon">🎵</div><h3>TikTok</h3><p>aam_aam</p></article>
-    <article class="card"><div class="character c6"></div><div class="icon">📞</div><h3>เบอร์โทรศัพท์</h3><p>062-737-3189</p></article>
-  </div>
+
+    <div class="title">
+
+        <h2>
+
+            🎨
+
+            <span class="gradient">
+                Hobby
+            </span>
+
+        </h2>
+
+        <p>
+            กิจกรรมที่ทำเมื่อเดินทางในจักรวาลเวลาว่าง
+        </p>
+
+    </div>
+
+
+    <div class="grid three">
+
+
+        <article class="card hobbyCard">
+
+            <div class="character">
+                🎨
+            </div>
+
+            <div class="icon">
+                🖌️
+            </div>
+
+            <h3>
+                วาดรูป
+            </h3>
+
+            <p>
+                สร้างโลกและตัวละคร
+                ด้วยจินตนาการของตัวเอง
+            </p>
+
+        </article>
+
+
+        <article class="card hobbyCard">
+
+            <div class="character">
+                🎤
+            </div>
+
+            <div class="icon">
+                🎧
+            </div>
+
+            <h3>
+                ร้องเพลง / ฟังเพลง
+            </h3>
+
+            <p>
+                เพลิดเพลินกับเสียงเพลง
+                และเพลงที่ชอบ
+            </p>
+
+        </article>
+
+
+        <article class="card hobbyCard">
+
+            <div class="character">
+                🌠
+            </div>
+
+            <div class="icon">
+                📺
+            </div>
+
+            <h3>
+                ดูอนิเม / ซีรีย์
+            </h3>
+
+            <p>
+                สนุกกับเรื่องราว
+                ตัวละคร และโลกแฟนตาซี
+            </p>
+
+        </article>
+
+
+    </div>
+
 </div>
+
 </section>
 
-<section class="page" id="friends">
+
+
+<!-- =====================================================
+     📡 CONTACT
+===================================================== -->
+
+<section
+    class="page"
+    id="contact">
+
 <div class="container">
-  <div class="title"><h2>⭐ <span class="gradient">Subject & My Best Friends</span></h2><p>คนและวิชาที่อยู่ในจักรวาลของฉัน</p></div>
-  <div class="grid two">
-    <article class="card">
-      <div class="character c4"></div><h3>📚 วิชาที่ชอบ / ไม่ชอบ</h3>
-      <p class="friends"><b style="color:var(--cyan)">💙 ชอบ:</b> Science, Chinese<br><b style="color:var(--pink)">💗 ไม่ชอบ:</b> Math</p>
-      <div><span class="tag">SCIENCE</span><span class="tag">CHINESE</span><span class="tag">MATH</span></div>
-    </article>
-    <article class="card">
-      <div class="character c5"></div><h3>👑 My Best Friends</h3>
-      <p class="friends">แก้ม · ปั้นหยา · จริน · เมกาน · พีท · ชู · พ็อต</p>
-    </article>
-  </div>
+
+    <div class="title">
+
+        <h2>
+
+            📡
+
+            <span class="gradient">
+                Contact
+            </span>
+
+        </h2>
+
+        <p>
+            ส่งสัญญาณติดต่อมาหาฉันได้
+        </p>
+
+    </div>
+
+
+    <div class="grid four">
+
+
+        <article class="card">
+
+            <div class="character">
+                📘
+            </div>
+
+            <div class="icon">
+                📘
+            </div>
+
+            <h3>
+                Facebook
+            </h3>
+
+            <p class="contactText">
+                Thanada lorlamliang
+            </p>
+
+        </article>
+
+
+        <article class="card">
+
+            <div class="character">
+                📸
+            </div>
+
+            <div class="icon">
+                📸
+            </div>
+
+            <h3>
+                Instagram
+            </h3>
+
+            <p class="contactText">
+                aimaam22
+            </p>
+
+        </article>
+
+
+        <article class="card">
+
+            <div class="character">
+                🎵
+            </div>
+
+            <div class="icon">
+                🎵
+            </div>
+
+            <h3>
+                TikTok
+            </h3>
+
+            <p class="contactText">
+                aam_aam
+            </p>
+
+        </article>
+
+
+        <article class="card">
+
+            <div class="character">
+                📞
+            </div>
+
+            <div class="icon">
+                📞
+            </div>
+
+            <h3>
+                เบอร์โทรศัพท์
+            </h3>
+
+            <p class="contactText">
+                062-737-3189
+            </p>
+
+        </article>
+
+
+    </div>
+
 </div>
+
 </section>
 
-<section class="page" id="works">
+
+
+<!-- =====================================================
+     ⭐ SUBJECT & FRIENDS
+===================================================== -->
+
+<section
+    class="page"
+    id="friends">
+
 <div class="container">
-  <div class="title"><h2>🏆 <span class="gradient">ผลงาน</span></h2><p>Achievement Log — บันทึกภารกิจที่ภูมิใจ</p></div>
-  <div class="grid three">
-    <article class="card achievement"><div class="character c1"></div><div class="big">🏅</div><strong>TOP 10</strong><p>ได้ท็อป 10 สี่เทอมติดดด 🔥</p></article>
-    <article class="card achievement"><div class="character c7"></div><div class="big">🥇</div><strong>ชนะเลิศ</strong><p>การแข่งขันตอบปัญหาวันวิทยาศาสตร์</p></article>
-    <article class="card achievement"><div class="character c9"></div><div class="big">👑</div><strong>มีอำนาจ</strong><p>เป็นหัวหน้าห้อง ⭐</p></article>
-  </div>
+
+    <div class="title">
+
+        <h2>
+
+            ⭐
+
+            <span class="gradient">
+                Subject & My Best Friends
+            </span>
+
+        </h2>
+
+        <p>
+            วิชาและเหล่าเพื่อนร่วมทีมในจักรวาลของฉัน
+        </p>
+
+    </div>
+
+
+    <div class="grid two">
+
+
+        <article class="card">
+
+            <div class="character">
+                🧑🏻‍🔬
+            </div>
+
+            <h3>
+                📚 วิชาที่ชอบ / ไม่ชอบ
+            </h3>
+
+            <p class="friends">
+
+                <b style="color:var(--cyan)">
+                    💙 ชอบ:
+                </b>
+
+                Science,
+                Chinese
+
+                <br>
+
+                <b style="color:var(--pink)">
+                    💗 ไม่ชอบ:
+                </b>
+
+                Math
+
+            </p>
+
+
+            <div>
+
+                <span class="tag">
+                    🔬 SCIENCE
+                </span>
+
+                <span class="tag">
+                    🀄 CHINESE
+                </span>
+
+                <span class="tag">
+                    ➗ MATH
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="card">
+
+            <div class="character">
+                👑
+            </div>
+
+            <h3>
+                👑 My Best Friends
+            </h3>
+
+            <p class="friends">
+
+                💫 แก้ม
+                <br>
+
+                🌟 ปั้นหยา
+                <br>
+
+                ✨ จริน
+                <br>
+
+                💜 เมกาน
+                <br>
+
+                💙 พีท
+                <br>
+
+                💚 ชู
+                <br>
+
+                💛 พ็อต
+                <br>
+
+                🧡 <b>มังโก้</b>
+
+            </p>
+
+        </article>
+
+
+    </div>
+
 </div>
+
 </section>
+
+
+
+<!-- =====================================================
+     🏆 WORKS
+===================================================== -->
+
+<section
+    class="page"
+    id="works">
+
+<div class="container">
+
+    <div class="title">
+
+        <h2>
+
+            🏆
+
+            <span class="gradient">
+                ผลงาน
+            </span>
+
+        </h2>
+
+        <p>
+            Achievement Log — ภารกิจที่ฉันภูมิใจ
+        </p>
+
+    </div>
+
+
+    <div class="grid three">
+
+
+        <article class="card achievement">
+
+            <div class="character">
+                🏅
+            </div>
+
+            <div class="big">
+                🏅
+            </div>
+
+            <strong>
+                TOP 10
+            </strong>
+
+            <p>
+                ได้ท็อป 10
+                สี่เทอมติดดด 🔥
+            </p>
+
+        </article>
+
+
+
+        <article class="card achievement">
+
+            <div class="character">
+                🧪
+            </div>
+
+            <div class="big">
+                🥇
+            </div>
+
+            <strong>
+                ชนะเลิศ
+            </strong>
+
+            <p>
+                การแข่งขันตอบปัญหา
+                วันวิทยาศาสตร์
+            </p>
+
+        </article>
+
+
+
+        <article class="card achievement">
+
+            <div class="character">
+                👑
+            </div>
+
+            <div class="big">
+                👑
+            </div>
+
+            <strong>
+                มีอำนาจ
+            </strong>
+
+            <p>
+                เป็นหัวหน้าห้อง ⭐
+            </p>
+
+        </article>
+
+
+    </div>
+
+</div>
+
+</section>
+
 
 </main>
 
-<footer>🚀 Made with <b>✨ Aimaam Galaxy ✨</b> — Explore. Create. Shine.</footer>
+
+<!-- =====================================================
+     🚀 FOOTER
+===================================================== -->
+
+<footer>
+
+    🚀 Made with
+
+    <b>
+        ✨ Aimaam Galaxy ✨
+    </b>
+
+    — Explore. Create. Shine.
+
+</footer>
+
+
 
 <script>
-const pages=[...document.querySelectorAll(".page")];
-const navs=[...document.querySelectorAll(".navGo")];
-const mobileMenu=document.getElementById("mobileMenu");
-const menuBtn=document.getElementById("menuBtn");
+
+/* =========================================================
+   📄 PAGE SYSTEM
+========================================================= */
+
+const pages =
+    [...document.querySelectorAll(".page")];
+
+const navs =
+    [...document.querySelectorAll(".navGo")];
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+const menuBtn =
+    document.getElementById("menuBtn");
+
 
 function showPage(id){
-  const target=document.getElementById(id)||document.getElementById("home");
-  pages.forEach(p=>p.classList.toggle("active",p===target));
-  navs.forEach(n=>n.classList.toggle("active",n.dataset.page===target.id));
-  mobileMenu.classList.remove("open");
-  window.scrollTo({top:0,behavior:"smooth"});
-  history.replaceState(null,"","#"+target.id);
+
+    const target =
+        document.getElementById(id)
+        ||
+        document.getElementById("home");
+
+
+    pages.forEach(page=>{
+
+        page.classList.toggle(
+            "active",
+            page === target
+        );
+
+    });
+
+
+    navs.forEach(button=>{
+
+        button.classList.toggle(
+            "active",
+            button.dataset.page === target.id
+        );
+
+    });
+
+
+    mobileMenu.classList.remove("open");
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+
+    history.replaceState(
+        null,
+        "",
+        "#" + target.id
+    );
+
 }
 
-navs.forEach(btn=>btn.addEventListener("click",()=>showPage(btn.dataset.page)));
-menuBtn.addEventListener("click",()=>mobileMenu.classList.toggle("open"));
 
-window.addEventListener("hashchange",()=>showPage(location.hash.slice(1)||"home"));
+/* =========================================================
+   🧭 NAVIGATION CLICK
+========================================================= */
 
-const glow=document.getElementById("mouseGlow");
-window.addEventListener("pointermove",e=>{
-  glow.style.left=e.clientX+"px";
-  glow.style.top=e.clientY+"px";
+navs.forEach(button=>{
+
+    button.addEventListener(
+        "click",
+        ()=>{
+
+            showPage(
+                button.dataset.page
+            );
+
+        }
+    );
+
 });
 
-window.addEventListener("load",()=>{
-  setTimeout(()=>document.getElementById("loader").style.opacity="0",1500);
-  setTimeout(()=>document.getElementById("loader").style.display="none",2200);
-  if(location.hash) showPage(location.hash.slice(1));
+
+/* =========================================================
+   📱 MOBILE MENU
+========================================================= */
+
+menuBtn.addEventListener(
+    "click",
+    ()=>{
+
+        mobileMenu.classList.toggle(
+            "open"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   🔗 HASH
+========================================================= */
+
+window.addEventListener(
+    "hashchange",
+    ()=>{
+
+        showPage(
+            location.hash.slice(1)
+            ||
+            "home"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   🖱️ MOUSE GLOW
+========================================================= */
+
+const glow =
+    document.getElementById("mouseGlow");
+
+
+let mouseX = 0;
+let mouseY = 0;
+
+
+window.addEventListener(
+    "pointermove",
+    event=>{
+
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+
+        glow.style.left =
+            mouseX + "px";
+
+        glow.style.top =
+            mouseY + "px";
+
+    }
+);
+
+
+/* =========================================================
+   ✨ DRAG PARTICLES
+========================================================= */
+
+let dragging = false;
+
+window.addEventListener(
+    "pointerdown",
+    ()=>{
+        dragging = true;
+    }
+);
+
+window.addEventListener(
+    "pointerup",
+    ()=>{
+        dragging = false;
+    }
+);
+
+
+window.addEventListener(
+    "pointermove",
+    event=>{
+
+        if(!dragging) return;
+
+        createParticle(
+            event.clientX,
+            event.clientY
+        );
+
+    }
+);
+
+
+function createParticle(x,y){
+
+    const particle =
+        document.createElement(
+            "div"
+        );
+
+    particle.className =
+        "pointerParticle";
+
+
+    particle.style.left =
+        x + "px";
+
+    particle.style.top =
+        y + "px";
+
+
+    particle.style.setProperty(
+        "--dx",
+        (Math.random()*80-40)+"px"
+    );
+
+    particle.style.setProperty(
+        "--dy",
+        (Math.random()*80-40)+"px"
+    );
+
+
+    document.body.appendChild(
+        particle
+    );
+
+
+    setTimeout(
+        ()=>particle.remove(),
+        800
+    );
+
+}
+
+
+/* =========================================================
+   💥 CLICK EFFECT
+========================================================= */
+
+window.addEventListener(
+    "pointerdown",
+    event=>{
+
+        const ripple =
+            document.createElement(
+                "div"
+            );
+
+        ripple.className =
+            "ripple";
+
+
+        ripple.style.left =
+            event.clientX + "px";
+
+        ripple.style.top =
+            event.clientY + "px";
+
+
+        document.body.appendChild(
+            ripple
+        );
+
+
+        setTimeout(
+            ()=>ripple.remove(),
+            800
+        );
+
+    }
+);
+
+
+/* =========================================================
+   🃏 3D CARD TILT
+========================================================= */
+
+const cards =
+    document.querySelectorAll(
+        ".card"
+    );
+
+
+cards.forEach(card=>{
+
+    card.addEventListener(
+        "pointermove",
+        event=>{
+
+            const rect =
+                card.getBoundingClientRect();
+
+
+            const x =
+                event.clientX -
+                rect.left;
+
+            const y =
+                event.clientY -
+                rect.top;
+
+
+            const centerX =
+                rect.width / 2;
+
+            const centerY =
+                rect.height / 2;
+
+
+            const rotateX =
+                ((y-centerY)/centerY)
+                * -5;
+
+
+            const rotateY =
+                ((x-centerX)/centerX)
+                * 5;
+
+
+            card.style.transform =
+                `perspective(900px)
+                 rotateX(${rotateX}deg)
+                 rotateY(${rotateY}deg)
+                 translateY(-5px)`;
+
+        }
+    );
+
+
+    card.addEventListener(
+        "pointerleave",
+        ()=>{
+
+            card.style.transform =
+                "";
+
+        }
+    );
+
 });
+
+
+/* =========================================================
+   ☄️ RANDOM SHOOTING STARS
+========================================================= */
+
+function createShootingStar(){
+
+    const star =
+        document.createElement(
+            "div"
+        );
+
+    star.className =
+        "shootingStar";
+
+
+    star.style.left =
+        (Math.random()*100+10)
+        + "vw";
+
+
+    star.style.top =
+        (Math.random()*45)
+        + "vh";
+
+
+    document.body.appendChild(
+        star
+    );
+
+
+    setTimeout(
+        ()=>star.remove(),
+        1400
+    );
+
+}
+
+
+/* ดาวตกทุก 2-5 วินาที */
+
+function shootingLoop(){
+
+    createShootingStar();
+
+    const next =
+        2000 +
+        Math.random()*3500;
+
+    setTimeout(
+        shootingLoop,
+        next
+    );
+
+}
+
+setTimeout(
+    shootingLoop,
+    2500
+);
+
+
+/* =========================================================
+   🚀 LOADER
+========================================================= */
+
+window.addEventListener(
+    "load",
+    ()=>{
+
+        setTimeout(
+            ()=>{
+
+                document
+                    .getElementById("loader")
+                    .style.opacity = "0";
+
+            },
+            1500
+        );
+
+
+        setTimeout(
+            ()=>{
+
+                document
+                    .getElementById("loader")
+                    .style.display = "none";
+
+            },
+            2300
+        );
+
+
+        if(location.hash){
+
+            showPage(
+                location.hash.slice(1)
+            );
+
+        }
+
+    }
+);
+
 </script>
+
 </body>
-</html>
+  </html>
