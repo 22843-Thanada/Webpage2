@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,30 +8,37 @@
 <title>Aimaam Galaxy Portfolio</title>
 
 <style>
+
 /* =========================================================
-   🌌 GALAXY PORTFOLIO
+   🌌 VARIABLES
 ========================================================= */
 
 :root{
     --bg:#02030d;
     --bg2:#07051c;
-    --panel:rgba(13,17,45,.78);
-    --panel2:rgba(24,18,58,.82);
+
+    --panel:rgba(12,17,45,.82);
+    --panel2:rgba(20,15,55,.88);
 
     --cyan:#00f6ff;
-    --blue:#398cff;
+    --blue:#3d8bff;
     --purple:#9147ff;
     --pink:#ff3cac;
     --yellow:#ffe45c;
 
-    --white:#fff;
-    --soft:#cbd5ff;
-    --muted:#8f9bc4;
+    --white:#ffffff;
+    --soft:#d4dcff;
+    --muted:#8995bd;
 
     --border:rgba(0,246,255,.25);
 
     --max:1200px;
 }
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
     margin:0;
@@ -44,7 +52,6 @@ html{
 
 body{
     min-height:100vh;
-    overflow-x:hidden;
 
     font-family:
         "Noto Sans Thai",
@@ -53,6 +60,8 @@ body{
         sans-serif;
 
     color:white;
+
+    overflow-x:hidden;
 
     background:
         radial-gradient(
@@ -78,15 +87,18 @@ body{
         );
 }
 
+
 /* =========================================================
-   🌌 STAR BACKGROUND
+   🌌 MOVING STAR FIELD
 ========================================================= */
 
 body::before{
     content:"";
+
     position:fixed;
     inset:0;
-    z-index:-10;
+
+    z-index:-20;
 
     background-image:
         radial-gradient(
@@ -94,7 +106,7 @@ body::before{
             transparent 1.5px
         ),
         radial-gradient(
-            #00f6ff 1px,
+            var(--cyan) 1px,
             transparent 1.5px
         ),
         radial-gradient(
@@ -107,12 +119,14 @@ body::before{
         160px 160px,
         230px 230px;
 
-    animation:spaceMove 60s linear infinite;
-
     opacity:.45;
+
+    animation:
+        spaceMove 60s linear infinite;
 }
 
 @keyframes spaceMove{
+
     from{
         background-position:
             0 0,
@@ -128,98 +142,176 @@ body::before{
     }
 }
 
+
 /* =========================================================
    🌈 NEBULA
 ========================================================= */
 
 .nebula{
     position:fixed;
+
     width:600px;
     height:600px;
 
     border-radius:50%;
 
+    pointer-events:none;
+
+    z-index:-10;
+
     background:
         radial-gradient(
             circle,
-            rgba(0,246,255,.13),
-            rgba(145,71,255,.10),
+            rgba(0,246,255,.14),
+            rgba(145,71,255,.12),
+            rgba(255,60,172,.06),
             transparent 70%
         );
 
-    filter:blur(50px);
-
-    pointer-events:none;
-    z-index:-5;
+    filter:blur(60px);
 
     animation:
-        nebula 12s ease-in-out infinite alternate;
+        nebulaMove 14s ease-in-out infinite alternate;
 }
 
 .nebula.one{
-    top:-150px;
-    left:-150px;
+    top:-180px;
+    left:-180px;
 }
 
 .nebula.two{
     right:-180px;
-    bottom:-100px;
+    bottom:-150px;
+
     animation-delay:3s;
 }
 
-@keyframes nebula{
+@keyframes nebulaMove{
+
     from{
-        transform:scale(.8) rotate(0);
+        transform:
+            scale(.8)
+            rotate(0deg);
     }
 
     to{
-        transform:scale(1.3) rotate(25deg);
+        transform:
+            scale(1.3)
+            rotate(25deg);
     }
 }
 
+
 /* =========================================================
-   ✨ STARS
+   🖱️ MOUSE GLOW
+========================================================= */
+
+.mouse-glow{
+    position:fixed;
+
+    width:300px;
+    height:300px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:9999;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,246,255,.12),
+            transparent 65%
+        );
+
+    transform:
+        translate(-50%,-50%);
+
+    mix-blend-mode:screen;
+}
+
+
+/* =========================================================
+   ⭐ FLOATING STARS
 ========================================================= */
 
 .star{
     position:fixed;
+
     z-index:2;
 
     pointer-events:none;
 
     animation:
-        starFloat 4s ease-in-out infinite,
-        starGlow 2s ease-in-out infinite;
+        starFloat 5s ease-in-out infinite,
+        starGlow 3s ease-in-out infinite;
+}
+
+.s1{
+    top:15%;
+    left:4%;
+    font-size:25px;
+}
+
+.s2{
+    top:25%;
+    right:5%;
+    font-size:35px;
+    animation-delay:1s;
+}
+
+.s3{
+    top:48%;
+    left:7%;
+    font-size:20px;
+    animation-delay:2s;
+}
+
+.s4{
+    top:70%;
+    right:8%;
+    font-size:28px;
+    animation-delay:.5s;
+}
+
+.s5{
+    top:85%;
+    left:15%;
+    font-size:22px;
+    animation-delay:1.5s;
 }
 
 @keyframes starFloat{
+
     0%,100%{
-        transform:translateY(0);
+        transform:
+            translateY(0)
+            rotate(0deg);
     }
 
     50%{
-        transform:translateY(-20px);
+        transform:
+            translateY(-25px)
+            rotate(10deg);
     }
 }
 
 @keyframes starGlow{
+
     0%,100%{
-        opacity:.35;
+        opacity:.3;
     }
 
     50%{
         opacity:1;
+
         filter:
             drop-shadow(0 0 8px white)
             drop-shadow(0 0 18px var(--cyan));
     }
 }
 
-.s1{top:15%;left:4%;font-size:25px}
-.s2{top:25%;right:5%;font-size:35px;animation-delay:1s}
-.s3{top:48%;left:7%;font-size:20px;animation-delay:2s}
-.s4{top:70%;right:8%;font-size:28px;animation-delay:.5s}
-.s5{top:85%;left:15%;font-size:22px;animation-delay:1.5s}
 
 /* =========================================================
    🛸 UFO
@@ -227,7 +319,8 @@ body::before{
 
 .ufo{
     position:fixed;
-    top:18%;
+
+    top:16%;
     right:-180px;
 
     z-index:4;
@@ -236,10 +329,12 @@ body::before{
 
     pointer-events:none;
 
-    animation:ufoFly 16s linear infinite;
+    animation:
+        ufoFly 18s linear infinite;
 }
 
 @keyframes ufoFly{
+
     0%{
         transform:
             translateX(0)
@@ -247,20 +342,21 @@ body::before{
             rotate(-5deg);
     }
 
-    50%{
+    45%{
         transform:
-            translateX(-60vw)
-            translateY(80px)
-            rotate(5deg);
+            translateX(-55vw)
+            translateY(100px)
+            rotate(6deg);
     }
 
     100%{
         transform:
             translateX(-130vw)
-            translateY(-40px)
+            translateY(-60px)
             rotate(-5deg);
     }
 }
+
 
 /* =========================================================
    ☄️ SHOOTING STAR
@@ -269,8 +365,14 @@ body::before{
 .shooting{
     position:fixed;
 
-    width:150px;
+    width:160px;
     height:3px;
+
+    z-index:3;
+
+    pointer-events:none;
+
+    opacity:0;
 
     background:
         linear-gradient(
@@ -280,23 +382,36 @@ body::before{
             var(--cyan)
         );
 
-    border-radius:50%;
+    box-shadow:
+        0 0 10px var(--cyan),
+        0 0 25px var(--cyan);
 
     transform:rotate(-35deg);
 
-    opacity:0;
-
-    z-index:3;
-
-    animation:shoot 8s linear infinite;
+    animation:
+        shooting 7s linear infinite;
 }
 
-@keyframes shoot{
+.shooting.one{
+    top:18%;
+    right:5%;
+}
+
+.shooting.two{
+    top:55%;
+    right:20%;
+
+    animation-delay:3s;
+}
+
+@keyframes shooting{
+
     0%{
-        opacity:0;
         transform:
             translate(0,0)
             rotate(-35deg);
+
+        opacity:0;
     }
 
     10%{
@@ -304,10 +419,11 @@ body::before{
     }
 
     35%{
-        opacity:0;
         transform:
-            translate(-500px,350px)
+            translate(-450px,300px)
             rotate(-35deg);
+
+        opacity:0;
     }
 
     100%{
@@ -315,45 +431,148 @@ body::before{
     }
 }
 
+
 /* =========================================================
-   🧭 NAVBAR
+   ⏳ LOADING SCREEN
 ========================================================= */
 
-header{
+.loader{
     position:fixed;
-    top:0;
-    left:0;
-    width:100%;
 
-    z-index:1000;
+    inset:0;
+
+    z-index:10000;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-direction:column;
 
     background:
-        rgba(2,3,13,.75);
+        radial-gradient(
+            circle,
+            #11184a,
+            #03040f 65%
+        );
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+.loader.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.loader-planet{
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #ffffff,
+            #00eaff 20%,
+            #3d72ff 45%,
+            #6f2bdb 70%,
+            #080017 100%
+        );
+
+    box-shadow:
+        0 0 30px var(--cyan),
+        0 0 80px var(--purple);
+
+    animation:
+        loaderSpin 3s linear infinite;
+}
+
+@keyframes loaderSpin{
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.loader h1{
+    margin-top:30px;
+
+    font-size:clamp(1.5rem,5vw,3rem);
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--purple),
+            var(--pink),
+            var(--yellow)
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.loader p{
+    color:var(--muted);
+
+    margin-top:8px;
+}
+
+
+/* =========================================================
+   🧭 NAVIGATION
+========================================================= */
+
+.header{
+    position:fixed;
+
+    top:0;
+    left:0;
+    right:0;
+
+    z-index:500;
+
+    background:
+        rgba(2,3,13,.72);
 
     border-bottom:
         1px solid var(--border);
 
-    backdrop-filter:blur(20px);
+    backdrop-filter:
+        blur(22px);
 }
 
 .nav{
-    width:min(
-        calc(100% - 35px),
-        var(--max)
-    );
+    max-width:var(--max);
 
-    min-height:75px;
+    min-height:76px;
 
     margin:auto;
 
+    padding:
+        0 20px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 }
 
 .logo{
-    font-size:22px;
+    font-size:1.4rem;
+
     font-weight:900;
+
+    white-space:nowrap;
 
     text-shadow:
         0 0 15px var(--cyan);
@@ -363,36 +582,49 @@ header{
     color:var(--cyan);
 }
 
-.menu{
+.nav-links{
     display:flex;
+
     gap:5px;
+
     list-style:none;
 }
 
-.menu a{
-    color:var(--soft);
-    text-decoration:none;
+.nav-links button{
+    border:0;
 
-    padding:10px 13px;
+    cursor:pointer;
+
+    color:var(--soft);
+
+    background:transparent;
+
+    padding:
+        10px 13px;
 
     border-radius:12px;
 
-    font-weight:700;
+    font-size:.92rem;
 
-    transition:.25s;
+    font-weight:800;
+
+    transition:.3s;
 }
 
-.menu a:hover,
-.menu a.active{
+.nav-links button:hover,
+.nav-links button.active{
     color:var(--cyan);
 
     background:
-        rgba(0,246,255,.09);
+        rgba(0,246,255,.08);
 
     box-shadow:
-        0 0 15px
-        rgba(0,246,255,.12);
+        0 0 20px rgba(0,246,255,.12);
+
+    text-shadow:
+        0 0 10px var(--cyan);
 }
+
 
 /* =========================================================
    📱 MOBILE MENU
@@ -405,6 +637,7 @@ header{
     height:45px;
 
     border:1px solid var(--border);
+
     border-radius:12px;
 
     background:
@@ -412,42 +645,118 @@ header{
 
     color:white;
 
-    font-size:23px;
+    font-size:1.5rem;
 
     cursor:pointer;
 }
 
-/* =========================================================
-   MAIN
-========================================================= */
+.mobile-menu{
+    position:fixed;
 
-main{
-    padding-top:75px;
-}
+    top:76px;
+    left:15px;
+    right:15px;
 
-.page{
-    min-height:100vh;
+    z-index:490;
 
-    width:min(
-        calc(100% - 30px),
-        var(--max)
-    );
-
-    margin:auto;
-
-    padding:
-        100px 0;
+    padding:15px;
 
     display:none;
 
-    animation:pageIn .7s ease;
+    background:
+        rgba(5,7,25,.95);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:20px;
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.5);
+}
+
+.mobile-menu.open{
+    display:block;
+
+    animation:
+        menuOpen .3s ease;
+}
+
+@keyframes menuOpen{
+
+    from{
+        opacity:0;
+        transform:translateY(-15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.mobile-menu button{
+    display:block;
+
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:6px;
+
+    border:0;
+
+    border-radius:12px;
+
+    background:transparent;
+
+    color:white;
+
+    text-align:left;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.mobile-menu button:hover{
+    background:
+        rgba(0,246,255,.1);
+
+    color:var(--cyan);
+}
+
+
+/* =========================================================
+   📄 PAGE SYSTEM
+========================================================= */
+
+.page{
+    display:none;
+
+    min-height:100vh;
+
+    padding:
+        120px 20px 80px;
+
+    max-width:var(--max);
+
+    margin:auto;
+
+    position:relative;
 }
 
 .page.active{
     display:block;
+
+    animation:
+        pageIn .55s ease;
 }
 
 @keyframes pageIn{
+
     from{
         opacity:0;
         transform:
@@ -463,18 +772,18 @@ main{
     }
 }
 
+
 /* =========================================================
-   HERO
+   🏠 HOME
 ========================================================= */
 
-.hero{
-    min-height:
-        calc(100vh - 75px);
+.home{
+    min-height:100vh;
 
     display:grid;
 
     grid-template-columns:
-        1fr 1fr;
+        1.1fr .9fr;
 
     align-items:center;
 
@@ -482,40 +791,36 @@ main{
 }
 
 .badge{
-    display:inline-block;
+    display:inline-flex;
 
     padding:
-        8px 18px;
+        8px 16px;
+
+    border-radius:999px;
 
     border:
-        1px solid
-        rgba(0,246,255,.5);
+        1px solid rgba(0,246,255,.5);
 
-    border-radius:50px;
+    background:
+        rgba(0,246,255,.08);
 
     color:var(--cyan);
 
-    background:
-        rgba(0,246,255,.07);
+    font-weight:900;
 
     box-shadow:
-        0 0 20px
-        rgba(0,246,255,.15);
-
-    margin-bottom:20px;
+        0 0 20px rgba(0,246,255,.15);
 }
 
-.hero h1{
+.home h1{
+    margin-top:25px;
+
     font-size:
-        clamp(
-            3rem,
-            7vw,
-            6rem
-        );
+        clamp(3rem,7vw,6rem);
 
     line-height:1.05;
 
-    margin-bottom:20px;
+    font-weight:1000;
 }
 
 .gradient{
@@ -526,54 +831,82 @@ main{
             var(--blue),
             var(--purple),
             var(--pink),
-            var(--yellow)
+            var(--yellow),
+            var(--cyan)
         );
 
-    background-size:300%;
+    background-size:400%;
 
     -webkit-background-clip:text;
     background-clip:text;
 
-    -webkit-text-fill-color:transparent;
+    color:transparent;
 
-    animation:gradient 5s ease infinite;
+    animation:
+        gradientFlow 7s ease infinite;
 }
 
-@keyframes gradient{
-    0%{background-position:0}
-    50%{background-position:100%}
-    100%{background-position:0}
+@keyframes gradientFlow{
+
+    0%{
+        background-position:0%;
+    }
+
+    50%{
+        background-position:100%;
+    }
+
+    100%{
+        background-position:0%;
+    }
 }
 
-.hero p{
-    color:var(--soft);
-    font-size:18px;
-    line-height:1.9;
+.home-text{
+    margin-top:25px;
 
     max-width:650px;
+
+    color:var(--soft);
+
+    font-size:1.1rem;
+
+    line-height:1.9;
 }
 
 .btns{
     display:flex;
+
     gap:15px;
-    margin-top:30px;
+
     flex-wrap:wrap;
+
+    margin-top:30px;
 }
 
 .btn{
-    padding:
-        13px 23px;
+    border:0;
 
-    border-radius:14px;
+    cursor:pointer;
 
     text-decoration:none;
 
-    font-weight:800;
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+        14px 22px;
+
+    border-radius:15px;
+
+    font-weight:900;
 
     transition:.3s;
 }
 
-.btn.primary{
+.btn-primary{
     color:white;
 
     background:
@@ -584,47 +917,52 @@ main{
         );
 
     box-shadow:
-        0 0 25px
-        rgba(0,246,255,.25);
+        0 0 25px rgba(0,246,255,.3);
 }
 
-.btn.secondary{
-    color:var(--cyan);
-
-    border:
-        1px solid
-        var(--cyan);
-
-    background:
-        rgba(0,246,255,.05);
-}
-
-.btn:hover{
+.btn-primary:hover{
     transform:
         translateY(-5px)
         scale(1.03);
+
+    box-shadow:
+        0 0 35px rgba(0,246,255,.6);
 }
+
+.btn-secondary{
+    color:var(--cyan);
+
+    background:
+        rgba(0,246,255,.05);
+
+    border:
+        1px solid var(--cyan);
+}
+
+.btn-secondary:hover{
+    background:
+        rgba(0,246,255,.12);
+
+    transform:
+        translateY(-5px);
+}
+
 
 /* =========================================================
    🪐 PLANET
 ========================================================= */
 
-.planet-box{
-    min-height:500px;
-
+.planet-area{
     display:grid;
+
     place-items:center;
 
-    position:relative;
+    min-height:480px;
 }
 
 .planet{
     width:
-        clamp(
-            240px,
-            32vw,
-            360px
-        );
+        clamp(230px,30vw,360px);
 
     aspect-ratio:1;
 
@@ -634,33 +972,24 @@ main{
 
     background:
         radial-gradient(
-            circle at 30% 25%,
-            #dfffff,
-            #55ddff 12%,
-            #2985ff 32%,
-            #7041ed 57%,
-            #19052e 82%,
-            #03010b
+            circle at 30% 22%,
+            white 0%,
+            #7df4ff 10%,
+            #348cff 32%,
+            #713bea 57%,
+            #1c063f 80%,
+            #03000b 100%
         );
 
     box-shadow:
-        0 0 35px var(--cyan),
-        0 0 80px rgba(145,71,255,.6),
-        0 0 150px rgba(255,60,172,.25),
-        inset -50px -40px 70px #000;
+        0 0 30px rgba(0,246,255,.7),
+        0 0 80px rgba(145,71,255,.5),
+        0 0 140px rgba(255,60,172,.2),
+        inset -45px -40px 70px rgba(0,0,0,.7);
 
     animation:
-        planetRotate 15s linear infinite;
-}
-
-@keyframes planetRotate{
-    from{
-        transform:rotate(0);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
+        planetFloat 6s ease-in-out infinite,
+        planetRotate 25s linear infinite;
 }
 
 .planet::before{
@@ -668,22 +997,22 @@ main{
 
     position:absolute;
 
-    width:150%;
+    width:145%;
     height:38%;
 
-    left:-25%;
     top:32%;
+    left:-22%;
 
     border:
-        4px solid
-        rgba(255,255,255,.55);
+        3px solid rgba(255,255,255,.55);
 
     border-radius:50%;
 
     transform:rotate(-17deg);
 
     box-shadow:
-        0 0 20px var(--cyan);
+        0 0 10px white,
+        0 0 30px var(--cyan);
 }
 
 .planet::after{
@@ -691,105 +1020,262 @@ main{
 
     position:absolute;
 
-    inset:-55px;
+    inset:-45px;
 
     border:
-        1px dashed
-        rgba(0,246,255,.4);
+        1px dashed rgba(0,246,255,.4);
 
     border-radius:50%;
 
     animation:
-        orbit 20s linear infinite;
+        orbit 15s linear infinite;
+}
+
+@keyframes planetFloat{
+
+    0%,100%{
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50%{
+        transform:
+            translateY(-20px)
+            rotate(5deg);
+    }
+}
+
+@keyframes planetRotate{
+
+    from{
+        filter:hue-rotate(0deg);
+    }
+
+    to{
+        filter:hue-rotate(360deg);
+    }
 }
 
 @keyframes orbit{
+
     to{
         transform:rotate(360deg);
     }
 }
 
+
 /* =========================================================
-   SECTION TITLE
+   📑 PAGE TITLE
 ========================================================= */
 
-.title{
+.page-title{
     text-align:center;
 
     margin-bottom:55px;
 }
 
-.title h2{
+.page-title .mini{
+    color:var(--cyan);
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+.page-title h2{
+    margin-top:10px;
+
     font-size:
-        clamp(
-            2.5rem,
-            6vw,
-            4.5rem
-        );
+        clamp(2.5rem,6vw,4.5rem);
 
     line-height:1.1;
-
-    margin-bottom:12px;
 }
 
-.title p{
-    color:var(--muted);
+.page-title p{
+    margin:
+        15px auto 0;
+
+    max-width:700px;
+
+    color:var(--soft);
 }
+
 
 /* =========================================================
-   PROFILE
+   🪟 CARDS
 ========================================================= */
 
-.profile{
-    display:grid;
-
-    grid-template-columns:
-        350px 1fr;
-
-    gap:50px;
-
-    align-items:center;
-}
-
-.profile-photo{
-    width:100%;
-    aspect-ratio:1;
-
-    border-radius:35px;
-
-    padding:8px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--cyan),
-            var(--purple),
-            var(--pink)
-        );
-
-    box-shadow:
-        0 0 35px
-        rgba(0,246,255,.25);
-}
-
-.profile-photo img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    border-radius:28px;
-
-    display:block;
-
-    background:#101329;
-}
-
-.info-grid{
+.grid{
     display:grid;
 
     grid-template-columns:
         repeat(2,1fr);
+
+    gap:25px;
+}
+
+.grid.three{
+    grid-template-columns:
+        repeat(3,1fr);
+}
+
+.card{
+    position:relative;
+
+    overflow:hidden;
+
+    padding:30px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20,27,65,.9),
+            rgba(8,10,31,.88)
+        );
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.3);
+
+    transition:.4s;
+}
+
+.card::before{
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    right:-80px;
+    top:-80px;
+
+    border-radius:50%;
+
+    background:
+        var(--purple);
+
+    opacity:.12;
+
+    filter:blur(30px);
+}
+
+.card:hover{
+    transform:
+        translateY(-10px)
+        scale(1.015);
+
+    border-color:
+        rgba(0,246,255,.7);
+
+    box-shadow:
+        0 0 30px rgba(0,246,255,.15),
+        0 25px 50px rgba(0,0,0,.45);
+}
+
+.card-icon{
+    font-size:2.8rem;
+
+    margin-bottom:15px;
+}
+
+.card h3{
+    color:white;
+
+    font-size:1.45rem;
+
+    margin-bottom:10px;
+}
+
+.card p{
+    color:var(--soft);
+
+    line-height:1.8;
+}
+
+
+/* =========================================================
+   👤 PROFILE
+========================================================= */
+
+.profile-grid{
+    display:grid;
+
+    grid-template-columns:
+        380px 1fr;
+
+    gap:35px;
+
+    align-items:stretch;
+}
+
+.profile-photo-card{
+    min-height:500px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:30px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18,27,70,.9),
+            rgba(10,8,35,.9)
+        );
+
+    box-shadow:
+        0 0 40px rgba(0,246,255,.1);
+}
+
+.profile-photo{
+    width:240px;
+    height:300px;
+
+    object-fit:cover;
+
+    object-position:center;
+
+    border-radius:25px;
+
+    border:
+        3px solid var(--cyan);
+
+    box-shadow:
+        0 0 25px var(--cyan),
+        0 0 60px rgba(145,71,255,.5);
+}
+
+.profile-photo-card h3{
+    margin-top:22px;
+
+    font-size:1.8rem;
+
+    color:var(--yellow);
+}
+
+.profile-photo-card p{
+    color:var(--soft);
+}
+
+.info-list{
+    display:grid;
 
     gap:15px;
 }
@@ -798,554 +1284,111 @@ main{
     padding:20px;
 
     border:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
     border-radius:18px;
 
     background:
-        var(--panel);
+        rgba(13,18,48,.75);
 
     transition:.3s;
 }
 
 .info:hover{
-    transform:
-        translateY(-6px);
+    transform:translateX(8px);
 
     border-color:var(--cyan);
 
     box-shadow:
-        0 0 25px
-        rgba(0,246,255,.13);
+        0 0 20px rgba(0,246,255,.12);
 }
 
 .info strong{
-    color:var(--cyan);
     display:block;
+
+    color:var(--cyan);
+
+    margin-bottom:4px;
 }
 
 .info span{
     color:var(--soft);
 }
 
+
 /* =========================================================
-   CARDS
+   🎓 EDUCATION
 ========================================================= */
 
-.cards{
+.edu-card{
+    min-height:230px;
+}
+
+.edu-number{
+    width:55px;
+    height:55px;
+
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:25px;
-}
-
-.card{
-    position:relative;
-
-    padding:30px;
-
-    min-height:220px;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:25px;
-
-    background:
-        linear-gradient(
-            145deg,
-            var(--panel),
-            var(--panel2)
-        );
-
-    backdrop-filter:blur(10px);
-
-    overflow:hidden;
-
-    transition:
-        transform .35s,
-        border .35s,
-        box-shadow .35s;
-}
-
-.card:hover{
-    transform:
-        translateY(-10px)
-        rotateX(2deg)
-        rotateY(-2deg);
-
-    border-color:var(--cyan);
-
-    box-shadow:
-        0 0 30px
-        rgba(0,246,255,.16),
-        0 15px 45px
-        rgba(0,0,0,.35);
-}
-
-.card::before{
-    content:"";
-
-    position:absolute;
-
-    width:150px;
-    height:150px;
-
-    right:-70px;
-    top:-70px;
+    place-items:center;
 
     border-radius:50%;
 
-    background:
-        var(--purple);
+    color:#000;
 
-    filter:blur(35px);
+    font-weight:1000;
 
-    opacity:.25;
-}
-
-.card-icon{
-    font-size:45px;
-    margin-bottom:15px;
-}
-
-.card h3{
-    font-size:24px;
-    margin-bottom:10px;
-}
-
-.card p{
-    color:var(--soft);
-    line-height:1.8;
-}
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
-.contact-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:22px;
-}
-
-.contact-card{
-    padding:30px;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:22px;
-
-    background:var(--panel);
-
-    transition:.3s;
-}
-
-.contact-card:hover{
-    transform:translateY(-8px);
-
-    border-color:var(--purple);
-
-    box-shadow:
-        0 0 30px
-        rgba(145,71,255,.2);
-}
-
-.contact-card .big{
-    font-size:42px;
-}
-
-.contact-card h3{
-    color:var(--cyan);
-    margin:8px 0;
-}
-
-.contact-card p{
-    color:var(--soft);
-    word-break:break-word;
-}
-
-/* =========================================================
-   BEST FRIENDS
-========================================================= */
-
-.friend-list{
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:12px;
-
-    margin-top:15px;
-}
-
-.friend{
-    padding:
-        10px 18px;
-
-    border-radius:50px;
-
-    color:white;
+    font-size:1.3rem;
 
     background:
         linear-gradient(
             135deg,
-            rgba(0,246,255,.12),
-            rgba(145,71,255,.18)
+            var(--cyan),
+            var(--yellow)
         );
 
-    border:
-        1px solid
-        var(--border);
+    box-shadow:
+        0 0 25px rgba(0,246,255,.4);
+
+    margin-bottom:20px;
 }
+
 
 /* =========================================================
-   🏆 ACHIEVEMENT
+   🎨 HOBBY
 ========================================================= */
 
-.achievement{
-    text-align:center;
-}
-
-.achievement .number{
-    font-size:55px;
-
-    font-weight:900;
-
-    color:var(--yellow);
-
-    text-shadow:
-        0 0 20px
-        rgba(255,228,92,.5);
-}
-
-/* =========================================================
-   🎭 CHARACTER
-========================================================= */
-
-.character{
-    position:absolute;
-
-    right:20px;
-    bottom:-8px;
-
-    font-size:70px;
-
-    animation:
-        characterFloat 4s ease-in-out infinite;
-}
-
-@keyframes characterFloat{
-    0%,100%{
-        transform:translateY(0) rotate(-3deg);
-    }
-
-    50%{
-        transform:translateY(-15px) rotate(3deg);
-    }
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
+.hobby-card{
     text-align:center;
 
-    padding:35px 20px;
+    min-height:270px;
 
-    color:var(--muted);
+    display:flex;
 
-    border-top:
-        1px solid
-        var(--border);
+    align-items:center;
 
-    background:#01020a;
+    justify-content:center;
+
+    flex-direction:column;
 }
 
-footer span{
-    color:var(--cyan);
+.hobby-icon{
+    font-size:5rem;
+
+    margin-bottom:15px;
+
+    filter:
+        drop-shadow(0 0 12px var(--cyan));
 }
+
 
 /* =========================================================
-   📱 MOBILE
+   📡 CONTACT
 ========================================================= */
 
-@media(max-width:850px){
+.contact-card{
+    text-align:center;
 
-    .menu-btn{
-        display:block;
-    }
-
-    .menu{
-        position:absolute;
-
-        top:75px;
-        left:15px;
-        right:15px;
-
-        display:none;
-
-        flex-direction:column;
-
-        padding:15px;
-
-        border:
-            1px solid
-            var(--border);
-
-        border-radius:20px;
-
-        background:
-            rgba(3,4,18,.95);
-
-        backdrop-filter:blur(20px);
-
-        box-shadow:
-            0 20px 50px
-            rgba(0,0,0,.5);
-    }
-
-    .menu.open{
-        display:flex;
-    }
-
-    .menu a{
-        text-align:center;
-        padding:14px;
-    }
-
-    .hero{
-        grid-template-columns:1fr;
-        text-align:center;
-    }
-
-    .hero p{
-        margin:auto;
-    }
-
-    .btns{
-        justify-content:center;
-    }
-
-    .planet-box{
-        min-height:380px;
-    }
-
-    .profile{
-        grid-template-columns:1fr;
-    }
-
-    .profile-photo{
-        max-width:320px;
-        margin:auto;
-    }
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    .contact-grid{
-        grid-template-columns:1fr;
-    }
+    min-height:220px;
 }
 
-@media(max-width:500px){
-
-    .page{
-        padding:
-            70px 0;
-    }
-
-    .hero h1{
-        font-size:2.8rem;
-    }
-
-    .info-grid{
-        grid-template-columns:1fr;
-    }
-
-    .planet{
-        width:230px;
-    }
-
-    .character{
-        font-size:50px;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<!-- 🌌 BACKGROUND -->
-<div class="nebula one"></div>
-<div class="nebula two"></div>
-
-<div class="star s1">⭐</div>
-<div class="star s2">🌟</div>
-<div class="star s3">✦</div>
-<div class="star s4">✨</div>
-<div class="star s5">💫</div>
-
-<div class="ufo">🛸</div>
-<div class="shooting"></div>
-
-<!-- =========================================================
-     NAVIGATION
-========================================================= -->
-
-<header>
-
-<nav class="nav">
-
-<div class="logo">
-🚀 Aimaam<span>Galaxy</span>
-</div>
-
-<button
-    class="menu-btn"
-    id="menuBtn"
-    aria-label="เปิดเมนู">
-    ☰
-</button>
-
-<ul class="menu" id="menu">
-
-<li>
-<a href="#home" class="active">
-🌌 Home
-</a>
-</li>
-
-<li>
-<a href="#profile">
-👩‍🚀 Profile
-</a>
-</li>
-
-<li>
-<a href="#education">
-🎓 Education
-</a>
-</li>
-
-<li>
-<a href="#hobby">
-🎨 Hobby
-</a>
-</li>
-
-<li>
-<a href="#contact">
-📡 Contact
-</a>
-</li>
-
-<li>
-<a href="#friends">
-⭐ Friends
-</a>
-</li>
-
-<li>
-<a href="#works">
-🏆 Works
-</a>
-</li>
-
-</ul>
-
-</nav>
-
-</header>
-
-<main>
-
-<!-- =========================================================
-     PAGE 1 HOME
-========================================================= -->
-
-<section
-    class="page active"
-    id="home">
-
-<div class="hero">
-
-<div>
-
-<div class="badge">
-✨ WELCOME TO MY UNIVERSE
-</div>
-
-<h1>
-สวัสดีค่ะ 👋
-<br>
-ฉันคือ
-<br>
-
-<span class="gradient">
-อิ่มเอม
-</span>
-</h1>
-
-<p>
-ยินดีต้อนรับเข้าสู่จักรวาล Portfolio
-ของฉัน 🚀
-ที่รวมเรื่องราว ตัวตน ความสามารถ
-งานอดิเรก เพื่อน และผลงาน
-เอาไว้ในโลกอวกาศแห่งเดียว
-</p>
-
-<div class="btns">
-
-<a
-    href="#profile"
-    class="btn primary">
-🚀 สำรวจจักรวาล
-</a>
-
-<a
-    href="#works"
-    class="btn secondary">
-🏆 ดูผลงาน
-</a>
-
-</div>
-
-</div>
-
-<div class="planet-box">
-
-<div class="planet"></div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =========================================================
-     PAGE 2 PROFILE
-========================================================= -->
-
-<section
-    class="page"
-    id="profile">
-
-<div class="title">
-
-<h2>
-👩‍🚀
-<span class="gradient">
-Prof
+.contact-icon{
