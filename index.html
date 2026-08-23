@@ -38,27 +38,34 @@ body{
     overflow-x:hidden;
     color:#fff;
     font-family:"Noto Sans Thai","Segoe UI",Arial,sans-serif;
+
     background:
-      radial-gradient(circle at 20% 10%,rgba(0,246,255,.16),transparent 25%),
-      radial-gradient(circle at 80% 20%,rgba(145,71,255,.18),transparent 30%),
-      radial-gradient(circle at 50% 80%,rgba(255,60,172,.12),transparent 30%),
-      linear-gradient(135deg,#01020b,#08051c,#020318);
+        radial-gradient(circle at 20% 10%,rgba(0,246,255,.16),transparent 25%),
+        radial-gradient(circle at 80% 20%,rgba(145,71,255,.18),transparent 30%),
+        radial-gradient(circle at 50% 80%,rgba(255,60,172,.12),transparent 30%),
+        linear-gradient(135deg,#01020b,#08051c,#020318);
 }
 
-/* =========================================================
-   BACKGROUND STARS
-========================================================= */
+/* =========================
+   STAR FIELD
+========================= */
 
 body::before{
     content:"";
     position:fixed;
     inset:0;
     z-index:-50;
+
     background-image:
-      radial-gradient(#fff 1px,transparent 1.5px),
-      radial-gradient(var(--cyan) 1px,transparent 1.5px),
-      radial-gradient(#a56bff 1px,transparent 1.7px);
-    background-size:90px 90px,160px 160px,230px 230px;
+        radial-gradient(#fff 1px,transparent 1.5px),
+        radial-gradient(var(--cyan) 1px,transparent 1.5px),
+        radial-gradient(#a56bff 1px,transparent 1.7px);
+
+    background-size:
+        90px 90px,
+        160px 160px,
+        230px 230px;
+
     opacity:.45;
     animation:starField 55s linear infinite;
 }
@@ -66,9 +73,9 @@ body::before{
 @keyframes starField{
     to{
         background-position:
-        500px 700px,
-        -300px 400px,
-        600px -300px
+            500px 700px,
+            -300px 400px,
+            600px -300px;
     }
 }
 
@@ -83,6 +90,7 @@ body::after{
     border-radius:50%;
     z-index:-40;
     pointer-events:none;
+
     background:
         radial-gradient(
             circle,
@@ -91,6 +99,7 @@ body::after{
             rgba(255,60,172,.06),
             transparent 70%
         );
+
     filter:blur(55px);
     animation:nebulaMove 14s ease-in-out infinite alternate;
 }
@@ -98,15 +107,15 @@ body::after{
 @keyframes nebulaMove{
     to{
         transform:
-        translate(-42%,-35%)
-        scale(1.25)
-        rotate(20deg)
+            translate(-42%,-35%)
+            scale(1.25)
+            rotate(20deg);
     }
 }
 
-/* =========================================================
+/* =========================
    MOUSE EFFECT
-========================================================= */
+========================= */
 
 #mouseGlow{
     position:fixed;
@@ -116,6 +125,7 @@ body::after{
     pointer-events:none;
     z-index:9998;
     transform:translate(-50%,-50%);
+
     background:
         radial-gradient(
             circle,
@@ -123,6 +133,7 @@ body::after{
             rgba(145,71,255,.08),
             transparent 68%
         );
+
     mix-blend-mode:screen;
 }
 
@@ -134,9 +145,11 @@ body::after{
     pointer-events:none;
     z-index:9997;
     background:var(--cyan);
+
     box-shadow:
         0 0 8px var(--cyan),
         0 0 18px var(--purple);
+
     animation:particleOut .8s forwards;
 }
 
@@ -163,9 +176,11 @@ body::after{
     pointer-events:none;
     z-index:10000;
     transform:translate(-50%,-50%);
+
     box-shadow:
         0 0 15px var(--cyan),
         0 0 30px var(--purple);
+
     animation:ripple .8s ease-out forwards;
 }
 
@@ -183,20 +198,20 @@ body::after{
     }
 }
 
-/* =========================================================
+/* =========================
    FLOATING STARS
-========================================================= */
+========================= */
 
 .stars{
     position:fixed;
     inset:0;
     pointer-events:none;
-    z-index:2
+    z-index:2;
 }
 
 .star{
     position:absolute;
-    animation:starFloat 4s ease-in-out infinite
+    animation:starFloat 4s ease-in-out infinite;
 }
 
 .s1{
@@ -233,20 +248,6 @@ body::after{
     animation-delay:1.7s
 }
 
-.s6{
-    right:25%;
-    top:12%;
-    font-size:18px;
-    animation-delay:.8s
-}
-
-.s7{
-    left:48%;
-    top:82%;
-    font-size:24px;
-    animation-delay:1.3s
-}
-
 @keyframes starFloat{
     0%,100%{
         transform:translateY(0) rotate(0);
@@ -254,28 +255,32 @@ body::after{
     }
 
     50%{
-        transform:translateY(-25px) rotate(12deg);
+        transform:
+            translateY(-25px)
+            rotate(12deg);
+
         opacity:1;
+
         filter:
             drop-shadow(0 0 8px white)
-            drop-shadow(0 0 18px var(--cyan))
+            drop-shadow(0 0 18px var(--cyan));
     }
 }
 
-/* =========================================================
+/* =========================
    PLANETS
-========================================================= */
+========================= */
 
 .spacePlanet,
 .saturn{
     position:fixed;
     border-radius:50%;
     pointer-events:none;
-    z-index:1
+    z-index:1;
 }
 
 .spacePlanet{
-    animation:planetFloat 8s ease-in-out infinite
+    animation:planetFloat 8s ease-in-out infinite;
 }
 
 .planetBlue{
@@ -283,6 +288,7 @@ body::after{
     height:75px;
     top:20%;
     left:-20px;
+
     background:
         radial-gradient(
             circle at 30% 25%,
@@ -292,6 +298,7 @@ body::after{
             #16206e 75%,
             #050512
         );
+
     box-shadow:
         0 0 20px var(--cyan),
         0 0 50px rgba(0,246,255,.4);
@@ -302,6 +309,7 @@ body::after{
     height:55px;
     right:7%;
     top:43%;
+
     background:
         radial-gradient(
             circle at 30% 25%,
@@ -310,7 +318,9 @@ body::after{
             #6425c9 65%,
             #15062d
         );
-    box-shadow:0 0 25px var(--purple);
+
+    box-shadow:
+        0 0 25px var(--purple);
 }
 
 .planetYellow{
@@ -318,6 +328,7 @@ body::after{
     height:42px;
     left:11%;
     bottom:18%;
+
     background:
         radial-gradient(
             circle at 30% 25%,
@@ -326,7 +337,9 @@ body::after{
             #ff9d00 70%,
             #501600
         );
-    box-shadow:0 0 20px var(--yellow);
+
+    box-shadow:
+        0 0 20px var(--yellow);
 }
 
 @keyframes planetFloat{
@@ -341,15 +354,16 @@ body::after{
     }
 }
 
-/* =========================================================
+/* =========================
    SATURN
-========================================================= */
+========================= */
 
 .saturn{
     right:2%;
     bottom:8%;
     width:100px;
     height:100px;
+
     background:
         radial-gradient(
             circle at 30% 25%,
@@ -358,8 +372,10 @@ body::after{
             #a96b32 60%,
             #29130c
         );
+
     box-shadow:
         0 0 25px rgba(255,200,100,.5);
+
     animation:saturnFloat 7s ease-in-out infinite;
 }
 
@@ -370,10 +386,17 @@ body::after{
     height:45px;
     left:-33px;
     top:28px;
-    border:6px solid rgba(255,220,130,.55);
+
+    border:
+        6px solid
+        rgba(255,220,130,.55);
+
     border-radius:50%;
     transform:rotate(-15deg);
-    box-shadow:0 0 15px rgba(255,220,130,.4);
+
+    box-shadow:
+        0 0 15px
+        rgba(255,220,130,.4);
 }
 
 @keyframes saturnFloat{
@@ -384,260 +407,216 @@ body::after{
     }
 }
 
-/* =========================================================
-   🚀 ROCKET
-========================================================= */
-
-.rocket{
-    position:fixed;
-    left:-130px;
-    top:32%;
-    font-size:68px;
-    z-index:6;
-    pointer-events:none;
-    filter:
-        drop-shadow(0 0 8px #fff)
-        drop-shadow(0 0 18px var(--cyan))
-        drop-shadow(0 0 35px var(--purple));
-    animation:rocketFly 15s linear infinite;
-}
-
-@keyframes rocketFly{
-
-    0%{
-        left:-130px;
-        top:72%;
-        transform:
-            rotate(-35deg)
-            scale(.8);
-        opacity:0;
-    }
-
-    8%{
-        opacity:1;
-    }
-
-    30%{
-        transform:
-            rotate(-25deg)
-            scale(1);
-    }
-
-    55%{
-        top:25%;
-        transform:
-            rotate(-20deg)
-            scale(1.1);
-    }
-
-    80%{
-        transform:
-            rotate(-10deg)
-            scale(1);
-    }
-
-    100%{
-        left:115vw;
-        top:5%;
-        transform:
-            rotate(-20deg)
-            scale(.8);
-        opacity:0;
-    }
-}
-
-/* =========================================================
-   🛸 SPACE SHIP
-========================================================= */
-
-.spaceShip{
-    position:fixed;
-    right:-150px;
-    top:45%;
-    font-size:72px;
-    z-index:6;
-    pointer-events:none;
-    filter:
-        drop-shadow(0 0 10px #fff)
-        drop-shadow(0 0 22px var(--purple))
-        drop-shadow(0 0 40px var(--pink));
-    animation:spaceShipFly 20s linear infinite;
-}
-
-@keyframes spaceShipFly{
-
-    0%{
-        right:-150px;
-        top:18%;
-        transform:
-            rotate(5deg)
-            scale(.8);
-        opacity:0;
-    }
-
-    8%{
-        opacity:1;
-    }
-
-    30%{
-        top:28%;
-        transform:
-            rotate(-8deg)
-            scale(1);
-    }
-
-    55%{
-        top:48%;
-        transform:
-            rotate(8deg)
-            scale(1.15);
-    }
-
-    75%{
-        top:35%;
-        transform:
-            rotate(-4deg)
-            scale(1;
-        )
-    }
-
-    100%{
-        right:115vw;
-        top:65%;
-        transform:
-            rotate(8deg)
-            scale(.8);
-        opacity:0;
-    }
-}
-
-/* =========================================================
-   🐱‍🚀 SPACE CAT
-========================================================= */
-
-.spaceCat{
-    position:fixed;
-    left:8%;
-    bottom:7%;
-    font-size:62px;
-    z-index:7;
-    pointer-events:none;
-    filter:
-        drop-shadow(0 0 8px white)
-        drop-shadow(0 0 18px var(--pink))
-        drop-shadow(0 0 28px var(--purple));
-    animation:spaceCatFloat 5s ease-in-out infinite;
-}
-
-@keyframes spaceCatFloat{
-
-    0%,100%{
-        transform:
-            translateY(0)
-            rotate(-5deg)
-            scale(1);
-    }
-
-    25%{
-        transform:
-            translateY(-25px)
-            rotate(5deg)
-            scale(1.05);
-    }
-
-    50%{
-        transform:
-            translateY(-45px)
-            rotate(-3deg)
-            scale(1.1);
-    }
-
-    75%{
-        transform:
-            translateY(-20px)
-            rotate(4deg)
-            scale(1.04);
-    }
-}
-
-/* =========================================================
-   👽 ALIEN
-========================================================= */
-
-.alien{
-    position:fixed;
-    left:-100px;
-    top:62%;
-    font-size:65px;
-    z-index:4;
-    pointer-events:none;
-    animation:alienFly 19s linear infinite;
-}
-
-@keyframes alienFly{
-    0%{
-        transform:
-            translateX(0)
-            rotate(-8deg)
-    }
-
-    50%{
-        transform:
-            translateX(55vw)
-            translateY(-100px)
-            rotate(8deg)
-    }
-
-    100%{
-        transform:
-            translateX(115vw)
-            translateY(50px)
-            rotate(-5deg)
-    }
-}
-
-/* =========================================================
+/* =========================
    UFO
-========================================================= */
+========================= */
 
 .ufo{
     position:fixed;
-    right:-120px;
+    right:-130px;
     top:18%;
-    font-size:60px;
+    font-size:65px;
     z-index:4;
     pointer-events:none;
+
     animation:ufoFly 17s linear infinite;
+
+    filter:
+        drop-shadow(0 0 10px var(--cyan))
+        drop-shadow(0 0 25px var(--purple));
 }
 
 @keyframes ufoFly{
     0%{
-        transform:translateX(0)
+        transform:translateX(0) rotate(-5deg)
     }
 
-    50%{
+    45%{
         transform:
-            translateX(-60vw)
-            translateY(90px)
-            rotate(7deg)
+            translateX(-55vw)
+            translateY(100px)
+            rotate(8deg)
     }
 
     100%{
         transform:
             translateX(-125vw)
             translateY(-40px)
+            rotate(-5deg)
     }
 }
 
-/* =========================================================
+/* =========================
+   SPACE CAT
+========================= */
+
+.spaceCat{
+    position:fixed;
+    right:-130px;
+    top:58%;
+    font-size:70px;
+    z-index:6;
+    pointer-events:none;
+
+    filter:
+        drop-shadow(0 0 8px white)
+        drop-shadow(0 0 20px var(--cyan))
+        drop-shadow(0 0 35px var(--purple));
+
+    animation:catFly 21s linear infinite;
+}
+
+@keyframes catFly{
+
+    0%{
+        transform:
+            translateX(0)
+            translateY(0)
+            rotate(-5deg);
+    }
+
+    25%{
+        transform:
+            translateX(-25vw)
+            translateY(-70px)
+            rotate(8deg);
+    }
+
+    50%{
+        transform:
+            translateX(-55vw)
+            translateY(40px)
+            rotate(-5deg);
+    }
+
+    75%{
+        transform:
+            translateX(-85vw)
+            translateY(-80px)
+            rotate(8deg);
+    }
+
+    100%{
+        transform:
+            translateX(-125vw)
+            translateY(20px)
+            rotate(-5deg);
+    }
+}
+
+/* =========================
+   ROCKETS
+========================= */
+
+.rocket{
+    position:fixed;
+    z-index:5;
+    pointer-events:none;
+
+    font-size:58px;
+
+    filter:
+        drop-shadow(0 0 8px #fff)
+        drop-shadow(0 0 18px var(--cyan))
+        drop-shadow(0 0 30px var(--pink));
+}
+
+.rocket1{
+    left:-100px;
+    top:30%;
+    animation:rocketFly1 13s linear infinite;
+}
+
+.rocket2{
+    right:-100px;
+    top:70%;
+    font-size:48px;
+    animation:rocketFly2 16s linear infinite;
+}
+
+.rocket3{
+    left:20%;
+    bottom:-100px;
+    font-size:42px;
+    animation:rocketFly3 12s linear infinite;
+}
+
+@keyframes rocketFly1{
+    0%{
+        transform:
+            translateX(0)
+            translateY(0)
+            rotate(25deg);
+    }
+
+    50%{
+        transform:
+            translateX(55vw)
+            translateY(-150px)
+            rotate(25deg);
+    }
+
+    100%{
+        transform:
+            translateX(120vw)
+            translateY(-300px)
+            rotate(25deg);
+    }
+}
+
+@keyframes rocketFly2{
+    0%{
+        transform:
+            translateX(0)
+            translateY(0)
+            rotate(-25deg);
+    }
+
+    50%{
+        transform:
+            translateX(-55vw)
+            translateY(-100px)
+            rotate(-25deg);
+    }
+
+    100%{
+        transform:
+            translateX(-125vw)
+            translateY(-200px)
+            rotate(-25deg);
+    }
+}
+
+@keyframes rocketFly3{
+    0%{
+        transform:
+            translateY(0)
+            rotate(-20deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translateY(-120vh)
+            rotate(-20deg);
+        opacity:0;
+    }
+}
+
+/* =========================
    SHOOTING STAR
-========================================================= */
+========================= */
 
 .shootingStar{
     position:fixed;
     width:150px;
     height:3px;
     border-radius:50%;
+
     background:
         linear-gradient(
             90deg,
@@ -645,46 +624,51 @@ body::after{
             white,
             var(--cyan)
         );
+
     box-shadow:
         0 0 10px white,
         0 0 25px var(--cyan);
+
     z-index:3;
     pointer-events:none;
+
     transform:rotate(-35deg);
+
     animation:shooting 1.3s linear forwards;
 }
 
 @keyframes shooting{
-
     0%{
         opacity:0;
         transform:
             translate(0,0)
-            rotate(-35deg)
+            rotate(-35deg);
     }
 
     10%{
-        opacity:1
+        opacity:1;
     }
 
     100%{
         opacity:0;
         transform:
             translate(-500px,400px)
-            rotate(-35deg)
+            rotate(-35deg);
     }
 }
 
-/* =========================================================
+/* =========================
    LOADER
-========================================================= */
+========================= */
 
 #loader{
     position:fixed;
     inset:0;
     z-index:999999;
+
     display:grid;
     place-items:center;
+
     background:
         radial-gradient(
             circle at center,
@@ -692,8 +676,10 @@ body::after{
             #05051a 45%,
             #01020b 100%
         );
+
     opacity:1;
     visibility:visible;
+
     transition:
         opacity .45s ease,
         visibility .45s ease;
@@ -715,6 +701,7 @@ body::after{
     height:90px;
     margin:auto;
     border-radius:50%;
+
     background:
         radial-gradient(
             circle at 30% 25%,
@@ -723,9 +710,11 @@ body::after{
             #6540ef 58%,
             #09021d 100%
         );
+
     box-shadow:
         0 0 25px var(--cyan),
         0 0 60px var(--purple);
+
     animation:loaderSpin 1.2s linear infinite;
 }
 
@@ -761,6 +750,7 @@ body::after{
     width:0;
     height:100%;
     border-radius:999px;
+
     background:
         linear-gradient(
             90deg,
@@ -768,6 +758,7 @@ body::after{
             var(--purple),
             var(--pink)
         );
+
     animation:loadFast .65s ease-out forwards;
 }
 
@@ -777,16 +768,18 @@ body::after{
     }
 }
 
-/* =========================================================
+/* =========================
    HEADER
-========================================================= */
+========================= */
 
 header{
     position:sticky;
     top:0;
     z-index:500;
+
     background:rgba(2,3,13,.75);
     border-bottom:1px solid var(--border);
+
     backdrop-filter:blur(20px);
 }
 
@@ -806,10 +799,14 @@ nav{
     border:0;
     background:none;
     color:#fff;
+
     font-weight:950;
     font-size:1.3rem;
+
     cursor:pointer;
-    text-shadow:0 0 15px var(--cyan);
+
+    text-shadow:
+        0 0 15px var(--cyan);
 }
 
 .logo b{
@@ -828,8 +825,10 @@ nav{
     background:transparent;
     color:var(--soft);
     cursor:pointer;
+
     padding:10px 12px;
     border-radius:12px;
+
     font-weight:850;
     transition:.25s;
 }
@@ -838,7 +837,10 @@ nav{
 .nav button.active{
     color:var(--cyan);
     background:rgba(0,246,255,.08);
-    box-shadow:0 0 20px rgba(0,246,255,.15);
+
+    box-shadow:
+        0 0 20px
+        rgba(0,246,255,.15);
 }
 
 .mobileBtn{
@@ -852,23 +854,27 @@ nav{
 }
 
 .mobileMenu.open{
-    display:block
+    display:block;
 }
 
 .mobileMenu button{
     width:100%;
     text-align:left;
+
     border:1px solid var(--border);
+
     background:rgba(255,255,255,.04);
     color:#fff;
+
     padding:13px;
     border-radius:12px;
+
     margin-top:6px;
 }
 
-/* =========================================================
+/* =========================
    PAGE
-========================================================= */
+========================= */
 
 main{
     position:relative;
@@ -879,45 +885,55 @@ main{
     display:none;
     min-height:calc(100vh - 72px);
     padding:80px 0 100px;
+
     animation:pageIn .5s ease;
 }
 
 .page.active{
-    display:block
+    display:block;
 }
 
 @keyframes pageIn{
     from{
         opacity:0;
-        transform:translateY(20px)
+        transform:translateY(20px);
     }
 
     to{
         opacity:1;
-        transform:none
+        transform:none;
     }
 }
 
-/* =========================================================
+/* =========================
    HERO
-========================================================= */
+========================= */
 
 .hero{
     min-height:calc(100vh - 72px);
+
     display:grid;
     grid-template-columns:1.05fr .95fr;
     gap:55px;
+
     align-items:center;
 }
 
 .eyebrow{
     display:inline-block;
+
     padding:8px 16px;
+
     border:1px solid var(--cyan);
     border-radius:999px;
+
     color:var(--cyan);
     background:rgba(0,246,255,.07);
-    box-shadow:0 0 25px rgba(0,246,255,.2);
+
+    box-shadow:
+        0 0 25px
+        rgba(0,246,255,.2);
+
     font-weight:900;
 }
 
@@ -938,10 +954,14 @@ main{
             var(--yellow),
             var(--cyan)
         );
+
     background-size:300% auto;
+
     -webkit-background-clip:text;
     background-clip:text;
+
     color:transparent;
+
     animation:gradientMove 6s linear infinite;
 }
 
@@ -968,18 +988,26 @@ main{
 .btn{
     border:1px solid var(--cyan);
     border-radius:14px;
+
     padding:12px 20px;
+
     text-decoration:none;
     font-weight:900;
+
     cursor:pointer;
     color:#fff;
+
     background:
         linear-gradient(
             135deg,
             var(--purple),
             var(--blue)
         );
-    box-shadow:0 0 25px rgba(0,246,255,.2);
+
+    box-shadow:
+        0 0 25px
+        rgba(0,246,255,.2);
+
     transition:.25s;
 }
 
@@ -987,8 +1015,10 @@ main{
     transform:
         translateY(-5px)
         scale(1.03);
+
     box-shadow:
-        0 0 40px rgba(0,246,255,.45);
+        0 0 40px
+        rgba(0,246,255,.45);
 }
 
 .btn.alt{
@@ -996,9 +1026,9 @@ main{
     color:var(--cyan);
 }
 
-/* =========================================================
+/* =========================
    HERO PLANET
-========================================================= */
+========================= */
 
 .planetBox{
     min-height:470px;
@@ -1012,6 +1042,7 @@ main{
     aspect-ratio:1;
     border-radius:50%;
     position:relative;
+
     background:
         radial-gradient(
             circle at 30% 23%,
@@ -1022,33 +1053,49 @@ main{
             #17072f 82%,
             #020108
         );
+
     box-shadow:
         0 0 35px var(--cyan),
         0 0 90px rgba(145,71,255,.55),
         0 0 150px rgba(255,60,172,.22),
         inset -45px -35px 70px #000;
+
     animation:heroPlanet 6s ease-in-out infinite;
 }
 
 .heroPlanet::before{
     content:"";
     position:absolute;
+
     width:145%;
     height:35%;
+
     left:-22%;
     top:34%;
-    border:3px solid rgba(255,255,255,.55);
+
+    border:
+        3px solid
+        rgba(255,255,255,.55);
+
     border-radius:50%;
+
     transform:rotate(-17deg);
-    box-shadow:0 0 25px var(--cyan);
+
+    box-shadow:
+        0 0 25px var(--cyan);
 }
 
 .heroPlanet::after{
     content:"";
     position:absolute;
     inset:-45px;
-    border:1px dashed rgba(0,246,255,.45);
+
+    border:
+        1px dashed
+        rgba(0,246,255,.45);
+
     border-radius:50%;
+
     animation:orbit 16s linear infinite;
 }
 
@@ -1066,9 +1113,9 @@ main{
     }
 }
 
-/* =========================================================
-   TITLES / CARDS
-========================================================= */
+/* =========================
+   TITLES
+========================= */
 
 .title{
     text-align:center;
@@ -1084,6 +1131,10 @@ main{
 .title p{
     color:var(--soft)
 }
+
+/* =========================
+   GRID
+========================= */
 
 .grid{
     display:grid;
@@ -1102,48 +1153,70 @@ main{
     grid-template-columns:repeat(4,1fr)
 }
 
+/* =========================
+   CARDS
+========================= */
+
 .card{
     position:relative;
     overflow:hidden;
+
     background:
         linear-gradient(
             145deg,
             rgba(18,25,62,.92),
             rgba(7,9,28,.94)
         );
-    border:1px solid var(--border);
+
+    border:
+        1px solid
+        var(--border);
+
     border-radius:24px;
     padding:28px;
-    box-shadow:0 18px 45px rgba(0,0,0,.3);
+
+    box-shadow:
+        0 18px 45px
+        rgba(0,0,0,.3);
+
     transition:
         transform .18s ease,
         border .25s,
         box-shadow .25s;
+
     transform-style:preserve-3d;
 }
 
 .card::before{
     content:"";
     position:absolute;
+
     width:180px;
     height:180px;
+
     right:-80px;
     top:-80px;
+
     border-radius:50%;
+
     background:
         radial-gradient(
             circle,
             rgba(0,246,255,.18),
             transparent 70%
         );
+
     pointer-events:none;
 }
 
 .card:hover{
     border-color:var(--cyan);
+
     box-shadow:
-        0 0 35px rgba(0,246,255,.22),
-        0 25px 60px rgba(0,0,0,.5);
+        0 0 35px
+        rgba(0,246,255,.22),
+        0 25px 60px
+        rgba(0,0,0,.5);
 }
 
 .card h3{
@@ -1158,12 +1231,12 @@ main{
 
 .icon{
     font-size:2.5rem;
-    margin-bottom:12px
+    margin-bottom:12px;
 }
 
-/* =========================================================
+/* =========================
    PROFILE
-========================================================= */
+========================= */
 
 .profile{
     display:grid;
@@ -1173,21 +1246,31 @@ main{
 }
 
 /*
-   รูปโปรไฟล์:
-   ไฟล์ 1000012017.jpg ต้องอยู่โฟลเดอร์เดียวกับ HTML
+   รูปโปรไฟล์จากไฟล์ที่ผู้ใช้ส่งมา
 */
-
 .profilePic{
     width:280px;
     height:340px;
+
     object-fit:cover;
+
     display:block;
     margin:auto;
-    border:2px solid var(--cyan);
+
+    border:
+        3px solid
+        var(--cyan);
+
     border-radius:35px;
+
+    background:#050816;
+
     box-shadow:
-        0 0 30px rgba(0,246,255,.35),
-        0 0 80px rgba(145,71,255,.25);
+        0 0 30px
+        rgba(0,246,255,.35),
+        0 0 80px
+        rgba(145,71,255,.25);
+
     transition:.35s;
 }
 
@@ -1195,6 +1278,7 @@ main{
     transform:
         scale(1.04)
         rotate(-1deg);
+
     box-shadow:
         0 0 45px var(--cyan),
         0 0 100px var(--purple);
@@ -1210,8 +1294,12 @@ main{
 .fact{
     padding:15px;
     border-radius:15px;
+
     background:rgba(255,255,255,.04);
-    border:1px solid var(--border);
+
+    border:
+        1px solid
+        var(--border);
 }
 
 .fact b{
@@ -1220,27 +1308,35 @@ main{
     margin-bottom:4px;
 }
 
-/* =========================================================
-   OTHER SECTIONS
-========================================================= */
+/* =========================
+   EDUCATION
+========================= */
 
 .edu .card{
-    min-height:270px
+    min-height:270px;
 }
 
 .year{
     font-size:2rem;
     font-weight:950;
+
     color:var(--purple);
-    text-shadow:0 0 15px var(--purple);
+
+    text-shadow:
+        0 0 15px
+        var(--purple);
 }
 
+/* =========================
+   HOBBY
+========================= */
+
 .hobbyCard{
-    min-height:300px
+    min-height:300px;
 }
 
 .hobbyCard:hover .icon{
-    animation:iconBounce .6s ease
+    animation:iconBounce .6s ease;
 }
 
 @keyframes iconBounce{
@@ -1251,32 +1347,51 @@ main{
     }
 }
 
+/* =========================
+   CONTACT
+========================= */
+
 .contact .card{
-    min-height:280px
+    min-height:280px;
 }
 
 .contactText{
     word-break:break-word;
-    color:var(--soft)
+    color:var(--soft);
 }
+
+/* =========================
+   FRIENDS
+========================= */
 
 .friends{
     font-size:1.12rem;
-    line-height:2.2
+    line-height:2.2;
 }
 
 .tag{
     display:inline-block;
+
     color:var(--yellow);
-    border:1px solid rgba(255,228,92,.4);
+
+    border:
+        1px solid
+        rgba(255,228,92,.4);
+
     padding:4px 10px;
     border-radius:999px;
+
     margin:3px;
+
     font-size:.9rem;
 }
 
+/* =========================
+   ACHIEVEMENT
+========================= */
+
 .achievement{
-    min-height:280px
+    min-height:280px;
 }
 
 .achievement strong{
@@ -1287,17 +1402,25 @@ main{
 }
 
 .big{
-    font-size:3rem
+    font-size:3rem;
 }
 
 .character{
     font-size:4rem;
     text-align:center;
     margin-bottom:12px;
+
     filter:
-        drop-shadow(0 0 12px rgba(0,246,255,.35));
+        drop-shadow(
+            0 0 12px
+            rgba(0,246,255,.35)
+        );
+
     animation:
-        characterFloat 3.5s ease-in-out infinite;
+        characterFloat
+        3.5s
+        ease-in-out
+        infinite;
 }
 
 @keyframes characterFloat{
@@ -1308,20 +1431,27 @@ main{
     }
 }
 
+/* =========================
+   FOOTER
+========================= */
+
 footer{
     text-align:center;
     color:var(--muted);
     padding:35px;
-    border-top:1px solid var(--border);
+
+    border-top:
+        1px solid
+        var(--border);
 }
 
 footer b{
     color:var(--cyan)
 }
 
-/* =========================================================
-   TABLET
-========================================================= */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:950px){
 
@@ -1332,45 +1462,32 @@ footer b{
     }
 
     .hero p{
-        margin:auto
+        margin:auto;
     }
 
     .two,
     .three,
     .four{
-        grid-template-columns:repeat(2,1fr)
+        grid-template-columns:repeat(2,1fr);
     }
 
     .nav{
-        display:none
+        display:none;
     }
 
     .mobileBtn{
-        display:block
+        display:block;
     }
 
     .profilePic{
-        margin:auto
+        margin:auto;
     }
 
     .spacePlanet,
     .saturn{
-        opacity:.55
-    }
-
-    .rocket,
-    .spaceShip{
-        font-size:52px;
-    }
-
-    .spaceCat{
-        font-size:48px;
+        opacity:.55;
     }
 }
-
-/* =========================================================
-   MOBILE
-========================================================= */
 
 @media(max-width:600px){
 
@@ -1378,76 +1495,65 @@ footer b{
         width:min(
             calc(100% - 24px),
             var(--max)
-        )
+        );
     }
 
     .page{
-        padding:55px 0 80px
+        padding:55px 0 80px;
     }
 
     .two,
     .three,
     .four{
-        grid-template-columns:1fr
+        grid-template-columns:1fr;
     }
 
     .hero{
         min-height:auto;
-        padding-top:35px
+        padding-top:35px;
     }
 
     .planetBox{
-        min-height:350px
+        min-height:350px;
     }
 
     .heroPlanet{
-        width:230px
+        width:230px;
     }
 
     .profilePic{
         width:220px;
-        height:285px
+        height:285px;
     }
 
     .facts{
-        grid-template-columns:1fr
+        grid-template-columns:1fr;
     }
 
-    .ufo,
-    .alien{
-        font-size:42px
-    }
-
-    .rocket{
+    .ufo{
         font-size:42px;
-    }
-
-    .spaceShip{
-        font-size:46px;
     }
 
     .spaceCat{
-        font-size:42px;
-        left:3%;
-        bottom:4%;
+        font-size:45px;
+    }
+
+    .rocket{
+        font-size:40px;
     }
 
     .saturn{
         width:65px;
-        height:65px
+        height:65px;
     }
 
     .saturn::before{
         width:110px;
         height:32px;
         left:-22px;
-        top:17px
+        top:17px;
     }
 }
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -1455,7 +1561,7 @@ footer b{
     *::before,
     *::after{
         animation:none!important;
-        scroll-behavior:auto!important
+        scroll-behavior:auto!important;
     }
 }
 </style>
@@ -1463,9 +1569,9 @@ footer b{
 
 <body>
 
-<!-- =======================================================
+<!-- =========================
      LOADER
-======================================================= -->
+========================= -->
 
 <div id="loader">
 
@@ -1491,16 +1597,12 @@ footer b{
 </div>
 
 
-<!-- =======================================================
-     MOUSE GLOW
-======================================================= -->
-
 <div id="mouseGlow"></div>
 
 
-<!-- =======================================================
+<!-- =========================
      FLOATING STARS
-======================================================= -->
+========================= -->
 
 <div class="stars">
 
@@ -1509,56 +1611,42 @@ footer b{
     <div class="star s3">✦</div>
     <div class="star s4">💫</div>
     <div class="star s5">✨</div>
-    <div class="star s6">✧</div>
-    <div class="star s7">🌟</div>
 
 </div>
 
 
-<!-- =======================================================
-     PLANETS
-======================================================= -->
+<!-- =========================
+     SPACE OBJECTS
+========================= -->
 
 <div class="spacePlanet planetBlue"></div>
+
 <div class="spacePlanet planetPurple"></div>
+
 <div class="spacePlanet planetYellow"></div>
 
 <div class="saturn"></div>
 
 
-<!-- =======================================================
-     🚀 NEW SPACE OBJECTS
-======================================================= -->
-
-<!-- จรวด -->
-<div class="rocket">
-    🚀
-</div>
-
-<!-- ยานอวกาศ -->
-<div class="spaceShip">
-    🛸
-</div>
-
-<!-- แมวอวกาศ -->
-<div class="spaceCat">
-    🐱‍🚀
-</div>
+<!-- UFO -->
+<div class="ufo">🛸</div>
 
 
-<!-- ของเดิม -->
-<div class="ufo">
-    🛸
-</div>
-
-<div class="alien">
-    👽
-</div>
+<!-- SPACE CAT -->
+<div class="spaceCat">🐱‍🚀</div>
 
 
-<!-- =======================================================
+<!-- ROCKETS -->
+<div class="rocket rocket1">🚀</div>
+
+<div class="rocket rocket2">🚀</div>
+
+<div class="rocket rocket3">🚀</div>
+
+
+<!-- =========================
      HEADER
-======================================================= -->
+========================= -->
 
 <header>
 
@@ -1566,9 +1654,11 @@ footer b{
 
     <button
         class="logo navGo"
-        data-page="home"
-    >
-        🚀 Aimaam <b>Galaxy</b>
+        data-page="home">
+
+        🚀 Aimaam
+        <b>Galaxy</b>
+
     </button>
 
 
@@ -1577,8 +1667,7 @@ footer b{
         <li>
             <button
                 class="navGo active"
-                data-page="home"
-            >
+                data-page="home">
                 HOME
             </button>
         </li>
@@ -1586,8 +1675,7 @@ footer b{
         <li>
             <button
                 class="navGo"
-                data-page="profile"
-            >
+                data-page="profile">
                 PROFILE
             </button>
         </li>
@@ -1595,8 +1683,7 @@ footer b{
         <li>
             <button
                 class="navGo"
-                data-page="education"
-            >
+                data-page="education">
                 EDUCATION
             </button>
         </li>
@@ -1604,8 +1691,7 @@ footer b{
         <li>
             <button
                 class="navGo"
-                data-page="hobby"
-            >
+                data-page="hobby">
                 HOBBY
             </button>
         </li>
@@ -1613,8 +1699,7 @@ footer b{
         <li>
             <button
                 class="navGo"
-                data-page="contact"
-            >
+                data-page="contact">
                 CONTACT
             </button>
         </li>
@@ -1622,8 +1707,7 @@ footer b{
         <li>
             <button
                 class="navGo"
-                data-page="friends"
-            >
+                data-page="friends">
                 FRIENDS
             </button>
         </li>
@@ -1631,8 +1715,7 @@ footer b{
         <li>
             <button
                 class="navGo"
-                data-page="works"
-            >
+                data-page="works">
                 WORKS
             </button>
         </li>
@@ -1642,8 +1725,7 @@ footer b{
 
     <button
         class="mobileBtn"
-        id="menuBtn"
-    >
+        id="menuBtn">
         ☰
     </button>
 
@@ -1652,55 +1734,47 @@ footer b{
 
 <div
     class="mobileMenu container"
-    id="mobileMenu"
->
+    id="mobileMenu">
 
     <button
         class="navGo"
-        data-page="home"
-    >
+        data-page="home">
         🏠 HOME
     </button>
 
     <button
         class="navGo"
-        data-page="profile"
-    >
+        data-page="profile">
         👤 PROFILE / ABOUT ME
     </button>
 
     <button
         class="navGo"
-        data-page="education"
-    >
+        data-page="education">
         🎓 EDUCATION
     </button>
 
     <button
         class="navGo"
-        data-page="hobby"
-    >
+        data-page="hobby">
         🎨 HOBBY
     </button>
 
     <button
         class="navGo"
-        data-page="contact"
-    >
+        data-page="contact">
         📡 CONTACT
     </button>
 
     <button
         class="navGo"
-        data-page="friends"
-    >
+        data-page="friends">
         ⭐ SUBJECT & FRIENDS
     </button>
 
     <button
         class="navGo"
-        data-page="works"
-    >
+        data-page="works">
         🏆 WORKS
     </button>
 
@@ -1709,21 +1783,20 @@ footer b{
 </header>
 
 
-<!-- =======================================================
+<!-- =========================
      MAIN
-======================================================= -->
+========================= -->
 
 <main>
 
 
-<!-- =======================================================
+<!-- =========================
      HOME
-======================================================= -->
+========================= -->
 
 <section
     class="page active"
-    id="home"
->
+    id="home">
 
 <div class="container hero">
 
@@ -1734,45 +1807,34 @@ footer b{
         </div>
 
         <h1>
-
             สวัสดีค่ะ<br>
-
             ฉันคือ
             <span class="gradient">
                 อิ่มเอม
             </span>
-
             🚀
-
         </h1>
 
         <p>
-
             ยินดีต้อนรับเข้าสู่
             <b>Aimaam Galaxy</b>
-
             จักรวาล Portfolio ส่วนตัว
             ที่เต็มไปด้วยดาวเคราะห์
-            จรวด ยานอวกาศ
-            แมวอวกาศ เอเลี่ยน
-            และความฝันของฉัน
-
+            ยานอวกาศ เอเลี่ยน
+            แมวอวกาศ และความฝันของฉัน
         </p>
-
 
         <div class="actions">
 
             <button
                 class="btn navGo"
-                data-page="profile"
-            >
+                data-page="profile">
                 🌌 สำรวจจักรวาล
             </button>
 
             <button
                 class="btn alt navGo"
-                data-page="works"
-            >
+                data-page="works">
                 🏆 ดูผลงาน
             </button>
 
@@ -1792,14 +1854,13 @@ footer b{
 </section>
 
 
-<!-- =======================================================
+<!-- =========================
      PROFILE
-======================================================= -->
+========================= -->
 
 <section
     class="page"
-    id="profile"
->
+    id="profile">
 
 <div class="container">
 
@@ -1822,14 +1883,13 @@ footer b{
     <div class="profile">
 
 
-        <!-- รูปที่ผู้ใช้ส่งมา -->
         <div>
 
+            <!-- รูปที่ผู้ใช้ส่งมา -->
             <img
                 class="profilePic"
                 src="1000012017.jpg"
-                alt="รูปโปรไฟล์ของอิ่มเอม"
-            >
+                alt="รูปโปรไฟล์ของอิ่มเอม">
 
         </div>
 
@@ -1848,43 +1908,75 @@ footer b{
             <div class="facts">
 
                 <div class="fact">
+
                     <b>ชื่อจริง</b>
+
                     นางสาว ฐาณดา ล้อลำเลียง
+
                 </div>
 
+
                 <div class="fact">
+
                     <b>ชื่อเล่น</b>
+
                     อิ่มเอม
+
                 </div>
 
+
                 <div class="fact">
+
                     <b>วันเกิด</b>
-                    3 มิถุนายน พ.ศ. 2554 / ค.ศ. 2011
+
+                    3 มิถุนายน พ.ศ. 2554
+                    / ค.ศ. 2011
+
                 </div>
 
+
                 <div class="fact">
+
                     <b>สีที่ชอบ</b>
+
                     💛 สีเหลือง
+
                 </div>
 
+
                 <div class="fact">
+
                     <b>อาหารที่ชอบ</b>
+
                     🍜 ก๋วยเตี๋ยว
+
                 </div>
 
+
                 <div class="fact">
+
                     <b>เครื่องดื่ม</b>
+
                     🥤 น้ำโกโก้
+
                 </div>
 
+
                 <div class="fact">
+
                     <b>ขนมที่ชอบ</b>
+
                     🍫 ช็อกโกแลต
+
                 </div>
 
+
                 <div class="fact">
+
                     <b>สัตว์ที่ชอบ</b>
+
                     🐶 สุนัข · 🐱 แมว
+
                 </div>
 
             </div>
@@ -1898,14 +1990,13 @@ footer b{
 </section>
 
 
-<!-- =======================================================
+<!-- =========================
      EDUCATION
-======================================================= -->
+========================= -->
 
 <section
     class="page"
-    id="education"
->
+    id="education">
 
 <div class="container">
 
@@ -1943,9 +2034,7 @@ footer b{
 
             <p>
                 เรียนที่
-                <b>
-                    โรงเรียนวิทยาวัฒน์
-                </b>
+                <b>โรงเรียนวิทยาวัฒน์</b>
             </p>
 
         </article>
@@ -1967,9 +2056,7 @@ footer b{
 
             <p>
                 เรียนที่
-                <b>
-                    โรงเรียนศรีจอมทอง
-                </b>
+                <b>โรงเรียนศรีจอมทอง</b>
             </p>
 
         </article>
@@ -1991,12 +2078,8 @@ footer b{
 
             <p>
                 กำลังเรียนชั้น
-                <b>
-                    มัธยมศึกษาปีที่ 3
-                </b>
-
+                <b>มัธยมศึกษาปีที่ 3</b>
                 <br>
-
                 โรงเรียนจอมทอง
             </p>
 
@@ -2020,9 +2103,7 @@ footer b{
             <p>
                 จะเรียนต่อชั้นมัธยมศึกษา
                 ที่
-                <b>
-                    โรงเรียนยุพราชวิทยาลัย
-                </b>
+                <b>โรงเรียนยุพราชวิทยาลัย</b>
             </p>
 
         </article>
@@ -2034,14 +2115,13 @@ footer b{
 </section>
 
 
-<!-- =======================================================
+<!-- =========================
      HOBBY
-======================================================= -->
+========================= -->
 
 <section
     class="page"
-    id="hobby"
->
+    id="hobby">
 
 <div class="container">
 
@@ -2062,7 +2142,6 @@ footer b{
 
 
     <div class="grid three">
-
 
         <article class="card hobbyCard">
 
@@ -2123,12 +2202,11 @@ footer b{
             </h3>
 
             <p>
-                สนุกกับเรื่องราว
-                ตัวละคร และโลกแฟนตาซี
+                สนุกกับเรื่องราว ตัวละคร
+                และโลกแฟนตาซี
             </p>
 
         </article>
-
 
     </div>
 
@@ -2137,14 +2215,13 @@ footer b{
 </section>
 
 
-<!-- =======================================================
+<!-- =========================
      CONTACT
-======================================================= -->
+========================= -->
 
 <section
     class="page"
-    id="contact"
->
+    id="contact">
 
 <div class="container">
 
@@ -2165,7 +2242,6 @@ footer b{
 
 
     <div class="grid four">
-
 
         <article class="card">
 
@@ -2250,7 +2326,6 @@ footer b{
 
         </article>
 
-
     </div>
 
 </div>
@@ -2258,14 +2333,13 @@ footer b{
 </section>
 
 
-<!-- =======================================================
+<!-- =========================
      FRIENDS
-======================================================= -->
+========================= -->
 
 <section
     class="page"
-    id="friends"
->
+    id="friends">
 
 <div class="container">
 
@@ -2375,7 +2449,6 @@ footer b{
 
         </article>
 
-
     </div>
 
 </div>
@@ -2383,14 +2456,13 @@ footer b{
 </section>
 
 
-<!-- =======================================================
+<!-- =========================
      WORKS
-======================================================= -->
+========================= -->
 
 <section
     class="page"
-    id="works"
->
+    id="works">
 
 <div class="container">
 
@@ -2429,7 +2501,8 @@ footer b{
             </strong>
 
             <p>
-                ได้ท็อป 10 สี่เทอมติดดด 🔥
+                ได้ท็อป 10
+                สี่เทอมติดดด 🔥
             </p>
 
         </article>
@@ -2477,43 +2550,40 @@ footer b{
 
         </article>
 
-
     </div>
 
 </div>
 
 </section>
 
-
 </main>
 
 
-<!-- =======================================================
+<!-- =========================
      FOOTER
-======================================================= -->
+========================= -->
 
 <footer>
 
     🚀 Made with
-
     <b>
         ✨ Aimaam Galaxy ✨
     </b>
-
     — Explore. Create. Shine.
 
 </footer>
 
 
 <script>
+
 (function(){
 
 "use strict";
 
 
-/* =========================================================
+/* =========================
    PAGE SYSTEM
-========================================================= */
+========================= */
 
 const pages =
     Array.from(
@@ -2526,10 +2596,14 @@ const navs =
     );
 
 const mobileMenu =
-    document.getElementById("mobileMenu");
+    document.getElementById(
+        "mobileMenu"
+    );
 
 const menuBtn =
-    document.getElementById("menuBtn");
+    document.getElementById(
+        "menuBtn"
+    );
 
 
 function showPage(
@@ -2648,14 +2722,12 @@ window.addEventListener(
 );
 
 
-/* เปิดหน้าโดยไม่รอรูป */
-
 openHashPage();
 
 
-/* =========================================================
+/* =========================
    MOUSE GLOW
-========================================================= */
+========================= */
 
 const glow =
     document.getElementById(
@@ -2684,9 +2756,9 @@ if(glow){
 }
 
 
-/* =========================================================
-   DRAG PARTICLES
-========================================================= */
+/* =========================
+   PARTICLES
+========================= */
 
 let dragging = false;
 
@@ -2751,9 +2823,7 @@ window.addEventListener(
 function createParticle(x,y){
 
     const particle =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
     particle.className =
         "pointerParticle";
@@ -2766,12 +2836,12 @@ function createParticle(x,y){
 
     particle.style.setProperty(
         "--dx",
-        (Math.random()*80-40)+"px"
+        (Math.random()*80-40) + "px"
     );
 
     particle.style.setProperty(
         "--dy",
-        (Math.random()*80-40)+"px"
+        (Math.random()*80-40) + "px"
     );
 
     document.body.appendChild(
@@ -2791,18 +2861,16 @@ function createParticle(x,y){
 }
 
 
-/* =========================================================
+/* =========================
    CLICK RIPPLE
-========================================================= */
+========================= */
 
 window.addEventListener(
     "pointerdown",
     function(event){
 
         const ripple =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
         ripple.className =
             "ripple";
@@ -2834,84 +2902,84 @@ window.addEventListener(
 );
 
 
-/* =========================================================
+/* =========================
    3D CARD TILT
-========================================================= */
+========================= */
 
 document
-    .querySelectorAll(".card")
-    .forEach(function(card){
+.querySelectorAll(".card")
+.forEach(function(card){
 
-        card.addEventListener(
-            "pointermove",
-            function(event){
+    card.addEventListener(
+        "pointermove",
+        function(event){
 
-                const rect =
-                    card.getBoundingClientRect();
+            const rect =
+                card.getBoundingClientRect();
 
-                const x =
-                    event.clientX -
-                    rect.left;
+            const x =
+                event.clientX -
+                rect.left;
 
-                const y =
-                    event.clientY -
-                    rect.top;
+            const y =
+                event.clientY -
+                rect.top;
 
-                const centerX =
-                    rect.width / 2;
+            const centerX =
+                rect.width / 2;
 
-                const centerY =
-                    rect.height / 2;
+            const centerY =
+                rect.height / 2;
 
-                const rotateX =
-                    ((y-centerY)/centerY)*-5;
+            const rotateX =
+                ((y-centerY) /
+                centerY) * -5;
 
-                const rotateY =
-                    ((x-centerX)/centerX)*5;
+            const rotateY =
+                ((x-centerX) /
+                centerX) * 5;
 
-                card.style.transform =
-                    `perspective(900px)
-                     rotateX(${rotateX}deg)
-                     rotateY(${rotateY}deg)
-                     translateY(-5px)`;
+            card.style.transform =
+                `perspective(900px)
+                 rotateX(${rotateX}deg)
+                 rotateY(${rotateY}deg)
+                 translateY(-5px)`;
 
-            }
-        );
-
-
-        card.addEventListener(
-            "pointerleave",
-            function(){
-
-                card.style.transform = "";
-
-            }
-        );
-
-    });
+        }
+    );
 
 
-/* =========================================================
+    card.addEventListener(
+        "pointerleave",
+        function(){
+
+            card.style.transform = "";
+
+        }
+    );
+
+});
+
+
+/* =========================
    SHOOTING STARS
-========================================================= */
+========================= */
 
 function createShootingStar(){
 
     const star =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
     star.className =
         "shootingStar";
 
     star.style.left =
-        (Math.random()*100+10)
-        + "vw";
+        (Math.random()*100+10) +
+        "vw";
 
     star.style.top =
-        (Math.random()*45)
-        + "vh";
+        (Math.random()*45) +
+        "vh";
 
     document.body.appendChild(
         star
@@ -2936,7 +3004,8 @@ function shootingLoop(){
 
     setTimeout(
         shootingLoop,
-        2000 + Math.random()*3500
+        2000 +
+        Math.random()*3500
     );
 
 }
@@ -2948,9 +3017,9 @@ setTimeout(
 );
 
 
-/* =========================================================
-   SAFE SHORT LOADER
-========================================================= */
+/* =========================
+   SAFE LOADER
+========================= */
 
 const loader =
     document.getElementById(
@@ -2965,12 +3034,7 @@ function closeLoader(){
     if(
         loaderClosed ||
         !loader
-    ){
-
-        return;
-
-    }
-
+    ) return;
 
     loaderClosed = true;
 
@@ -2996,17 +3060,14 @@ function closeLoader(){
 }
 
 
-/* ไม่ใช้ window.load
-   จึงไม่รอรูปโปรไฟล์ */
-
+/* ไม่รอรูป */
 setTimeout(
     closeLoader,
     700
 );
 
 
-/* ตัวกันค้างขั้นสุดท้าย */
-
+/* ตัวป้องกันค้าง */
 setTimeout(
     closeLoader,
     1800
@@ -3014,6 +3075,7 @@ setTimeout(
 
 
 })();
+
 </script>
 
 </body>
