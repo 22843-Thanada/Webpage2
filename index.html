@@ -2083,6 +2083,218 @@ button:focus-visible{
 outline:2px solid var(--cyan);  
 outline-offset:4px;  
 }  
+
+/* =========================================================
+   SPACE FISHING MINI GAME — FISHING ANIMAL
+========================================================= */
+.dinoGamePro,.spaceFishingPro{
+  width:min(100%,1280px);margin:30px auto;padding:24px;
+  border:1px solid rgba(0,246,255,.35);border-radius:28px;
+  background:linear-gradient(145deg,rgba(3,7,26,.94),rgba(20,7,45,.88));
+  box-shadow:0 0 35px rgba(0,246,255,.13),inset 0 0 35px rgba(145,71,255,.08);
+}
+.gameTopBar{display:flex;justify-content:space-between;gap:22px;align-items:center;margin-bottom:18px}
+.gameTopBar h3{font-size:clamp(1.5rem,3vw,2.25rem);color:#fff;text-shadow:0 0 18px var(--cyan);margin:5px 0}
+.gameTopBar p{color:var(--soft);margin:0}
+.gameBadge{display:inline-block;padding:6px 10px;border-radius:999px;color:#07111a;background:var(--cyan);font-weight:1000;letter-spacing:1px;font-size:.72rem;box-shadow:0 0 20px rgba(0,246,255,.4)}
+.skinPicker{min-width:280px;text-align:right}.skinPicker label{display:block;color:var(--muted);font-size:.78rem;margin-bottom:7px}
+.skinChoices{display:flex;justify-content:flex-end;gap:7px;flex-wrap:wrap}
+.skinBtn{border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;border-radius:12px;padding:7px 10px;cursor:pointer;font-weight:800}
+.skinBtn.active{border-color:var(--cyan);box-shadow:0 0 18px rgba(0,246,255,.35);background:rgba(0,246,255,.12)}
+.dinoHudPro{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px}
+.dinoHudPro>div{background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.12);border-radius:15px;padding:10px;text-align:center}
+.dinoHudPro span{display:block;color:var(--muted);font-size:.72rem}.dinoHudPro b{font-size:1.4rem;color:#fff;text-shadow:0 0 12px var(--cyan)}
+.dinoCanvasWrapPro{height:420px;position:relative;overflow:hidden;border-radius:22px;border:2px solid rgba(0,246,255,.32);background:#030518;box-shadow:inset 0 -70px 80px rgba(0,0,0,.5),0 0 30px rgba(0,246,255,.12)}
+#dinoCanvas{width:100%;height:100%;display:block;touch-action:none}
+.dinoOverlayPro{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(circle,rgba(0,0,0,.12),rgba(0,0,0,.42));pointer-events:none}
+.dinoStartPro{pointer-events:auto;font-size:1.1rem!important;padding:15px 28px!important}
+.dinoControlsPro{display:flex;justify-content:center;gap:12px;margin:15px 0;flex-wrap:wrap}
+.dinoControlsPro .btn{min-width:145px}
+.dinoStatsPanelPro{margin-top:18px;padding:15px;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(0,0,0,.18)}
+.statsHead{display:flex;justify-content:space-between;align-items:center;color:var(--soft);margin-bottom:10px}.statsHead b{color:var(--cyan)}
+.dinoChart{width:100%;height:170px;display:block;border-radius:12px;background:rgba(0,0,0,.15)}
+.dinoRankList{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}.dinoRankItem{padding:9px;border:1px solid rgba(255,255,255,.1);border-radius:12px;text-align:center;background:rgba(255,255,255,.03)}.dinoRankItem strong{color:var(--yellow);display:block}.dinoRankItem small{color:var(--muted)}
+.dinoGameMessage{text-align:center;color:var(--soft);min-height:24px;margin-top:7px}
+
+/* fishing */
+.spaceFishingPro{position:relative;overflow:hidden}
+.walletBox{padding:12px 18px;border:1px solid rgba(255,228,92,.35);border-radius:16px;background:rgba(255,228,92,.08);color:var(--yellow);white-space:nowrap}
+.fishingStage{height:470px;position:relative;overflow:hidden;border-radius:24px;border:2px solid rgba(145,71,255,.45);background:#02030e;box-shadow:inset 0 0 80px rgba(0,0,0,.6),0 0 35px rgba(145,71,255,.13)}
+#fishingCanvas{width:100%;height:100%;display:block;touch-action:none}
+.fishingIdle{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#dce5ff;font-size:1.1rem;text-shadow:0 0 14px var(--cyan);pointer-events:none}
+.catchAlert{position:absolute;top:18px;left:50%;transform:translateX(-50%);font-weight:1000;font-size:1.2rem;color:#fff;text-shadow:0 0 15px var(--yellow);pointer-events:none}
+.reelPanel{display:none;position:absolute;left:50%;bottom:22px;transform:translateX(-50%);width:min(92%,650px);padding:16px;border:1px solid rgba(0,246,255,.55);border-radius:20px;background:rgba(3,6,24,.9);backdrop-filter:blur(12px);box-shadow:0 0 30px rgba(0,246,255,.2);z-index:5;text-align:center}
+.reelPanel.open{display:block}.reelTitle{font-weight:1000;color:#fff;margin-bottom:10px}
+.reelTrack{height:28px;position:relative;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);overflow:hidden}
+.reelZone{position:absolute;top:2px;bottom:2px;border-radius:999px;background:linear-gradient(90deg,#55ffb0,#fff,#55ffb0);box-shadow:0 0 18px #55ffb0}
+.reelCursor{position:absolute;top:-2px;width:5px;height:32px;border-radius:5px;background:#ff4e8a;box-shadow:0 0 15px #ff4e8a}
+.reelInfo{display:flex;justify-content:space-between;margin:8px 0;color:var(--muted)}.reelInfo b{color:#fff}
+.fishingActions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:16px 0}
+.fishingGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.inventoryPanel,.shopPanel{border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:16px;background:rgba(0,0,0,.18)}
+.inventoryList{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-height:260px;overflow:auto}
+.inventoryItem{padding:10px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);text-align:center}.inventoryItem .itemEmoji{font-size:2rem;display:block}.inventoryItem b{display:block;color:#fff}.inventoryItem small{color:var(--yellow)}
+.shopPanel{display:none}.shopPanel.open{display:block}.shopClose{border:0;background:none;color:#fff;cursor:pointer;font-size:1.1rem}
+.rodShopList{display:grid;gap:9px}.rodCard{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:12px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.03)}.rodCard.active{border-color:var(--cyan);box-shadow:0 0 18px rgba(0,246,255,.16)}.rodCard h4{margin:0;color:#fff}.rodCard p{margin:3px 0;color:var(--muted);font-size:.78rem}.rodCard button{padding:8px 11px;border-radius:10px;border:1px solid var(--cyan);background:rgba(0,246,255,.1);color:#fff;cursor:pointer;font-weight:900}.rodCard button:disabled{opacity:.45;cursor:not-allowed}
+
+@media(max-width:800px){
+  .gameTopBar{flex-direction:column;align-items:stretch}.skinPicker{text-align:left;min-width:0}.skinChoices{justify-content:flex-start}
+  .dinoHudPro{grid-template-columns:repeat(2,1fr)}.dinoCanvasWrapPro{height:330px}
+  .dinoRankList{grid-template-columns:repeat(5,1fr);gap:4px}.dinoRankItem{padding:7px 3px;font-size:.76rem}
+  .fishingStage{height:390px}.fishingGrid{grid-template-columns:1fr}.inventoryList{grid-template-columns:repeat(2,1fr)}
+}
+
+
+/* =========================================================
+   SPACE FISHING COLLECTION BOOK
+========================================================= */
+.fishingCollectionPanel{
+  grid-column:1/-1;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 8% 18%,rgba(0,246,255,.10),transparent 28%),
+    radial-gradient(circle at 90% 75%,rgba(255,60,172,.09),transparent 26%),
+    linear-gradient(145deg,rgba(11,19,55,.96),rgba(5,6,24,.98));
+  border:1px solid rgba(0,246,255,.28);
+  border-radius:24px;
+  padding:22px;
+  box-shadow:0 18px 55px rgba(0,0,0,.35),inset 0 0 45px rgba(0,246,255,.035);
+}
+.fishingCollectionPanel:before{
+  content:"📖";
+  position:absolute;
+  right:22px;
+  top:14px;
+  font-size:42px;
+  opacity:.18;
+  filter:drop-shadow(0 0 12px #00f6ff);
+}
+.collectionSub{
+  color:var(--muted);
+  font-size:.92rem;
+  margin:4px 0 12px;
+}
+.collectionProgress{
+  height:8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.06);
+  overflow:hidden;
+  border:1px solid rgba(0,246,255,.16);
+  margin-bottom:16px;
+}
+.collectionProgress span{
+  display:block;
+  height:100%;
+  width:0%;
+  border-radius:inherit;
+  background:linear-gradient(90deg,#00f6ff,#9147ff,#ff3cac);
+  box-shadow:0 0 16px rgba(0,246,255,.5);
+  transition:width .35s ease;
+}
+.collectionList{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:13px;
+  max-height:680px;
+  overflow:auto;
+  padding-right:3px;
+}
+.collectionCard{
+  position:relative;
+  min-height:190px;
+  border-radius:18px;
+  padding:15px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(0,0,0,.22));
+  transition:.22s ease;
+}
+.collectionCard:hover{
+  transform:translateY(-3px);
+  border-color:var(--rarity-color,#00f6ff);
+  box-shadow:0 0 24px color-mix(in srgb,var(--rarity-color,#00f6ff) 20%,transparent);
+}
+.collectionTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  font-size:.78rem;
+  font-weight:900;
+  color:var(--rarity-color,#d9e0ff);
+}
+.collectionNo{opacity:.5}
+.collectionEmojiWrap{
+  display:grid;
+  place-items:center;
+  height:82px;
+  margin:7px 0 4px;
+  border-radius:15px;
+  background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);
+}
+.collectionEmoji{
+  font-size:52px;
+  line-height:1;
+  filter:drop-shadow(0 0 13px var(--rarity-color,#00f6ff));
+}
+.collectionCard.locked .collectionEmoji{
+  filter:brightness(0) saturate(0) drop-shadow(0 0 4px #000);
+  opacity:.92;
+}
+.collectionCard.locked .collectionEmojiWrap{
+  background:radial-gradient(circle,rgba(0,0,0,.65),rgba(0,0,0,.12) 72%);
+  box-shadow:inset 0 0 25px rgba(0,0,0,.55);
+}
+.collectionName{
+  font-weight:950;
+  font-size:.98rem;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.collectionPrice{
+  margin-top:4px;
+  color:var(--yellow);
+  font-size:.84rem;
+  font-weight:900;
+}
+.collectionLock{
+  color:var(--muted);
+  font-size:.78rem;
+  margin-top:4px;
+}
+.collectionFooter{
+  display:flex;
+  justify-content:space-between;
+  gap:7px;
+  margin-top:8px;
+  font-size:.72rem;
+  color:var(--soft);
+}
+.collectionFooter span:last-child{
+  color:var(--rarity-color,#d9e0ff);
+  font-weight:900;
+}
+.collectionBadge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  padding:4px 7px;
+  border-radius:999px;
+  background:rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:.7rem;
+}
+@media(max-width:1050px){
+  .collectionList{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:720px){
+  .collectionList{grid-template-columns:repeat(2,minmax(0,1fr));max-height:520px}
+}
+@media(max-width:430px){
+  .collectionList{grid-template-columns:1fr}
+}
+
 </style>
 <style id="performance-music-css">
 /* =========================================================
@@ -2298,6 +2510,8 @@ outline-offset:4px;
   #thankyou .thankyouBox::after{font-size:16px;letter-spacing:7px;}
 }
 @media(max-width:700px){.profileImageFacts{grid-template-columns:1fr 1fr}.cardImage{height:220px}.factImageInline{width:125px;height:105px}.contactImage{width:135px;height:120px}.subjectImageItem img{max-width:140px;height:105px}}
+
+
 </style><style>
 /* INLINE PROFILE + FRIENDS IMAGES — use the existing cards/frames */
 .profileFactWithImage{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
@@ -2413,6 +2627,158 @@ outline-offset:4px;
 }
 </style>
 
+
+<style id="space-fishing-v2-css">
+.fishingProV2{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(0,246,255,.12),transparent 28%),
+    radial-gradient(circle at 90% 10%,rgba(255,60,172,.11),transparent 25%),
+    linear-gradient(145deg,rgba(2,4,20,.97),rgba(11,4,34,.95));
+  border-color:rgba(0,246,255,.42);
+  box-shadow:0 0 55px rgba(0,246,255,.11),inset 0 0 65px rgba(145,71,255,.10);
+}
+.fishingTopBarV2{position:relative;z-index:3}
+.fishingBadgeV2{
+  background:linear-gradient(90deg,#00f6ff,#55ffb0,#9147ff,#ff3cac);
+  color:#050514;
+  box-shadow:0 0 28px rgba(0,246,255,.35),0 0 45px rgba(255,60,172,.18);
+}
+.fishingTopBarV2 h3{font-size:clamp(1.9rem,4vw,3rem);text-shadow:0 0 18px #00f6ff,0 0 35px #9147ff}
+.walletV2{font-size:1.1rem;box-shadow:0 0 24px rgba(255,228,92,.14),inset 0 0 18px rgba(255,228,92,.05)}
+
+.fishingStageV2{
+  height:560px;
+  border:2px solid rgba(0,246,255,.44);
+  background:#02030d;
+  box-shadow:inset 0 0 110px rgba(0,0,0,.72),0 0 50px rgba(0,246,255,.14),0 0 90px rgba(145,71,255,.10);
+}
+.fishingStageV2::before{
+  content:"";
+  position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(0,246,255,.08),transparent 28%),
+    radial-gradient(circle at 77% 28%,rgba(255,60,172,.08),transparent 26%),
+    radial-gradient(circle at 51% 88%,rgba(145,71,255,.08),transparent 30%);
+  mix-blend-mode:screen;
+}
+#fishingCanvas{position:absolute;inset:0;z-index:0;width:100%;height:100%;display:block;touch-action:none}
+
+.fishingLoader{
+  position:absolute;inset:0;z-index:50;display:grid;place-items:center;overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 50%,rgba(26,34,104,.86),rgba(4,5,26,.97) 46%,rgba(1,2,11,1) 100%);
+  transition:opacity .9s ease,visibility .9s ease;
+}
+.fishingLoader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.fishingLoader::before{
+  content:"";position:absolute;inset:-30%;
+  background-image:
+    radial-gradient(#fff 1px,transparent 1.3px),
+    radial-gradient(#00f6ff 1px,transparent 1.4px),
+    radial-gradient(#ff3cac 1px,transparent 1.3px);
+  background-size:56px 56px,110px 110px,180px 180px;
+  opacity:.55;animation:fishingLoaderStarDrift 18s linear infinite;
+}
+@keyframes fishingLoaderStarDrift{to{transform:translate3d(-90px,140px,0) rotate(4deg)}}
+.fishingLoaderCore{position:relative;z-index:4;text-align:center;width:min(90%,700px);padding:30px 26px;border:1px solid rgba(0,246,255,.35);border-radius:28px;background:rgba(4,7,28,.54);backdrop-filter:blur(16px);box-shadow:0 0 40px rgba(0,246,255,.12),inset 0 0 35px rgba(145,71,255,.08)}
+.fishingLoaderKicker{font-weight:1000;letter-spacing:.28em;color:#7ffeff;font-size:.76rem;text-shadow:0 0 14px #00f6ff}
+.fishingLoaderTitle{margin:10px 0 8px;font-size:clamp(3.3rem,9vw,7rem);font-weight:1000;line-height:.95;color:#fff;text-shadow:0 0 14px #fff,0 0 32px #00f6ff,0 0 70px #9147ff;animation:fishingTitlePulse 1.8s ease-in-out infinite alternate}
+.fishingLoaderTitle span{background:linear-gradient(90deg,#55ffb0,#00f6ff,#9147ff,#ff3cac,#55ffb0);background-size:300% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:fishingGradient 3.5s linear infinite}
+@keyframes fishingTitlePulse{to{transform:scale(1.035);filter:drop-shadow(0 0 16px rgba(0,246,255,.34))}}
+@keyframes fishingGradient{to{background-position:300% center}}
+.fishingLoaderSub{color:#d9e0ff;font-weight:750;font-size:1rem}
+.fishingLoaderBar{width:min(520px,85%);height:9px;margin:18px auto 12px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);box-shadow:0 0 18px rgba(0,246,255,.13)}
+.fishingLoaderBar span{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#00f6ff,#55ffb0,#9147ff,#ff3cac);box-shadow:0 0 15px #00f6ff;animation:fishingLoaderProgress 1.95s ease forwards}
+@keyframes fishingLoaderProgress{to{width:100%}}
+.fishingLoaderDots{color:#dce5ff;letter-spacing:.2em;font-size:.95rem}
+.loaderCosmicEmoji{position:absolute;z-index:3;font-size:clamp(2rem,5vw,4rem);filter:drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #00f6ff) drop-shadow(0 0 30px #9147ff);animation:loaderEmojiFloat 4.5s ease-in-out infinite}
+.loaderEmojiA{left:7%;top:15%}.loaderEmojiB{left:16%;bottom:18%;animation-delay:.5s}.loaderEmojiC{right:10%;top:12%;animation-delay:1s}.loaderEmojiD{right:17%;bottom:22%;animation-delay:1.4s}.loaderEmojiE{left:31%;top:10%;font-size:1.8rem;animation-delay:.2s}.loaderEmojiF{right:35%;top:7%;font-size:2rem;animation-delay:1.7s}.loaderEmojiG{left:8%;bottom:38%;font-size:2.2rem;animation-delay:2.2s}.loaderEmojiH{right:6%;bottom:39%;font-size:1.8rem;animation-delay:2.8s}
+@keyframes loaderEmojiFloat{0%,100%{transform:translateY(0) rotate(-8deg) scale(.92);opacity:.65}50%{transform:translateY(-18px) rotate(10deg) scale(1.06);opacity:1}}
+
+.catchAlertV2{top:18px;font-size:1.15rem;z-index:8;padding:8px 14px;border-radius:999px;background:rgba(4,7,24,.52);border:1px solid rgba(0,246,255,.25);box-shadow:0 0 18px rgba(0,246,255,.10);backdrop-filter:blur(8px)}
+.fishingIdleV2{z-index:4;font-weight:900;color:#e7efff;max-width:80%;left:50%;right:auto;transform:translateX(-50%);inset-inline:auto;top:auto;bottom:24px;height:auto;padding:9px 14px;border-radius:999px;background:rgba(4,7,24,.46);border:1px solid rgba(0,246,255,.18);box-shadow:0 0 22px rgba(0,246,255,.07);text-align:center}
+
+.reelPanelV2{z-index:10;bottom:18px;background:linear-gradient(145deg,rgba(4,8,28,.92),rgba(18,7,43,.94));border-color:rgba(0,246,255,.55);box-shadow:0 0 35px rgba(0,246,255,.22),0 0 60px rgba(145,71,255,.12)}
+.reelPanelV2 .reelTitle{font-size:1.2rem;text-shadow:0 0 12px #00f6ff}
+.reelSubTitle{color:#aebce2;font-size:.82rem;margin:-4px 0 10px}
+.reelPanelV2 .reelZone{background:linear-gradient(90deg,#55ffb0,#fff,#00f6ff,#55ffb0);box-shadow:0 0 18px #55ffb0,0 0 28px rgba(0,246,255,.35)}
+
+.fishingResult{position:absolute;inset:0;z-index:12;display:none;align-items:center;justify-content:center;pointer-events:none;background:radial-gradient(circle,rgba(2,2,18,.10),rgba(1,2,12,.48));backdrop-filter:blur(3px)}
+.fishingResult.show{display:flex;animation:resultFadeIn .28s ease both}
+@keyframes resultFadeIn{from{opacity:0}to{opacity:1}}
+.resultCard{--status-color:#d9e0ff;position:relative;width:min(92%,470px);padding:22px 22px 20px;border-radius:28px;border:1px solid color-mix(in srgb,var(--status-color) 58%,#fff 12%);background:linear-gradient(145deg,rgba(7,9,31,.95),rgba(21,5,42,.92));box-shadow:0 0 28px color-mix(in srgb,var(--status-color) 42%,transparent),inset 0 0 40px rgba(255,255,255,.025);text-align:center;overflow:visible;animation:resultCardPop .65s cubic-bezier(.2,.85,.2,1) both}
+.resultCard::before{content:"";position:absolute;inset:-7px;border-radius:34px;border:1px solid color-mix(in srgb,var(--status-color) 56%,transparent);filter:blur(.2px);opacity:.9;animation:resultRing 1.6s ease-in-out infinite}
+.resultCard::after{content:"";position:absolute;inset:-18px;border-radius:44px;background:conic-gradient(from 0deg,transparent 0 14%,color-mix(in srgb,var(--status-color) 65%,transparent) 18%,transparent 28% 42%,color-mix(in srgb,#9147ff 45%,transparent) 48%,transparent 60% 78%,color-mix(in srgb,#00f6ff 45%,transparent) 84%,transparent 92%);filter:blur(8px);opacity:.65;animation:resultSpin 5s linear infinite;z-index:-1}
+@keyframes resultCardPop{0%{transform:translateY(25px) scale(.86) rotateX(8deg);opacity:0}100%{transform:none;opacity:1}}
+@keyframes resultRing{50%{transform:scale(1.02);opacity:.55}}
+@keyframes resultSpin{to{transform:rotate(360deg)}}
+.resultStatusLine{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:color-mix(in srgb,var(--status-color) 12%,transparent);border:1px solid color-mix(in srgb,var(--status-color) 45%,transparent);color:var(--status-color);font-weight:1000;box-shadow:0 0 16px color-mix(in srgb,var(--status-color) 22%,transparent)}
+.resultEmoji{font-size:5rem;line-height:1;margin:16px 0 7px;filter:drop-shadow(0 0 10px var(--status-color)) drop-shadow(0 0 28px color-mix(in srgb,var(--status-color) 65%,transparent));animation:resultEmojiFloat 1.8s ease-in-out infinite alternate}
+@keyframes resultEmojiFloat{to{transform:translateY(-7px) rotate(4deg) scale(1.05)}}
+.resultName{font-size:1.45rem;font-weight:1000;color:#fff;text-shadow:0 0 12px rgba(255,255,255,.24)}
+.resultRarity{font-size:.85rem;color:#aebce2;margin-top:3px}
+.resultPriceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0 12px}
+.resultPriceGrid>div{padding:9px 6px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.035)}
+.resultPriceGrid small{display:block;color:#8f9abd;font-size:.68rem}.resultPriceGrid b{display:block;color:#fff;margin-top:2px;font-size:1rem}.resultPriceGrid>div:last-child b{color:var(--status-color);text-shadow:0 0 10px color-mix(in srgb,var(--status-color) 65%,transparent)}
+.resultFormula{font-size:.92rem;font-weight:900;color:#dce5ff}.resultNote{margin-top:9px;color:#91a0c7;font-size:.78rem}
+.resultOrbit{position:absolute;z-index:1;font-size:1.5rem;color:var(--status-color,#fff);text-shadow:0 0 8px #fff,0 0 20px currentColor;animation:resultOrbitFly 1.8s ease-out infinite}
+.resultOrbit1{left:22%;top:18%}.resultOrbit2{right:20%;top:24%;animation-delay:.45s}.resultOrbit3{left:21%;bottom:23%;animation-delay:.9s}.resultOrbit4{right:18%;bottom:18%;animation-delay:1.15s}
+@keyframes resultOrbitFly{0%,100%{transform:scale(.65) rotate(0);opacity:.35}50%{transform:translateY(-10px) scale(1.25) rotate(160deg);opacity:1}}
+.fishingResult[data-status="scorching"]{--status-color:#ff6b35}.fishingResult[data-status="freeze"]{--status-color:#8fd3ff}.fishingResult[data-status="meteor"]{--status-color:#ffd25e}.fishingResult[data-status="bigbang"]{--status-color:#ff55c8}.fishingResult[data-status="blackhole"]{--status-color:#b06cff}.fishingResult[data-status="divine"]{--status-color:#fff59d}.fishingResult[data-status="debris"]{--status-color:#98a0b8}.fishingResult[data-status="pathogen"]{--status-color:#7dff86}.fishingResult[data-status="normal"]{--status-color:#d9e0ff}
+
+.fishingActionsV2{position:relative;z-index:2;margin-top:18px}
+.btnGlow{background:linear-gradient(135deg,#00a9ff,#9147ff,#ff3cac);box-shadow:0 0 25px rgba(0,246,255,.28),0 0 36px rgba(145,71,255,.14)}
+.fishingRuleBar{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;color:#aebce2;margin:-2px 0 18px;font-size:.78rem}
+.fishingRuleBar span{padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025)}
+
+.fishingGridV2{grid-template-columns:minmax(0,1.1fr) minmax(330px,.9fr);align-items:start}
+.inventoryPanelV2,.shopPanelV2{background:linear-gradient(145deg,rgba(5,8,26,.85),rgba(15,6,35,.78));border-color:rgba(0,246,255,.16);box-shadow:inset 0 0 24px rgba(0,246,255,.03)}
+.inventoryListV2{max-height:330px;padding-right:3px}
+.inventoryItemV2{position:relative;overflow:hidden;padding:12px;border-radius:16px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03)}
+.inventoryItemV2::after{content:"✦";position:absolute;top:6px;right:8px;color:#8ceeff;text-shadow:0 0 10px #00f6ff;animation:invTwinkle 1.8s ease-in-out infinite}
+@keyframes invTwinkle{50%{opacity:.25;transform:scale(.6) rotate(120deg)}}
+.inventoryItemV2 .itemEmoji{font-size:2.5rem}.inventoryItemV2 b{font-size:.92rem}.inventoryMeta{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:6px}.inventoryMeta span{font-size:.66rem;padding:3px 7px;border-radius:999px;background:rgba(255,255,255,.045);color:#bcc9ea;border:1px solid rgba(255,255,255,.06)}.inventoryMeta .status{color:var(--item-status,#fff);border-color:color-mix(in srgb,var(--item-status,#fff) 40%,transparent)}.inventorySale{margin-top:7px;font-size:.82rem;color:#ffe45c;font-weight:1000}
+
+.shopPanelV2.open{display:block}
+.shopIntro{font-size:.78rem;color:#96a5ca;margin:-3px 0 11px;padding:10px;border-radius:12px;background:rgba(0,246,255,.035);border:1px solid rgba(0,246,255,.10)}
+.rodShopListV2{max-height:620px;overflow:auto;padding-right:4px}
+.rodCardV2{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px;border:1px solid color-mix(in srgb,var(--rod-color,#00f6ff) 24%,transparent);border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.04),rgba(0,0,0,.15));overflow:hidden;transition:.25s}
+.rodCardV2::before{content:"";position:absolute;left:-35px;top:-35px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,var(--rod-color),transparent 70%);opacity:.11;filter:blur(8px)}
+.rodCardV2:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--rod-color,#00f6ff) 65%,#fff 10%);box-shadow:0 0 26px color-mix(in srgb,var(--rod-color,#00f6ff) 18%,transparent)}
+.rodCardV2.active{border-color:var(--rod-color,#00f6ff);box-shadow:0 0 28px color-mix(in srgb,var(--rod-color,#00f6ff) 20%,transparent),inset 0 0 22px color-mix(in srgb,var(--rod-color,#00f6ff) 5%,transparent)}
+.rodLevel{font-size:.68rem;font-weight:1000;letter-spacing:.16em;color:var(--rod-color,#00f6ff)}
+.rodNameV2{display:flex;align-items:center;gap:7px;margin-top:2px;font-weight:1000;color:#fff}.rodNameV2 span{font-size:1.08rem}
+.rodDescV2{font-size:.7rem;color:#8796bb;margin-top:3px;line-height:1.45}
+.rodStatsV2{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.rodStatsV2 span{font-size:.64rem;color:#b8c4e6;padding:3px 7px;border-radius:999px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.025)}
+.rodLuckBar{height:5px;margin-top:7px;width:min(310px,100%);border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden}.rodLuckBar span{display:block;height:100%;width:var(--luck);background:linear-gradient(90deg,var(--rod-color,#00f6ff),#fff);box-shadow:0 0 12px var(--rod-color,#00f6ff)}
+.rodBuyV2{min-width:120px;display:flex;flex-direction:column;align-items:center;gap:4px}.rodPriceV2{font-weight:1000;color:#ffe45c;font-size:.84rem}.rodBuyV2 button{border:1px solid var(--rod-color,#00f6ff);background:color-mix(in srgb,var(--rod-color,#00f6ff) 10%,transparent);color:#fff;border-radius:11px;padding:8px 10px;cursor:pointer;font-weight:1000}.rodBuyV2 button:disabled{opacity:.38;cursor:not-allowed}.rodBuyV2 small{font-size:.62rem;color:#7282aa}
+
+.statusLegendV2{margin-top:18px;padding:16px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(0,0,0,.15)}
+.legendTitle{font-weight:1000;color:#dce5ff;margin-bottom:10px}.legendGrid{display:flex;gap:7px;flex-wrap:wrap}.legend{padding:6px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.08);font-size:.72rem;font-weight:900}.legend.normal{color:#d9e0ff}.legend.scorching{color:#ff6b35}.legend.freeze{color:#8fd3ff}.legend.meteor{color:#ffd25e}.legend.bigbang{color:#ff55c8}.legend.blackhole{color:#b06cff}.legend.divine{color:#fff59d}.legend.debris{color:#98a0b8}.legend.pathogen{color:#7dff86}.legendFootnote{margin-top:9px;color:#7282aa;font-size:.7rem}
+
+@media(max-width:900px){
+  .fishingStageV2{height:500px}
+  .fishingGridV2{grid-template-columns:1fr}
+  .shopPanelV2{margin-top:0}
+  .resultCard{width:min(94%,440px)}
+}
+@media(max-width:650px){
+  .fishingStageV2{height:450px}
+  .fishingLoaderCore{padding:22px 14px}.fishingLoaderTitle{font-size:clamp(3rem,15vw,5.2rem)}
+  .walletV2{width:100%;text-align:center}
+  .fishingRuleBar{font-size:.68rem}.fishingRuleBar span{padding:6px 8px}
+  .resultPriceGrid{grid-template-columns:1fr 1fr}.resultPriceGrid>div:last-child{grid-column:1/-1}
+  .rodCardV2{grid-template-columns:1fr}.rodBuyV2{align-items:stretch}.rodBuyV2 button{width:100%}
+  .inventoryListV2{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:430px){
+  .fishingStageV2{height:420px}.inventoryListV2{grid-template-columns:1fr}
+  .fishingIdleV2{max-width:92%;font-size:.78rem}.resultEmoji{font-size:4.1rem}
+}
+</style>
 </head>
 <body>
 <!-- BACKGROUND MUSIC -->
@@ -3111,8 +3477,126 @@ Achievement Log — ภารกิจที่ฉันภูมิใจ
         <h2 class="gradient thankyouTitle">Thank you</h2>
         <p class="thankyouSubtitle">ขอบคุณสำหรับการรับชม 💙✨</p>
         <p class="thankyouMini">Aimaam Galaxy • Thank you for visiting my universe 🌌</p>
+
+        <div class="spaceFishingPro fishingProV2" id="spaceFishing">
+  <div class="gameTopBar fishingTopBarV2">
+    <div>
+      <span class="gameBadge fishingBadgeV2">🎣 SPACE FISHING // FISHING ANIMAL</span>
+      <h3>Fishing Animal 🌌🐟</h3>
+      <p>ออกสำรวจทะเลอวกาศ • เก็บของลงกระเป๋า • กดขายจึงจะได้รับเครดิต</p>
+    </div>
+    <div class="walletBox walletV2">💰 <b id="fishCoins">0</b> เครดิต</div>
+  </div>
+
+  <div class="fishingStage fishingStageV2" id="fishingStage">
+    <canvas id="fishingCanvas" aria-label="มินิเกมตกปลาในอวกาศ"></canvas>
+
+    <div class="fishingLoader" id="fishingLoader" aria-live="polite">
+      <div class="loaderCosmicEmoji loaderEmojiA">🐟</div>
+      <div class="loaderCosmicEmoji loaderEmojiB">⭐</div>
+      <div class="loaderCosmicEmoji loaderEmojiC">🌟</div>
+      <div class="loaderCosmicEmoji loaderEmojiD">🐠</div>
+      <div class="loaderCosmicEmoji loaderEmojiE">✦</div>
+      <div class="loaderCosmicEmoji loaderEmojiF">🪐</div>
+      <div class="loaderCosmicEmoji loaderEmojiG">🐬</div>
+      <div class="loaderCosmicEmoji loaderEmojiH">✧</div>
+      <div class="fishingLoaderCore">
+        <div class="fishingLoaderKicker">🌌 AIMAAM GALAXY MINI GAME</div>
+        <div class="fishingLoaderTitle">Fishing <span>Animal</span></div>
+        <div class="fishingLoaderSub">กำลังเปิดประตูสู่ทะเลแห่งดวงดาว...</div>
+        <div class="fishingLoaderBar"><span></span></div>
+        <div class="fishingLoaderDots">🐟 • ⭐ • 🐠 • ✦ • 🌌 • 🪐</div>
       </div>
-      <div class="pageNext">
+    </div>
+
+    <div class="catchAlert catchAlertV2" id="catchAlert"></div>
+
+    <div class="reelPanel reelPanelV2" id="reelPanel">
+      <div class="reelTitle">❔ มีบางอย่างติดเบ็ด!</div>
+      <div class="reelSubTitle">ดึงให้ทันโดยเลื่อนตัวชี้เข้าเขตเรืองแสง • ยังไม่เฉลยว่าเป็นอะไร</div>
+      <div class="reelTrack"><div class="reelZone" id="reelZone"></div><div class="reelCursor" id="reelCursor"></div></div>
+      <div class="reelInfo"><span id="reelTimer">เวลา 0.0s</span><b id="reelHint">🎯 จับตัวชี้ให้อยู่ในโซน</b></div>
+      <button class="btn" id="reelButton">🎣 ดึงเบ็ด!</button>
+    </div>
+
+    <div class="fishingResult" id="fishingResult" data-status="normal" aria-live="polite">
+      <div class="resultOrbit resultOrbit1">✦</div>
+      <div class="resultOrbit resultOrbit2">✧</div>
+      <div class="resultOrbit resultOrbit3">⋆</div>
+      <div class="resultOrbit resultOrbit4">⭐</div>
+      <div class="resultCard" id="fishingResultCard">
+        <div class="resultStatusLine"><span id="resultStatusEmoji">✨</span><span id="resultStatus">Normal</span></div>
+        <div class="resultEmoji" id="resultEmoji">🐟</div>
+        <div class="resultName" id="resultName">ปลาปริศนา</div>
+        <div class="resultRarity" id="resultRarity">Common</div>
+        <div class="resultPriceGrid">
+          <div><small>ราคาปกติ</small><b id="resultBasePrice">0</b></div>
+          <div><small>สถานะ</small><b id="resultMultiplier">×1</b></div>
+          <div><small>ราคาขายจริง</small><b id="resultSaleValue">0</b></div>
+        </div>
+        <div class="resultFormula" id="resultFormula">ราคาปกติ ×1 = ราคาขายจริง</div>
+        <div class="resultNote" id="resultNote">เก็บเข้ากระเป๋าแล้ว • ยังไม่ได้รับเงินจนกว่าจะกดขาย</div>
+      </div>
+    </div>
+
+    <div class="fishingIdle fishingIdleV2" id="fishingIdle">กด “ตกปลา” เพื่อโยนเบ็ดออกไปในทะเลอวกาศ ✨</div>
+  </div>
+
+  <div class="fishingActions fishingActionsV2">
+    <button class="btn btnGlow" id="castButton">🎣 ตกปลา</button>
+    <button class="btn alt" id="sellAllButton">💰 ขายของทั้งหมด</button>
+    <button class="btn alt" id="openShopButton">🛒 ร้านค้าเบ็ด 15 ระดับ</button>
+  </div>
+
+  <div class="fishingRuleBar">
+    <span>🎒 ของที่ตกได้จะเข้ากระเป๋าก่อน</span>
+    <span>💰 ต้องกด “ขายของทั้งหมด” จึงจะได้เงิน</span>
+    <span>✨ สถานะสุ่มตอนจับสำเร็จ</span>
+  </div>
+
+  <div class="fishingGrid fishingGridV2">
+    <div class="inventoryPanel inventoryPanelV2">
+      <div class="statsHead"><b>🎒 กระเป๋าสิ่งที่ตกได้</b><span id="inventoryCount">0 ชิ้น</span></div>
+      <div id="inventoryList" class="inventoryList inventoryListV2"></div>
+    </div>
+
+    <div class="shopPanel shopPanelV2" id="shopPanel">
+      <div class="statsHead"><b>🛒 ร้านค้าเบ็ด — 15 ระดับ</b><button class="shopClose" id="closeShopButton">✕</button></div>
+      <div class="shopIntro">เบ็ดระดับสูงจะเพิ่มความง่ายในการดึง + เปิดทางให้เจอสัตว์/ปลาราคาแพงบ่อยขึ้น</div>
+      <div id="rodShopList" class="rodShopList rodShopListV2"></div>
+    </div>
+
+    <div class="collectionPanel fishingCollectionPanel" id="collectionPanel">
+      <div class="statsHead">
+        <b>📖 สมุดสะสมสัตว์จักรวาล</b>
+        <span id="collectionCount">0 / 0 ค้นพบ</span>
+      </div>
+      <div class="collectionSub">
+        เรียงตามระดับความหายาก → เงินที่ได้ • ตัวที่ยังไม่เคยจับจะเป็นเงาสีดำ
+      </div>
+      <div class="collectionProgress"><span id="collectionProgressBar"></span></div>
+      <div id="collectionList" class="collectionList"></div>
+    </div>
+  </div>
+
+  <div class="statusLegendV2">
+    <div class="legendTitle">🌠 ระบบสถานะของสิ่งที่ตกได้</div>
+    <div class="legendGrid">
+      <span class="legend normal">✨ Normal ×1</span>
+      <span class="legend scorching">🔥 Scorching ×0.5</span>
+      <span class="legend freeze">❄️ Freeze ×0.25</span>
+      <span class="legend meteor">☄️ Meteor ×1.5</span>
+      <span class="legend bigbang">💥 Big Bang ×2</span>
+      <span class="legend blackhole">🕳️ Black hole ×3</span>
+      <span class="legend divine">🌌 อภิชาติ ดีนุ ×10</span>
+      <span class="legend debris">🛰️ Space debris ÷2</span>
+      <span class="legend pathogen">🧬 Space pathogen ÷3</span>
+    </div>
+    <p class="legendFootnote">สถานะคูณสูงและสถานะหารราคาจะสุ่มยากขึ้น โดยสถานะธรรมดายังมีโอกาสเจอบ่อยที่สุด</p>
+  </div>
+</div>
+
+<div class="pageNext">
         <button class="navGo" data-page="home">🏠 กลับหน้า Home →</button>
       </div>
     </div>
@@ -3908,6 +4392,9 @@ card.style.transform=
 });  
   
   
+
+
+
 })();  
 </script>
 <script id="optimized-effects-js">
@@ -4096,5 +4583,405 @@ card.style.transform=
   updateButton();
 })();
 </script>
+
+<script>
+/* =========================================================
+   SPACE FISHING 2.0 — Fishing Animal / space collection / statuses / 15 rods
+========================================================= */
+(()=>{
+  const $=id=>document.getElementById(id);
+  const c=$('fishingCanvas');
+  if(!c) return;
+  const x=c.getContext('2d');
+
+  const items=[
+    {name:'ปลานีออนเนบิวลา',emoji:'🐟',rarity:'Common',tier:0,price:90,weight:34,color:'#55eaff'},
+    {name:'ปลาการ์ตูนคอสมิก',emoji:'🐠',rarity:'Common',tier:0,price:120,weight:26,color:'#ff8a4d'},
+    {name:'ปลาปักเป้าดาว',emoji:'🐡',rarity:'Common',tier:0,price:150,weight:20,color:'#ffe45c'},
+    {name:'กุ้งอวกาศ',emoji:'🦐',rarity:'Common',tier:0,price:80,weight:16,color:'#ff9cc5'},
+    {name:'ปูดาวหาง',emoji:'🦀',rarity:'Common',tier:0,price:110,weight:13,color:'#ff6b6b'},
+    {name:'หอยจันทร์',emoji:'🐚',rarity:'Common',tier:0,price:95,weight:11,color:'#d8c7ff'},
+    {name:'หอยนางรมเนบิวลา',emoji:'🦪',rarity:'Common',tier:0,price:140,weight:8,color:'#e8f1ff'},
+    {name:'ปลาหมึกนีออน',emoji:'🦑',rarity:'Uncommon',tier:1,price:420,weight:10,color:'#ff62da'},
+    {name:'ปลาหมึกวงโคจร',emoji:'🐙',rarity:'Uncommon',tier:1,price:620,weight:8,color:'#c78cff'},
+    {name:'โลมาออโรร่า',emoji:'🐬',rarity:'Uncommon',tier:1,price:920,weight:6.5,color:'#6fe8ff'},
+    {name:'เต่าดาวเคราะห์',emoji:'🐢',rarity:'Uncommon',tier:1,price:760,weight:6,color:'#63ffb5'},
+    {name:'แมวน้ำอวกาศ',emoji:'🦭',rarity:'Uncommon',tier:1,price:1050,weight:5,color:'#a7b9dc'},
+    {name:'เพนกวินดวงจันทร์',emoji:'🐧',rarity:'Uncommon',tier:1,price:880,weight:5,color:'#c9e7ff'},
+    {name:'นากเนบิวลา',emoji:'🦦',rarity:'Uncommon',tier:1,price:1150,weight:4.2,color:'#c28f65'},
+    {name:'วาฬดาวฤกษ์',emoji:'🐳',rarity:'Uncommon',tier:1,price:1550,weight:3.4,color:'#73b9ff'},
+    {name:'วาฬกาแล็กซี',emoji:'🐋',rarity:'Uncommon',tier:1,price:2200,weight:2.5,color:'#a98cff'},
+    {name:'ดอกบัวจันทรา',emoji:'🪷',rarity:'Uncommon',tier:1,price:680,weight:4.8,color:'#ff9fe8'},
+    {name:'ดอกซากุระอวกาศ',emoji:'🌸',rarity:'Uncommon',tier:1,price:740,weight:4.5,color:'#ff8fcf'},
+    {name:'ทานตะวันสุริยะ',emoji:'🌻',rarity:'Uncommon',tier:1,price:820,weight:4.1,color:'#ffd95c'},
+    {name:'โคลเวอร์เนบิวลา',emoji:'🍀',rarity:'Uncommon',tier:1,price:960,weight:3.7,color:'#6dff9d'},
+    {name:'ฉลามควาซาร์',emoji:'🦈',rarity:'Rare',tier:2,price:4200,weight:2.1,color:'#67efff'},
+    {name:'จระเข้คอสมิก',emoji:'🐊',rarity:'Rare',tier:2,price:2600,weight:2.3,color:'#69ff92'},
+    {name:'แมวน้ำวงแหวน',emoji:'🦭',rarity:'Rare',tier:2,price:5200,weight:1.6,color:'#b5d0ff'},
+    {name:'เพนกวินอุกกาบาต',emoji:'🐧',rarity:'Rare',tier:2,price:4800,weight:1.5,color:'#81d8ff'},
+    {name:'จิ้งจอกดาวตก',emoji:'🦊',rarity:'Rare',tier:2,price:7000,weight:1.15,color:'#ff9865'},
+    {name:'หมาป่าจันทรา',emoji:'🐺',rarity:'Rare',tier:2,price:8500,weight:0.95,color:'#c5d2ff'},
+    {name:'สิงโตสุริยะ',emoji:'🦁',rarity:'Rare',tier:2,price:12000,weight:0.72,color:'#ffd55a'},
+    {name:'เสือพลาสมา',emoji:'🐯',rarity:'Rare',tier:2,price:14500,weight:0.62,color:'#ff9b50'},
+    {name:'ผีเสื้อคอสมิก',emoji:'🦋',rarity:'Rare',tier:2,price:11500,weight:0.58,color:'#6ef8ff'},
+    {name:'ช่อดอกดาวเรือง',emoji:'💐',rarity:'Rare',tier:2,price:9000,weight:0.52,color:'#ff8bd6'},
+    {name:'ดอกทิวลิปจักรวาล',emoji:'🌷',rarity:'Rare',tier:2,price:13000,weight:0.47,color:'#ff729e'},
+    {name:'กบเนบิวลา',emoji:'🐸',rarity:'Rare',tier:2,price:6100,weight:0.44,color:'#71ff9a'},
+    {name:'แมงป่องอุกกาบาต',emoji:'🦂',rarity:'Epic',tier:3,price:22000,weight:0.38,color:'#ff74c8'},
+    {name:'กอริลล่าแรงโน้มถ่วง',emoji:'🦍',rarity:'Epic',tier:3,price:28000,weight:0.33,color:'#b78cff'},
+    {name:'อินทรีออโรร่า',emoji:'🦅',rarity:'Epic',tier:3,price:36000,weight:0.3,color:'#6fe5ff'},
+    {name:'นกฮูกเนบิวลา',emoji:'🦉',rarity:'Epic',tier:3,price:39000,weight:0.28,color:'#d7b5ff'},
+    {name:'งูสุริยะ',emoji:'🐍',rarity:'Epic',tier:3,price:45000,weight:0.22,color:'#74ff9d'},
+    {name:'มังกรแห่งดาราจักร',emoji:'🐉',rarity:'Epic',tier:3,price:76000,weight:0.16,color:'#ff5bc9'},
+    {name:'ดอกกล้วยไม้กาแล็กซี',emoji:'🌺',rarity:'Epic',tier:3,price:68000,weight:0.14,color:'#ff6cd6'},
+    {name:'ดอกไฮเดรนเยียอวกาศ',emoji:'💠',rarity:'Epic',tier:3,price:82000,weight:0.11,color:'#79d8ff'},
+    {name:'หอยทากดาวตก',emoji:'🐌',rarity:'Epic',tier:3,price:54000,weight:0.095,color:'#f3a6ff'},
+    {name:'วาฬหลุมดำ',emoji:'🐋',rarity:'Legendary',tier:4,price:170000,weight:0.1,color:'#b06cff'},
+    {name:'ฉลามเอกฐาน',emoji:'🦈',rarity:'Legendary',tier:4,price:250000,weight:0.075,color:'#74e8ff'},
+    {name:'มังกรซูเปอร์โนวา',emoji:'🐲',rarity:'Legendary',tier:4,price:620000,weight:0.045,color:'#ff6b96'},
+    {name:'ยูนิคอร์นอินฟินิตี้',emoji:'🦄',rarity:'Legendary',tier:4,price:1200000,weight:0.03,color:'#f2d0ff'},
+    {name:'ดอกกุหลาบจักรวาล',emoji:'🌹',rarity:'Legendary',tier:4,price:880000,weight:0.022,color:'#ff4f8b'},
+    {name:'ดอกลิลลี่ดาวหาง',emoji:'🌼',rarity:'Legendary',tier:4,price:1050000,weight:0.018,color:'#ffe47a'},
+    {name:'แมงกะพรุนเนบิวลา',emoji:'🪼',rarity:'Mythic',tier:5,price:380000,weight:0.024,color:'#74f7ff'},
+    {name:'โลมาวิญญาณกาแล็กซี',emoji:'🐬',rarity:'Mythic',tier:5,price:1500000,weight:0.016,color:'#8bf4ff'},
+    {name:'ผีเสื้อแสงจักรวาล',emoji:'🦋',rarity:'Mythic',tier:5,price:2500000,weight:0.01,color:'#ff83d1'},
+    {name:'นกยูงเนบิวลา',emoji:'🦚',rarity:'Mythic',tier:5,price:3200000,weight:0.008,color:'#7cf5ff'},
+    {name:'ดอกบัวทองสุริยะ',emoji:'🪷',rarity:'Mythic',tier:5,price:3600000,weight:0.0065,color:'#ffe878'},
+    {name:'สัตว์ดาวมีชีวิต',emoji:'🌟',rarity:'Cosmic',tier:6,price:4000000,weight:0.0045,color:'#fff3a7'},
+    {name:'อสูรดาวเคราะห์',emoji:'🪐',rarity:'Cosmic',tier:6,price:7500000,weight:0.0022,color:'#ae90ff'},
+    {name:'ดอกไม้แห่งบิ๊กแบง',emoji:'🌺',rarity:'Cosmic',tier:6,price:9500000,weight:0.0014,color:'#ff83e8'},
+    {name:'ฟีนิกซ์ดวงดาว',emoji:'🐦',rarity:'Cosmic',tier:6,price:12500000,weight:0.0009,color:'#ff6a4f'},
+    {name:'กิ้งก่าจักรวาล',emoji:'🦎',rarity:'Cosmic',tier:6,price:11000000,weight:0.0007,color:'#76ffd5'},
+    {name:'ปลาไหลแสงจันทร์',emoji:'🐟',rarity:'Uncommon',tier:1,price:540,weight:3.5,color:'#8bdcff'},
+    {name:'เม่นดาว',emoji:'🦔',rarity:'Rare',tier:2,price:7400,weight:0.4,color:'#d9b28c'},
+    {name:'ดอกแดฟโฟดิลสุริยะ',emoji:'🌼',rarity:'Epic',tier:3,price:61000,weight:0.1,color:'#ffe86b'}
+  
+  ];
+
+  const statuses=[
+    {key:'normal',name:'Normal',emoji:'✨',mult:1,chance:91.3,color:'#d9e0ff',formula:'×1',note:'ราคาปกติ',fx:['✨','⭐','✦','🌟']},
+    {key:'scorching',name:'Scorching',emoji:'🔥',mult:.5,chance:3.0,color:'#ff6b35',formula:'×0.5',note:'ราคาปกติ ×0.5',fx:['🔥','☄️','♨️','🔥']},
+    {key:'freeze',name:'Freeze',emoji:'❄️',mult:.25,chance:1.5,color:'#8fd3ff',formula:'×0.25',note:'ราคาปกติ ×0.25',fx:['❄️','🧊','✧','❄️']},
+    {key:'meteor',name:'Meteor',emoji:'☄️',mult:1.5,chance:2.0,color:'#ffd25e',formula:'×1.5',note:'ราคาปกติ ×1.5',fx:['☄️','🔥','⭐','☄️']},
+    {key:'bigbang',name:'Big Bang',emoji:'💥',mult:2,chance:1.1,color:'#ff55c8',formula:'×2',note:'ราคาปกติ ×2',fx:['💥','🌟','💫','💥']},
+    {key:'blackhole',name:'Black hole',emoji:'🕳️',mult:3,chance:.6,color:'#b06cff',formula:'×3',note:'ราคาปกติ ×3',fx:['🕳️','🌀','🪐','🕳️']},
+    {key:'divine',name:'อภิชาติ ดีนุ',emoji:'🌌',mult:10,chance:.005,color:'#fff59d',formula:'×10',note:'ราคาปกติ ×10 • หายากมากกกก',fx:['🌌','👑','✨','🌠']},
+    {key:'debris',name:'Space debris',emoji:'🛰️',mult:.5,chance:.3,color:'#98a0b8',formula:'÷2',note:'ราคาปกติ ÷2',fx:['🛰️','⚙️','✦','🛰️']},
+    {key:'pathogen',name:'Space pathogen',emoji:'🧬',mult:1/3,chance:.195,color:'#7dff86',formula:'÷3',note:'ราคาปกติ ÷3',fx:['🧬','☣️','✧','🧬']}
+  ];
+
+  const rods=[
+    {id:'rod1',level:1,name:'Cosmic Twig',emoji:'🪵',price:0,luck:0,window:32,time:2.8,color:'#8f9abf',desc:'เบ็ดเริ่มต้นสำหรับการสำรวจอวกาศ'},
+    {id:'rod2',level:2,name:'Moonbeam Rod',emoji:'🌙',price:500,luck:.03,window:36,time:3.0,color:'#9cd7ff',desc:'เริ่มเห็นของ Uncommon บ่อยขึ้น'},
+    {id:'rod3',level:3,name:'Meteorite Rod',emoji:'☄️',price:2500,luck:.07,window:40,time:3.15,color:'#ffb45e',desc:'ช่วยรับมือกับเหยื่อที่หายากขึ้น'},
+    {id:'rod4',level:4,name:'Aurora Rod',emoji:'🌈',price:6300,luck:.11,window:44,time:3.3,color:'#6fffe0',desc:'หน้าต่างดึงกว้างขึ้นอย่างชัดเจน'},
+    {id:'rod5',level:5,name:'Nebula Prism Rod',emoji:'🔮',price:10000,luck:.15,window:48,time:3.45,color:'#cc86ff',desc:'ดันโอกาส Rare และ Epic'},
+    {id:'rod6',level:6,name:'Plasma Rod',emoji:'⚡',price:35000,luck:.20,window:52,time:3.6,color:'#61eaff',desc:'รับของราคาแรงได้สม่ำเสมอขึ้น'},
+    {id:'rod7',level:7,name:'Supernova Rod',emoji:'💥',price:59000,luck:.26,window:56,time:3.75,color:'#ff6bc0',desc:'เริ่มมีโอกาสเจอ Legendary มากขึ้น'},
+    {id:'rod8',level:8,name:'Galaxy Core Rod',emoji:'🌌',price:91000,luck:.33,window:60,time:3.9,color:'#5d9dff',desc:'สมดุลระหว่างความง่ายกับโชค'},
+    {id:'rod9',level:9,name:'Quasar Rod',emoji:'🌀',price:150000,luck:.41,window:64,time:4.05,color:'#8cb8ff',desc:'เพิ่มทางเลือกสู่ของแพงระดับสูง'},
+    {id:'rod10',level:10,name:'Pulsar X Rod',emoji:'✨',price:500000,luck:.50,window:68,time:4.2,color:'#fff06a',desc:'Rare / Epic เริ่มออกได้เด่นชัด'},
+    {id:'rod11',level:11,name:'Wormhole Rod',emoji:'🕳️',price:1000000,luck:.60,window:72,time:4.35,color:'#bc86ff',desc:'เปิดโอกาสสู่ Mythic และ Cosmic'},
+    {id:'rod12',level:12,name:'Singularity Rod',emoji:'⚫',price:3500000,luck:.68,window:75,time:4.5,color:'#b36cff',desc:'โซนดึงกว้างและของหายากเริ่มชัด'},
+    {id:'rod13',level:13,name:'Celestial Apex Rod',emoji:'👑',price:8888888,luck:.76,window:78,time:4.65,color:'#ffe98a',desc:'ระดับพรีเมียมสำหรับนักสะสม'},
+    {id:'rod14',level:14,name:'Infinity Star Rod',emoji:'🌟',price:15000000,luck:.86,window:81,time:4.8,color:'#7ffeff',desc:'โอกาสของชั้นสูงเพิ่มขึ้นมาก'},
+    {id:'rod15',level:15,name:'Big Bang Rod',emoji:'💫',price:30000000,luck:.98,window:84,time:5.0,color:'#ff6bdb',desc:'สุดยอดเบ็ดระดับจักรวาล โอกาสของแพงสูงสุด'}
+  ];
+
+  const rarityRank={Common:0,Uncommon:1,Rare:2,Epic:3,Legendary:4,Mythic:5,Cosmic:6};
+  const legacyMap={starter:'rod1',nebula:'rod2',star:'rod3',galaxy:'rod4'};
+  const money=new Intl.NumberFormat('th-TH');
+  const SAVE_KEY='aimaamSpaceFishing_v4_60collection';
+
+  let data={coins:0,rod:'rod1',inventory:[],collection:[]};
+  try{ data=JSON.parse(localStorage.getItem(SAVE_KEY)||JSON.stringify(data))||data; }catch(e){}
+  if(typeof data.coins!=='number'||data.coins<0)data.coins=0;
+  if(!Array.isArray(data.inventory))data.inventory=[];
+  if(!Array.isArray(data.collection))data.collection=[];
+  if(!Array.isArray(data.collection)) data.collection=[];
+  if(legacyMap[data.rod]) data.rod=legacyMap[data.rod];
+  if(!rods.some(r=>r.id===data.rod)) data.rod='rod1';
+  if(!Array.isArray(data.inventory)) data.inventory=[];
+  data.inventory=data.inventory.map((i)=>{
+    const base=Number(i.basePrice ?? i.price ?? 0);
+    const sale=Number(i.saleValue ?? i.price ?? base);
+    const st=statuses.find(s=>s.key===i.statusKey)||statuses[0];
+    return {...i,basePrice:base,saleValue:sale,multiplier:Number(i.multiplier ?? st.mult),statusKey:st.key,statusName:st.name,statusEmoji:st.emoji,formula:i.formula||st.formula};
+  });
+
+  const collectionSet=new Set(data.collection.filter(Boolean));
+  data.inventory.forEach(i=>{if(i&&i.name) collectionSet.add(i.name);});
+  data.collection=[...collectionSet].filter(name=>items.some(i=>i.name===name));
+
+  let W=800,H=560,anim=0,casting=false,reeling=false,current=null,reelStart=0,hideResultTimer=0;
+  let loaderTimer=null;
+  const cosmicStars=Array.from({length:180},(_,i)=>({x:Math.random(),y:Math.random(),r:.4+Math.random()*1.8,s:.15+Math.random()*.6,a:.25+Math.random()*.75,hue:i%7===0?'#ff68d5':i%5===0?'#00f6ff':'#fff'}));
+  const fishParticles=Array.from({length:10},()=>({x:.1+Math.random()*.8,y:.55+Math.random()*.35,p:Math.random()*6.28,s:.3+Math.random()*.7}));
+
+  function fmt(n){return money.format(Math.max(0,Math.round(n||0)));}
+  function activeRod(){return rods.find(r=>r.id===data.rod)||rods[0];}
+  function save(){
+    try{localStorage.setItem(SAVE_KEY,JSON.stringify(data));}catch(e){}
+    $('fishCoins').textContent=fmt(data.coins);
+    const canSell=data.inventory.length>0;
+    $('sellAllButton').disabled=!canSell;
+    $('sellAllButton').style.opacity=canSell?'1':'.5';
+  }
+
+  function resize(){
+    const r=c.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);
+    W=Math.max(500,r.width);H=Math.max(330,r.height);
+    c.width=Math.floor(W*d);c.height=Math.floor(H*d);x.setTransform(d,0,0,d,0,0);
+  }
+  addEventListener('resize',resize,{passive:true});resize();
+
+  function rarityColor(r){return r==='Cosmic'?'#fff59d':r==='Mythic'?'#8dffed':r==='Legendary'?'#ff70d1':r==='Epic'?'#b66cff':r==='Rare'?'#55eaff':r==='Uncommon'?'#55ffb0':'#e9efff';}
+  function statusRoll(){
+    let n=Math.random()*100;
+    for(const s of statuses){n-=s.chance;if(n<0)return s;}
+    return statuses[0];
+  }
+  function pick(){
+    const rod=activeRod();
+    const weighted=items.map(i=>({i,w:i.weight*(1+rod.luck*(0.75+i.tier*2.4))}));
+    const total=weighted.reduce((a,b)=>a+b.w,0);
+    let roll=Math.random()*total;
+    for(const q of weighted){roll-=q.w;if(roll<=0)return q.i;}
+    return items[0];
+  }
+
+  function startLoading(duration=2100){
+    const loader=$('fishingLoader');
+    if(!loader)return;
+    clearTimeout(loaderTimer);
+    loader.classList.remove('hide');
+    loaderTimer=setTimeout(()=>loader.classList.add('hide'),duration);
+  }
+
+  function draw(t){
+    anim=t/1000;
+    x.clearRect(0,0,W,H);
+
+    const bg=x.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,'#020313');bg.addColorStop(.36,'#07133a');bg.addColorStop(.65,'#13082e');bg.addColorStop(1,'#01020b');
+    x.fillStyle=bg;x.fillRect(0,0,W,H);
+
+    const neb1=x.createRadialGradient(W*.18,H*.28,10,W*.18,H*.28,W*.48);
+    neb1.addColorStop(0,'rgba(0,246,255,.16)');neb1.addColorStop(.45,'rgba(0,120,255,.06)');neb1.addColorStop(1,'transparent');x.fillStyle=neb1;x.fillRect(0,0,W,H);
+    const neb2=x.createRadialGradient(W*.76,H*.22,8,W*.76,H*.22,W*.45);
+    neb2.addColorStop(0,'rgba(255,60,172,.15)');neb2.addColorStop(.5,'rgba(145,71,255,.06)');neb2.addColorStop(1,'transparent');x.fillStyle=neb2;x.fillRect(0,0,W,H);
+
+    cosmicStars.forEach((s,i)=>{
+      const px=(s.x*W+anim*(8+s.s*14))%W;
+      const py=s.y*H;
+      x.globalAlpha=s.a*(.65+.35*Math.sin(anim*(.7+s.s)+i));x.fillStyle=s.hue;x.beginPath();x.arc(px,py,s.r,0,Math.PI*2);x.fill();
+    });x.globalAlpha=1;
+
+    // distant ringed planet
+    x.save();x.translate(W*.19,H*.24);x.rotate(-.22);x.strokeStyle='rgba(116,225,255,.42)';x.lineWidth=7;x.beginPath();x.ellipse(0,0,82,23,0,0,Math.PI*2);x.stroke();x.restore();
+    const pg=x.createRadialGradient(W*.19-18,H*.24-22,5,W*.19,H*.24,58);pg.addColorStop(0,'#fff');pg.addColorStop(.16,'#70ecff');pg.addColorStop(.5,'#428cff');pg.addColorStop(.78,'#4522a7');pg.addColorStop(1,'#08041a');x.fillStyle=pg;x.beginPath();x.arc(W*.19,H*.24,58,0,Math.PI*2);x.fill();
+
+    // black hole / gravity well
+    x.save();x.translate(W*.82,H*.30);for(let i=0;i<5;i++){x.beginPath();x.strokeStyle=`rgba(${255-i*15},${90+i*15},255,${.11+i*.025})`;x.lineWidth=4+i*2;x.ellipse(0,0,40+i*12,12+i*4,anim*.15+i*.08,0,Math.PI*2);x.stroke();}x.fillStyle='#020207';x.shadowBlur=20;x.shadowColor='#8c52ff';x.beginPath();x.arc(0,0,34,0,Math.PI*2);x.fill();x.restore();
+
+    // tiny drifting aquatic silhouettes / emojis
+    fishParticles.forEach((p,i)=>{
+      const fx=((p.x+anim*(.006+p.s*.004))%1)*W;
+      const fy=(p.y+Math.sin(anim*.7+p.p)*.025)*H;
+      x.globalAlpha=.18+.07*Math.sin(anim+p.p);x.font=`${28+i%3*5}px serif`;x.fillText(i%3===0?'🐟':i%3===1?'🪼':'🦀',fx,fy);
+    });x.globalAlpha=1;
+
+    if(casting||reeling){
+      x.save();x.strokeStyle='rgba(255,255,255,.72)';x.lineWidth=2;x.shadowBlur=8;x.shadowColor='#00f6ff';x.beginPath();x.moveTo(W*.5,120);x.quadraticCurveTo(W*.47+Math.sin(anim)*40,H*.56,W*.51,H*.76);x.stroke();x.font='60px serif';x.fillText('🎣',W*.46,H*.82);x.restore();
+    } else {
+      x.globalAlpha=.82;x.font='70px serif';x.fillText('🐟',W*.16,H*.78);x.font='62px serif';x.fillText('🐠',W*.77,H*.69);x.globalAlpha=1;
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+
+  function renderInventory(){
+    const el=$('inventoryList');
+    $('inventoryCount').textContent=`${data.inventory.length} ชิ้น`;
+    if(!data.inventory.length){el.innerHTML='<div style="color:var(--muted);grid-column:1/-1;text-align:center;padding:22px">ยังไม่มีของที่ตกได้ 🌌<br><small>ลองกด “ตกปลา” แล้วมาดูกันว่าจะได้อะไร</small></div>';return;}
+    el.innerHTML=data.inventory.slice(-36).reverse().map(i=>{
+      const st=statuses.find(s=>s.key===i.statusKey)||statuses[0];
+      return `<div class="inventoryItem inventoryItemV2" style="--item-status:${st.color}">
+        <span class="itemEmoji">${i.emoji}</span>
+        <b>${i.name}</b>
+        <div class="inventoryMeta"><span>${i.rarity||'Unknown'}</span><span class="status">${st.emoji} ${st.name}</span></div>
+        <div class="inventorySale">💰 ${fmt(i.saleValue)} ตอนขาย • ${st.formula}</div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderCollection(){
+    const el=$('collectionList');
+    if(!el)return;
+
+    const ordered=[...items].sort((a,b)=>{
+      const rarityDiff=(rarityRank[b.rarity]??0)-(rarityRank[a.rarity]??0);
+      return rarityDiff || b.price-a.price;
+    });
+
+    const found=new Set(data.collection||[]);
+    const foundCount=ordered.filter(i=>found.has(i.name)).length;
+    $('collectionCount').textContent=`${foundCount} / ${ordered.length} ค้นพบ`;
+    $('collectionProgressBar').style.width=`${ordered.length?(foundCount/ordered.length)*100:0}%`;
+
+    el.innerHTML=ordered.map((item,index)=>{
+      const unlocked=found.has(item.name);
+      const color=rarityColor(item.rarity);
+      return `<div class="collectionCard ${unlocked?'unlocked':'locked'}" style="--rarity-color:${color}">
+        <div class="collectionBadge">${unlocked?'✓ ค้นพบ':'🔒 ยังไม่พบ'}</div>
+        <div class="collectionTop">
+          <span>${item.rarity}</span>
+          <span class="collectionNo">#${String(index+1).padStart(2,'0')}</span>
+        </div>
+        <div class="collectionEmojiWrap"><span class="collectionEmoji">${item.emoji}</span></div>
+        <div class="collectionName">${unlocked?item.name:'???????'}</div>
+        ${unlocked
+          ? `<div class="collectionPrice">💰 ${fmt(item.price)} เครดิต</div>`
+          : `<div class="collectionLock">เงาดำ • ค้นพบเพื่อปลดล็อก</div>`}
+        <div class="collectionFooter">
+          <span>${unlocked?'📖 เก็บข้อมูลแล้ว':'🌑 ปริศนา'}</span>
+          <span>${unlocked?'พร้อมแสดง':'???'}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderShop(){
+    const el=$('rodShopList');
+    const current=activeRod();
+    el.innerHTML=rods.map(r=>{
+      const active=current.id===r.id;
+      const affordable=data.coins>=r.price;
+      const luckPct=Math.round(r.luck*100);
+      const price=r.price?`${fmt(r.price)} 💰`:'ฟรี';
+      const note=active?'กำลังใช้อยู่':(affordable?'ซื้อเลย':`ขาด ${fmt(r.price-data.coins)} 💰`);
+      return `<div class="rodCard rodCardV2 ${active?'active':''}" style="--rod-color:${r.color}">
+        <div>
+          <div class="rodLevel">LEVEL ${String(r.level).padStart(2,'0')}</div>
+          <div class="rodNameV2"><span>${r.emoji}</span>${r.name}</div>
+          <div class="rodDescV2">${r.desc}</div>
+          <div class="rodStatsV2"><span>🎯 โซน ${r.window}%</span><span>⏱ ${r.time.toFixed(1)}s</span><span>🍀 โอกาสของแพง +${luckPct}%</span></div>
+          <div class="rodLuckBar" style="--luck:${Math.max(5,luckPct)}%"><span></span></div>
+        </div>
+        <div class="rodBuyV2"><div class="rodPriceV2">${price}</div><button data-rod="${r.id}" ${active||(!affordable)?'disabled':''}>${active?'✓ ใช้อยู่':'ซื้อ'}</button><small>${note}</small></div>
+      </div>`;
+    }).join('');
+    el.querySelectorAll('button[data-rod]').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const r=rods.find(v=>v.id===btn.dataset.rod);if(!r||data.coins<r.price)return;
+        data.coins-=r.price;data.rod=r.id;save();renderShop();$('fishingIdle').textContent=`✅ ใช้ ${r.emoji} ${r.name} แล้ว — ไปลองตกของราคาแพงขึ้นได้เลย!`;
+      });
+    });
+  }
+
+  function setResult(item,status,saleValue){
+    const box=$('fishingResult');
+    const card=$('fishingResultCard');
+    box.dataset.status=status.key;
+    card.style.setProperty('--status-color',status.color);
+    $('resultStatusEmoji').textContent=status.emoji;
+    $('resultStatus').textContent=status.name;
+    $('resultEmoji').textContent=item.emoji;
+    $('resultName').textContent=item.name;
+    $('resultRarity').textContent=item.rarity;
+    $('resultBasePrice').textContent=fmt(item.price)+' 💰';
+    $('resultMultiplier').textContent=status.formula;
+    $('resultSaleValue').textContent=fmt(saleValue)+' 💰';
+    $('resultFormula').textContent=`${fmt(item.price)} ${status.formula} = ${fmt(saleValue)} เครดิตตอนขาย`;
+    document.querySelectorAll('#fishingResult .resultOrbit').forEach((el,i)=>el.textContent=(status.fx||['✦','✧','⋆','⭐'])[i]||'✦');
+    $('resultNote').textContent='🎒 เก็บเข้ากระเป๋าแล้ว • ยังไม่ได้เงินจนกว่าจะกดขาย';
+    box.classList.remove('show');void box.offsetWidth;box.classList.add('show');
+    clearTimeout(hideResultTimer);hideResultTimer=setTimeout(()=>box.classList.remove('show'),4200);
+  }
+
+  function cast(){
+    if(casting||reeling)return;
+    $('fishingResult').classList.remove('show');
+    casting=true;current=null;
+    $('catchAlert').textContent='🌌 กำลังค้นหาเพื่อนร่วมจักรวาล...';
+    $('fishingIdle').textContent='🎣 เบ็ดกำลังลอยผ่านดาวเคราะห์และเนบิวลา...';
+    setTimeout(()=>{casting=false;current=pick();startReel();},900+Math.random()*1300);
+  }
+
+  function startReel(){
+    reeling=true;reelStart=performance.now();
+    const rod=activeRod();
+    const rarityDifficulty=current.tier>=4?8:current.tier>=2?4:0;
+    const width=Math.max(24,Math.min(84,rod.window-rarityDifficulty));
+    const zone=$('reelZone');zone.style.width=width+'%';zone.style.left=(50-width/2)+'%';
+    $('reelPanel').classList.add('open');
+    $('catchAlert').textContent='❔ มีบางอย่างแตะเหยื่อแล้ว...';
+    $('reelHint').textContent='🎯 คุมตัวชี้ให้อยู่ในเขตสีเขียว';
+    $('fishingIdle').textContent='✨ ยังไม่เฉลยว่าเป็นอะไร — ดึงให้สำเร็จ!';
+  }
+
+  function pull(){
+    if(!reeling)return;
+    const cursor=$('reelCursor').getBoundingClientRect();
+    const zone=$('reelZone').getBoundingClientRect();
+    const inside=cursor.left>=zone.left-3 && cursor.right<=zone.right+3;
+    const rod=activeRod();
+    const elapsed=(performance.now()-reelStart)/1000;
+    if(inside){
+      const status=statusRoll();
+      const saleValue=Math.max(1,Math.round(current.price*status.mult));
+      const caught={...current,basePrice:current.price,saleValue,multiplier:status.mult,statusKey:status.key,statusName:status.name,statusEmoji:status.emoji,formula:status.formula,caughtAt:Date.now()};
+      data.inventory.push(caught);data.inventory=data.inventory.slice(-60);
+      if(!Array.isArray(data.collection)) data.collection=[];
+      if(!data.collection.includes(current.name)) data.collection.push(current.name);
+      renderInventory();renderCollection();save();
+      setResult(current,status,saleValue);
+      $('fishingIdle').textContent=`🎒 ${current.name} ถูกเก็บเข้ากระเป๋าแล้ว • กดขายภายหลังเพื่อรับ ${fmt(saleValue)} เครดิต`;
+    }else{
+      $('fishingIdle').textContent='💨 หลุดเบ็ด! ของที่ติดอยู่ยังไม่ถูกเปิดเผย ลองใหม่ได้เลย';
+    }
+    reeling=false;$('reelPanel').classList.remove('open');current=null;
+  }
+
+  function reelLoop(){
+    if(reeling){
+      const rod=activeRod();
+      const elapsed=(performance.now()-reelStart)/1000;
+      const p=Math.min(1,elapsed/rod.time);
+      const wave=1.15 + (1.7-rod.luck);
+      const pos=(Math.sin(p*Math.PI*wave*2)*.5+.5)*100;
+      $('reelCursor').style.left=`calc(${pos}% - 2px)`;
+      $('reelTimer').textContent=`เวลา ${Math.max(0,rod.time-elapsed).toFixed(1)}s`;
+      if(elapsed>=rod.time)pull();
+    }
+    requestAnimationFrame(reelLoop);
+  }
+  reelLoop();
+
+  $('castButton').onclick=cast;
+  $('reelButton').onclick=pull;
+  $('openShopButton').onclick=()=>{$('shopPanel').classList.toggle('open');renderShop();};
+  $('closeShopButton').onclick=()=>$('shopPanel').classList.remove('open');
+  $('sellAllButton').onclick=()=>{
+    if(!data.inventory.length){$('fishingIdle').textContent='🎒 กระเป๋ายังว่าง ไม่มีอะไรให้ขาย';return;}
+    const total=data.inventory.reduce((a,i)=>a+Number(i.saleValue||i.price||0),0);
+    data.coins+=total;data.inventory=[];save();renderInventory();renderCollection();
+    $('fishingResult').classList.remove('show');
+    $('fishingIdle').textContent=`💰 ขายของทั้งหมดแล้ว +${fmt(total)} เครดิต • เงินพร้อมซื้อเบ็ดระดับถัดไป!`;
+    renderShop();
+  };
+
+  // Reload the mini-game loader whenever the Thank You page is entered.
+  const ty=$('thankyou');
+  if(ty){
+    const mo=new MutationObserver(()=>{if(ty.classList.contains('active'))startLoading(1800);});
+    mo.observe(ty,{attributes:true,attributeFilter:['class']});
+    if(ty.classList.contains('active'))startLoading(1800);
+  }else startLoading(1800);
+
+  save();renderInventory();renderCollection();renderShop();
+})();
+</script>
+
 </body>
 </html>
